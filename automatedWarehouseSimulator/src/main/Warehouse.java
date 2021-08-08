@@ -2,7 +2,7 @@ package main;
 
 public class Warehouse {
 	
-	String test = "test";
+	private String testt = "test";
 
 	public Warehouse() {
 		// TODO Auto-generated constructor stub
