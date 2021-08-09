@@ -10,5 +10,17 @@ public class UserInterface {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String showGrid() {
+		return null;
+	}
+	
+	public int getCurrentTick() {
+		return 0;
+	}
+	
+	public void showUserInterface() {
+		
+	}
 
 }
