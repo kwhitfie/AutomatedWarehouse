@@ -17,7 +17,6 @@ public class Warehouse implements Tick{
 	@Override
 	public void Tick() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public OrderQueue getOrderQueue() {
