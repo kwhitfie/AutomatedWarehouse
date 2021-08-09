@@ -1,19 +1,18 @@
 package main;
-
-<<<<<<< HEAD
-public class Simulator {
 	
+	
+
+public class Simulator implements Tick{
+
+
 	private Warehouse warehouse;
 	private int tick;
-=======
-public class Simulator implements Tick{
->>>>>>> branch 'master' of https://github.com/kwhitfie/AutomatedWarehouse.git
-
+	
 	public Simulator() {
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
+
 	public int getTick() {
 		return tick;
 	}
@@ -38,11 +37,10 @@ public class Simulator implements Tick{
 		
 	}
 
-=======
+
 	@Override
 	public void Tick() {
 		// TODO Auto-generated method stub
 		
 	}
->>>>>>> branch 'master' of https://github.com/kwhitfie/AutomatedWarehouse.git
 }
