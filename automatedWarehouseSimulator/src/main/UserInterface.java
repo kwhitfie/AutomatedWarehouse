@@ -1,6 +1,6 @@
 package main;
 
-public class UserInterface {
+public class UserInterface implements Tick{
 
 	public UserInterface() {
 		// TODO Auto-generated constructor stub
@@ -11,4 +11,9 @@ public class UserInterface {
 
 	}
 
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }
