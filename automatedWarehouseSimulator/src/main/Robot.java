@@ -25,7 +25,6 @@ public class Robot implements Tick{
 	 */
 	public Robot() {
 		// TODO Auto-generated constructor stub
-		int a = 1+1;
 	}
 	
 	/**
