@@ -1,9 +1,12 @@
 package main;
 
-
-
 public class PackingStation implements Tick{
 
+	/**
+	 * Details here
+	 * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+	 *
+	 */
 	
 	private String UID;
 	private Order order;

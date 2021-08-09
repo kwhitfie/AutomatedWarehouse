@@ -1,5 +1,11 @@
 package main;
 
+/**
+ * Details here
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class Position implements Tick{
 	
 	private int y;

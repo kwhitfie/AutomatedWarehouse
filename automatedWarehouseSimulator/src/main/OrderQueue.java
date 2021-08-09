@@ -1,8 +1,12 @@
 package main;
 
-
 import java.util.Queue;
 
+/**
+ * Details here
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
 
 public class OrderQueue implements Tick{
 

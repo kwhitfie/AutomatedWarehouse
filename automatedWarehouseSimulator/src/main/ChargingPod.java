@@ -2,6 +2,12 @@ package main;
 
 public class ChargingPod implements Tick {
 	
+	/**
+	 * Details here
+	 * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+	 *
+	 */
+	
 	private String UID;
 	private static final int POWER_UNITS_PER_TICK = 0;
 

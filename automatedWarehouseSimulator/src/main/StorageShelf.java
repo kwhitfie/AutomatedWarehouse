@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Details here
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
 
 public class StorageShelf implements Tick{
 
