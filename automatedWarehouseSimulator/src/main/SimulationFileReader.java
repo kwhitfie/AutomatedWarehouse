@@ -1,12 +1,10 @@
 package main;
 
-<<<<<<< HEAD
+
 import java.util.Scanner;
 
-public class SimulationFileReader {
-=======
 public class SimulationFileReader implements Tick{
->>>>>>> branch 'master' of https://github.com/kwhitfie/AutomatedWarehouse.git
+
 
 	private Scanner input;
 	

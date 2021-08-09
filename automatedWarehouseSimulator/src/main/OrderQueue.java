@@ -1,14 +1,12 @@
 package main;
 
-<<<<<<< HEAD
+
 import java.util.Queue;
 
-public class OrderQueue {
-	
-	private Queue orderQueue;
-=======
+
 public class OrderQueue implements Tick{
->>>>>>> branch 'master' of https://github.com/kwhitfie/AutomatedWarehouse.git
+
+	private Queue orderQueue;
 
 	public OrderQueue() {
 		// TODO Auto-generated constructor stub
