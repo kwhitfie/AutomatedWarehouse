@@ -11,19 +11,32 @@ public class PackingStation implements Tick{
 	private String UID;
 	private Order order;
 	
+	/**
+	 * 
+	 */
 	public PackingStation() {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUID() {
 		return UID;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Order getCurrentOrder() {
 		return order;
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public void Tick() {
 		// TODO Auto-generated method stub
