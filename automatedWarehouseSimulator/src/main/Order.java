@@ -1,6 +1,6 @@
 package main;
 
-public class Order {
+public class Order implements Tick{
 	
 	public int[] shelfUID;
 
@@ -10,6 +10,12 @@ public class Order {
 	
 	public int[] getShelfUIDs() {
 		return shelfUID;
+	}
+
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package main;
 
-public class Warehouse {
+public class Warehouse implements Tick{
 	
 	private String test = "test";
 
@@ -8,4 +8,9 @@ public class Warehouse {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }

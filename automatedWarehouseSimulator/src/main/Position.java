@@ -1,6 +1,6 @@
 package main;
 
-public class Position {
+public class Position implements Tick{
 	
 	private int y;
 	private int x;
@@ -18,4 +18,9 @@ public class Position {
 		return y;
 	}
 
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }

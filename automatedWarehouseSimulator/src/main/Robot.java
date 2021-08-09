@@ -1,5 +1,6 @@
 package main;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 public class Robot {
@@ -12,6 +13,9 @@ public class Robot {
 	private boolean isBusy;
 	private int batteryChargePercent;
 	private static final int MAX_BATTERY = 0;
+=======
+public class Robot implements Tick{
+>>>>>>> branch 'master' of https://github.com/kwhitfie/AutomatedWarehouse.git
 
 	public Robot() {
 		// TODO Auto-generated constructor stub
@@ -42,4 +46,9 @@ public class Robot {
 	}
 	
 
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }

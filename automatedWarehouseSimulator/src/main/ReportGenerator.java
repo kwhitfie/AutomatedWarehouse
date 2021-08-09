@@ -1,6 +1,6 @@
 package main;
 
-public class ReportGenerator {
+public class ReportGenerator implements Tick{
 
 	private Simulator simulator;
 
@@ -13,4 +13,9 @@ public class ReportGenerator {
 		return null;
 	}
 
+	@Override
+	public void Tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }
