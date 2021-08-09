@@ -3,6 +3,12 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Details here
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class Warehouse implements Tick{
 	
 	private OrderQueue oq;
