@@ -20,35 +20,65 @@ public class Robot implements Tick{
 	private int batteryChargePercent;
 	private static final int MAX_BATTERY = 0;
 
+	/**
+	 * 
+	 */
 	public Robot() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * 
+	 */
 	public void move() {
 		
 	}
 	
+	/**
+	 * 
+	 * @param UID
+	 * @return
+	 */
 	public String[] getPathToDestination(String UID) {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUID() {
 		return UID;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int checkBatteryStatus() {
 		return 0;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean checkIfPossibleToAcceptJob() {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param StorageShelfID
+	 * @return
+	 */
 	public boolean getItemFromShelf(int StorageShelfID) {
 		return false;
 	}
 	
-
+	/**
+	 * 
+	 */
 	@Override
 	public void Tick() {
 		// TODO Auto-generated method stub
