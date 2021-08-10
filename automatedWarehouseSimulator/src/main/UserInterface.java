@@ -69,8 +69,6 @@ public class UserInterface extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		  
-	      Button button1 = new Button("Submit"); 
 	      
 		//Creating a Grid Pane 
 	      GridPane gridPane = new GridPane();    
