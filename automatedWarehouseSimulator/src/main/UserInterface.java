@@ -88,6 +88,8 @@ public class UserInterface extends Application{
 	      //Setting the Grid alignment 
 	      gridPane.setAlignment(Pos.CENTER); 
 	      
+	      //Creating buttons and adding to grid based on specified grid size
+	      
 	      for(int x =0; x<=xsize;x++) {
 	    	  for(int y =0; y<=ysize;y++) {
 	    		  Button b = new Button("("+x+","+y+")"); 
