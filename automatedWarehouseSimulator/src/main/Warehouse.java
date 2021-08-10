@@ -13,14 +13,26 @@ public class Warehouse implements Tick{
 	
 	private OrderQueue oq;
 	private HashMap<Position, ArrayList<String>> grid;
+	private ArrayList<PackingStation> packingStations;
+	private ArrayList<Robot> robots;
+	private ArrayList<ChargingPod> chargingPods;
+	private ArrayList<StorageShelf> storageShelves;
 	
 	/**
 	 * 
 	 */
-	public Warehouse() {
+	public Warehouse(String output) {
 		// TODO Auto-generated constructor stub
 		oq = new OrderQueue();
 		grid = new HashMap<Position, ArrayList<String>>();
+		
+		//Take output and parse each string
+		
+		//Pass first part of each string into switch statement
+		
+		//Create object from each string
+		
+		
 	}
 	
 	/**
