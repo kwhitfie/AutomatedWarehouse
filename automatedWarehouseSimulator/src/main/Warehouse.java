@@ -25,13 +25,13 @@ public class Warehouse implements Tick{
 			ArrayList<String> podRobots, ArrayList<String> shelves, ArrayList<String> stations, ArrayList<String> orders) {
 		
 		System.out.println("Width: " + width);
-		System.out.println("H: " + height);
-		System.out.println("C: " + capacity);
-		System.out.println("cS: " + chargeSpeed);
-		System.out.println("pR: " + podRobots.toString());
-		System.out.println("Sh: " + shelves.toString());
-		System.out.println("St: " + stations.toString());
-		System.out.println("Or: " + orders.toString());
+		System.out.println("Height: " + height);
+		System.out.println("Capacity: " + capacity);
+		System.out.println("cCharge Speed: " + chargeSpeed);
+		System.out.println("Pod Robots: " + podRobots.toString());
+		System.out.println("Shelves: " + shelves.toString());
+		System.out.println("Stations: " + stations.toString());
+		System.out.println("Orders: " + orders.toString());
 		
 		// TODO Auto-generated constructor stub
 		oq = new OrderQueue();
