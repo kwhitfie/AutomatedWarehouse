@@ -99,10 +99,8 @@ public class SimulationFileReader {
 						line = line.replaceFirst("order", "");
 						line = line.strip();
 						orders.add(line);
-					}
-					
+					}	
 				}
-				
 				System.out.println("Width: " + width);
 				System.out.println("H: " + height);
 				System.out.println("C: " + capacity);
