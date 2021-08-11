@@ -101,15 +101,15 @@ public class SimulationFileReader {
 						orders.add(line);
 					}	
 				}
-				System.out.println("Width: " + width);
-				System.out.println("H: " + height);
-				System.out.println("C: " + capacity);
-				System.out.println("cS: " + chargeSpeed);
-				System.out.println("pR: " + podRobots.toString());
-				System.out.println("Sh: " + shelves.toString());
-				System.out.println("St: " + stations.toString());
-				System.out.println("Or: " + orders.toString());
 			}
+			System.out.println("Width: " + width);
+			System.out.println("H: " + height);
+			System.out.println("C: " + capacity);
+			System.out.println("cS: " + chargeSpeed);
+			System.out.println("pR: " + podRobots.toString());
+			System.out.println("Sh: " + shelves.toString());
+			System.out.println("St: " + stations.toString());
+			System.out.println("Or: " + orders.toString());
 				
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
