@@ -53,6 +53,10 @@ public class SimulationFileReader {
 				//Ignores first line of file
 				if(!line.startsWith("format")){
 					
+					//Read each line of the sim file, and depending on the first word in the line,
+					//assign/add the lines contents to a variable/collection, which can later be passed 
+					//to the Warehouse. 
+					
 					if(line.startsWith("width")) {
 						line = line.replaceFirst("width", "");
 						line = line.strip();
@@ -102,21 +106,13 @@ public class SimulationFileReader {
 					}	
 				}
 			}
-			System.out.println("Width: " + width);
-			System.out.println("H: " + height);
-			System.out.println("C: " + capacity);
-			System.out.println("cS: " + chargeSpeed);
-			System.out.println("pR: " + podRobots.toString());
-			System.out.println("Sh: " + shelves.toString());
-			System.out.println("St: " + stations.toString());
-			System.out.println("Or: " + orders.toString());
 				
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new Warehouse(width, height, capacity, chargeSpeed, podRobots, shelves, stations, orders);
 	}
 	
 	public static void main(String[] args) {
