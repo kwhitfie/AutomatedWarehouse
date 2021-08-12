@@ -23,8 +23,8 @@ public class Robot implements Tick{
 	/**
 	 * 
 	 */
-	public Robot() {
-		// TODO Auto-generated constructor stub
+	public Robot(String UID) {
+		this.UID = UID;
 	}
 	
 	/**
@@ -74,6 +74,10 @@ public class Robot implements Tick{
 	 */
 	public boolean getItemFromShelf(int StorageShelfID) {
 		return false;
+	}
+	
+	public String toString() {
+		return "Robot("+UID+")";
 	}
 	
 	/**

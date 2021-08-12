@@ -23,6 +23,13 @@ public class UserInterface extends Application{
 	/**
 	 * 
 	 */
+	
+	
+	public UserInterface(int x, int y) {
+		ysize = y; 
+		xsize = x;
+	}
+	
 	public UserInterface() {
 		ysize = 7; 
 		xsize = 7;
@@ -33,7 +40,7 @@ public class UserInterface extends Application{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		launch(args);
 
 	}

@@ -14,8 +14,8 @@ public class PackingStation implements Tick{
 	/**
 	 * 
 	 */
-	public PackingStation() {
-		// TODO Auto-generated constructor stub
+	public PackingStation(String UID) {
+		this.UID=UID;
 	}
 
 	/**
@@ -24,6 +24,10 @@ public class PackingStation implements Tick{
 	 */
 	public String getUID() {
 		return UID;
+	}
+	
+	public String toString() {
+		return "Packing Station("+UID+")";
 	}
 
 	/**

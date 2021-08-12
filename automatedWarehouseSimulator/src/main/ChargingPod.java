@@ -14,8 +14,8 @@ public class ChargingPod implements Tick {
 	/**
 	 * 
 	 */
-	public ChargingPod() {
-		// TODO Auto-generated constructor stub
+	public ChargingPod(String UID) {
+		this.UID = UID;
 	}
 	
 	/**
@@ -26,6 +26,9 @@ public class ChargingPod implements Tick {
 		return UID;
 	}
 	
+	public String toString() {
+		return "Charging Pod("+UID+")";
+	}
 	/**
 	 * 
 	 */

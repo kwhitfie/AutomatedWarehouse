@@ -13,8 +13,8 @@ public class StorageShelf implements Tick{
 	/**
 	 * 
 	 */
-	public StorageShelf() {
-		// TODO Auto-generated constructor stub
+	public StorageShelf(String UID) {
+		this.UID = UID;
 	}
 
 	/**
@@ -23,6 +23,10 @@ public class StorageShelf implements Tick{
 	 */
 	public String getUID() {
 		return UID;
+	}
+	
+	public String toString() {
+		return "Storage Shelf("+UID+")";
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 /**
  * Details here
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
@@ -8,7 +10,7 @@ package main;
 
 public class Order implements Tick{
 	
-	public int[] shelfUID;
+	public ArrayList<String> shelfUID;
 	
 	/**
 	 * 
@@ -21,7 +23,7 @@ public class Order implements Tick{
 	 * 
 	 * @return
 	 */
-	public int[] getShelfUIDs() {
+	public ArrayList<String> getShelfUIDs() {
 		return shelfUID;
 	}
 

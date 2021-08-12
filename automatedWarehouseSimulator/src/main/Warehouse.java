@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.application.Application;
+
 /**
  * Details here
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
@@ -21,8 +23,13 @@ public class Warehouse implements Tick{
 	/**
 	 * 
 	 */
-	public Warehouse(Integer width, Integer height, Integer capacity, Integer chargeSpeed,
+	public Warehouse(int width, int height, Integer capacity, Integer chargeSpeed,
 			ArrayList<String> podRobots, ArrayList<String> shelves, ArrayList<String> stations, ArrayList<String> orders) {
+		
+		storageShelves = new ArrayList<StorageShelf>();
+		packingStations = new ArrayList<PackingStation>();
+		robots = new ArrayList<Robot>();
+		chargingPods = new ArrayList<ChargingPod>();
 		
 		System.out.println("Width: " + width);
 		System.out.println("Height: " + height);
@@ -38,14 +45,67 @@ public class Warehouse implements Tick{
 		grid = new HashMap<Position, ArrayList<String>>();
 		
 		//Hello Kayley, instead of the Warehouse getting a single output ArrayList, the SimulationFileReader
+		//Hello Alfie o/
 		//reads the sim file, and breaks it down by storing each Object type into it's own variable/collection.
 		//This saves the hassle of having to loop through the arraylist. 
 		
-		//Please could you look to set up the grid when you have the time tomorrow using the width and heigh parameters that is passed
+		//Please could you look to set up the grid when you have the time tomorrow using the width and height parameters that is passed
 		//to the Warehouse. Thanks. We'll look to start creating the objects and adding them to the grid once the grid is properly set up. 
-	
 		
+		UserInterface ui = new UserInterface(width, height);
+		//ui.main(null);
 		
+		// This currently runs the main after the constructor so the size isnt correct, need to figure out how to make it not do that
+		
+		for(String r: podRobots) {
+			String[] parse = r.split("\\s+");
+			ArrayList<String> s = new ArrayList<String>();
+			s.add(parse[0]);
+			s.add(parse[1]);
+			Position pos = new Position(Integer.parseInt(parse[2]),Integer.parseInt(parse[3]));
+			grid.put(pos, s);
+			
+			ChargingPod cPod = new ChargingPod(parse[0]);
+			Robot robot = new Robot(parse[1]);
+			chargingPods.add(cPod);
+			robots.add(robot);
+			
+		}
+		
+		for(String sh: shelves) {
+			String[] parse = sh.split("\\s+");
+			ArrayList<String> s = new ArrayList<String>();
+			s.add(parse[0]);
+			Position pos = new Position(Integer.parseInt(parse[1]),Integer.parseInt(parse[2]));
+			grid.put(pos, s);
+			
+			StorageShelf shelf = new StorageShelf(parse[0]);
+			storageShelves.add(shelf);
+		}
+		
+		for(String st: stations) {
+			String[] parse = st.split("\\s+");
+			ArrayList<String> s = new ArrayList<String>();
+			s.add(parse[0]);
+			Position pos = new Position(Integer.parseInt(parse[1]),Integer.parseInt(parse[2]));
+			grid.put(pos, s);
+			
+			PackingStation station = new PackingStation(parse[0]);
+			packingStations.add(station);
+		}
+		
+		for(String o: orders) {
+			String[] parse = o.split("\\s+");
+			
+		}
+		
+		System.out.println();
+		System.out.println("Grid information: "+grid);
+		System.out.println();
+		System.out.println("Packing Stations:"+packingStations);
+		System.out.println("Robots:"+robots);
+		System.out.println("Charging Pods:"+chargingPods);
+		System.out.println("Storage Shelves:"+storageShelves);
 	}
 	
 	/**
