@@ -42,8 +42,8 @@ public class UserInterface extends Application{
 	 * @param args
 	 */
 	public static void main(String[] args) {		
-		//UserInterface ui = new UserInterface(xsize,ysize);
-		launch(args);
+		UserInterface ui = new UserInterface(xsize,ysize);
+		Application.launch(args);
 
 	}
 	
