@@ -1,4 +1,7 @@
 package main;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javafx.application.Application; 
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
@@ -24,15 +27,11 @@ public class UserInterface extends Application{
 	 * 
 	 */
 	public UserInterface() {
-		ysize = 7; 
-		xsize = 7;
-		System.out.println("USING INCORRECT CONSTRUCTOR");
 	}
 	
 	public UserInterface(int x, int y) {
 		ysize = y; 
 		xsize = x; 
-		System.out.println("USING CORRECT CONSTRUCTOR");
 	}
 	
 	
@@ -47,11 +46,9 @@ public class UserInterface extends Application{
 
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public void showGrid(int width, int height) {
+	public void updateGrid(HashMap<Position, ArrayList<String>> grid) { 
+		
+		//Gotta figure out how the hell to update the grid
 		
 	}
 	
@@ -63,12 +60,6 @@ public class UserInterface extends Application{
 		return 0;
 	}
 	
-	/**
-	 * 
-	 */
-	public void showUserInterface() {
-		
-	}
 	
 	/**
 	 * 

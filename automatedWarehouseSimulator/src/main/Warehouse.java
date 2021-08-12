@@ -54,9 +54,6 @@ public class Warehouse implements Tick{
 		
 		
 		
-		
-		// This currently runs the main after the constructor so the size isnt correct, need to figure out how to make it not do that
-		
 		for(String r: podRobots) {
 			String[] parse = r.split("\\s+");
 			ArrayList<String> s = new ArrayList<String>();
@@ -110,7 +107,7 @@ public class Warehouse implements Tick{
 		UserInterface ui = new UserInterface(width, height);
 		String[] arguments = new String[] {"123"};
 		ui.main(arguments);
-		//bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh
+
 	}
 	
 	/**
