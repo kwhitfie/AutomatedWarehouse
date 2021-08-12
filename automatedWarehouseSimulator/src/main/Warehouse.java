@@ -52,8 +52,8 @@ public class Warehouse implements Tick{
 		//Please could you look to set up the grid when you have the time tomorrow using the width and height parameters that is passed
 		//to the Warehouse. Thanks. We'll look to start creating the objects and adding them to the grid once the grid is properly set up. 
 		
-		UserInterface ui = new UserInterface(width, height);
-		//ui.main(null);
+		
+		
 		
 		// This currently runs the main after the constructor so the size isnt correct, need to figure out how to make it not do that
 		
@@ -106,6 +106,11 @@ public class Warehouse implements Tick{
 		System.out.println("Robots:"+robots);
 		System.out.println("Charging Pods:"+chargingPods);
 		System.out.println("Storage Shelves:"+storageShelves);
+		
+		UserInterface ui = new UserInterface(width, height);
+		String[] arguments = new String[] {"123"};
+		ui.main(arguments);
+		//bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh bruh
 	}
 	
 	/**

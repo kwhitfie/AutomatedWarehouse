@@ -17,30 +17,32 @@ import javafx.stage.Stage;
 
 public class UserInterface extends Application{
 	
-	private int ysize;
-	private int xsize;
+	private static int ysize;
+	private static int xsize;
 	
 	/**
 	 * 
 	 */
-	
-	
-	public UserInterface(int x, int y) {
-		ysize = y; 
-		xsize = x;
-	}
-	
 	public UserInterface() {
 		ysize = 7; 
 		xsize = 7;
+		System.out.println("USING INCORRECT CONSTRUCTOR");
 	}
+	
+	public UserInterface(int x, int y) {
+		ysize = y; 
+		xsize = x; 
+		System.out.println("USING CORRECT CONSTRUCTOR");
+	}
+	
+	
 	
 	/**
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
+		//UserInterface ui = new UserInterface(xsize,ysize);
 		launch(args);
 
 	}
