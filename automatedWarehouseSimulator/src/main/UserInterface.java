@@ -2,7 +2,8 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.application.Application; 
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
@@ -22,17 +23,27 @@ public class UserInterface extends Application{
 	
 	private static int ysize;
 	private static int xsize;
+	private static HashMap<Position, ArrayList<String>> grid;
+	private HashMap<Position, Button> buttons;
+	private Stage stageT;
+	private Scene sceneT;
 	
 	/**
 	 * 
 	 */
-	public UserInterface() {
+	public UserInterface() {			
+		buttons = new HashMap<Position, Button>();
+		//grid = new HashMap<Position, ArrayList<String>>();
 	}
 	
-	public UserInterface(int x, int y) {
+	public UserInterface(int x, int y, HashMap<Position, ArrayList<String>> grid) {
 		ysize = y; 
 		xsize = x; 
+		this.grid = grid;
+		buttons = new HashMap<Position, Button>();
+		
 	}
+
 	
 	
 	
@@ -41,14 +52,35 @@ public class UserInterface extends Application{
 	 * @param args
 	 */
 	public static void main(String[] args) {		
-		UserInterface ui = new UserInterface(xsize,ysize);
+		UserInterface ui = new UserInterface(xsize,ysize,grid);
+		
 		Application.launch(args);
+
+		
 
 	}
 	
 	public void updateGrid(HashMap<Position, ArrayList<String>> grid) { 
 		
 		//Gotta figure out how the hell to update the grid
+		
+		//Loop in the buttons
+		for(Position buttonP : buttons.keySet()) {
+			//Loop in the grid
+			for(Position gridP : grid.keySet())
+			{
+				if(buttonP.getX()==gridP.getX() && buttonP.getY()==gridP.getY())
+				{
+					//If positions match, update text to be string
+					buttons.get(buttonP).setText(grid.get(gridP).toString());
+				}
+			}
+			
+		
+		}
+		
+		
+		
 		
 	}
 	
@@ -69,7 +101,15 @@ public class UserInterface extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-	      
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+	      stageT = stage;
 		//Creating a Grid Pane 
 	      GridPane gridPane = new GridPane();    
 	      
@@ -90,16 +130,22 @@ public class UserInterface extends Application{
 	      
 	      for(int x =0; x<=xsize;x++) {
 	    	  for(int y =0; y<=ysize;y++) {
-	    		  Button b = new Button("("+x+","+y+")"); 
+	    		  Button b = new Button(); 
+	    		  buttons.put(new Position(x,y), b);
 	    		  b.setPrefSize(70,70);
 	    		  gridPane.add(b, x, y);
 		    	  
 		      }
 	      }
+	      
+	      updateGrid(grid);
+	      
+	      
 	       
 	      
 	      //Creating a scene object 
 	      Scene scene = new Scene(gridPane);  
+	      sceneT = scene;
 	      
 	      //Setting title to the Stage 
 	      stage.setTitle("Warehouse moment"); 

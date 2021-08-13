@@ -104,9 +104,13 @@ public class Warehouse implements Tick{
 		System.out.println("Charging Pods:"+chargingPods);
 		System.out.println("Storage Shelves:"+storageShelves);
 		
-		UserInterface ui = new UserInterface(width, height);
+		UserInterface ui = new UserInterface(width, height,grid);
 		String[] arguments = new String[] {"123"};
 		ui.main(arguments);
+		
+	
+		
+		
 
 	}
 	
