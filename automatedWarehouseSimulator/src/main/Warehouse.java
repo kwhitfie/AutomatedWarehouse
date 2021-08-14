@@ -62,8 +62,8 @@ public class Warehouse implements Tick{
 			Position pos = new Position(Integer.parseInt(parse[2]),Integer.parseInt(parse[3]));
 			grid.put(pos, s);
 			
-			ChargingPod cPod = new ChargingPod(parse[0]);
-			Robot robot = new Robot(parse[1]);
+			ChargingPod cPod = new ChargingPod(parse[0],chargeSpeed);
+			Robot robot = new Robot(parse[1],capacity);
 			chargingPods.add(cPod);
 			robots.add(robot);
 			
