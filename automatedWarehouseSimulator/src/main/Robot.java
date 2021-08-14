@@ -18,13 +18,15 @@ public class Robot extends WarehouseObject implements Tick{
 	private boolean isBusy;
 	private int batteryChargePercent;
 	private static int MAX_BATTERY;
+	private Position position;
 
 	/**
 	 * 
 	 */
-	public Robot(String UID, int MAX_BATTERY) {
+	public Robot(String UID, int MAX_BATTERY, Position position) {
 		super(UID);
 		this.MAX_BATTERY = MAX_BATTERY;
+		this.position = position;
 	}
 	
 	public int getManhattanDistance(Position a, Position b) {

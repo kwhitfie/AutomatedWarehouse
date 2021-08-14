@@ -69,7 +69,7 @@ public class Warehouse {
 			grid.put(pos, s);
 			
 			ChargingPod cPod = new ChargingPod(parse[0],chargeSpeed);
-			Robot robot = new Robot(parse[1],capacity);
+			Robot robot = new Robot(parse[1],capacity,pos);
 			chargingPods.add(cPod);
 			robots.add(robot);
 			
