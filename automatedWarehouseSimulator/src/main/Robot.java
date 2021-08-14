@@ -9,9 +9,8 @@ package main;
 import java.util.ArrayList;
 	
 
-public class Robot implements Tick{
+public class Robot extends WarehouseObject implements Tick{
 	
-	private String UID;
 	private ArrayList<Position> path;
 	private ChargingPod chargingPod;
 	private String[] storageShelfIDs;
@@ -24,7 +23,7 @@ public class Robot implements Tick{
 	 * 
 	 */
 	public Robot(String UID) {
-		this.UID = UID;
+		super(UID);
 	}
 	
 	/**
@@ -41,14 +40,6 @@ public class Robot implements Tick{
 	 */
 	public String[] getPathToDestination(String UID) {
 		return null;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getUID() {
-		return UID;
 	}
 	
 	/**

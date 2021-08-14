@@ -6,25 +6,20 @@ package main;
  *
  */
 
-public class StorageShelf implements Tick{
+public class StorageShelf extends WarehouseObject implements Tick{
 
-	private String UID;
 	
 	/**
 	 * 
 	 */
 	public StorageShelf(String UID) {
-		this.UID = UID;
+		super(UID);
 	}
 
 	/**
 	 * 
 	 * @return
-	 */
-	public String getUID() {
-		return UID;
-	}
-	
+	 */	
 	public String toString() {
 		return "Storage Shelf("+UID+")";
 	}

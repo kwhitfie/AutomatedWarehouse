@@ -1,29 +1,20 @@
 package main;
 
-public class PackingStation implements Tick{
+public class PackingStation extends WarehouseObject implements Tick{
 
 	/**
 	 * Details here
 	 * @author Alfie Smith, Kayley Whitfield, Dan Philpot
 	 *
 	 */
-	
-	private String UID;
+
 	private Order order;
 	
 	/**
 	 * 
 	 */
 	public PackingStation(String UID) {
-		this.UID=UID;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getUID() {
-		return UID;
+		super(UID);
 	}
 	
 	public String toString() {
