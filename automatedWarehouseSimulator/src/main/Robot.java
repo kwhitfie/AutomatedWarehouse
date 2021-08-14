@@ -14,8 +14,8 @@ public class Robot extends WarehouseObject implements Tick{
 	private ArrayList<Position> path;
 	private ChargingPod chargingPod;
 	private String[] storageShelfIDs;
-	private boolean hasItem;
-	private boolean isBusy;
+	private boolean hasItem = false;
+	private boolean isBusy = false;
 	private int batteryChargePercent;
 	private static int MAX_BATTERY;
 	private Position position;
