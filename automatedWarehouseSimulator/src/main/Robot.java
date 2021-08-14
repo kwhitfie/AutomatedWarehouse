@@ -27,6 +27,10 @@ public class Robot extends WarehouseObject implements Tick{
 		this.MAX_BATTERY = MAX_BATTERY;
 	}
 	
+	public int getManhattanDistance(Position a, Position b) {
+		return (a.getX()-b.getX())+(a.getY()-b.getX());
+	}
+	
 	/**
 	 * 
 	 */
