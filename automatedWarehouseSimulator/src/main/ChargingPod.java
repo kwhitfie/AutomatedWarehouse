@@ -1,6 +1,6 @@
 package main;
 
-public class ChargingPod implements Tick {
+public class ChargingPod extends WarehouseObject implements Tick {
 	
 	/**
 	 * Details here
@@ -8,27 +8,23 @@ public class ChargingPod implements Tick {
 	 *
 	 */
 	
-	private String UID;
 	private static final int POWER_UNITS_PER_TICK = 0;
 	
 	/**
 	 * 
 	 */
 	public ChargingPod(String UID) {
-		this.UID = UID;
+		super(UID);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public String getUID() {
-		return UID;
-	}
-	
 	public String toString() {
 		return "Charging Pod("+UID+")";
 	}
+	
 	/**
 	 * 
 	 */
