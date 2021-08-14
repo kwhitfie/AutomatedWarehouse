@@ -11,5 +11,5 @@ public interface Tick {
 	/**
 	 * 
 	 */
-	public void Tick();
+	public void tick(Warehouse wh);
 }

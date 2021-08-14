@@ -75,9 +75,8 @@ public class Robot extends WarehouseObject implements Tick{
 	/**
 	 * 
 	 */
-	@Override
-	public void Tick() {
+	public void tick(Warehouse wh) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Robots warehouse: " + wh.toString());
 	}
 }

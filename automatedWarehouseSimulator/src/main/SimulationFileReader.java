@@ -117,6 +117,7 @@ public class SimulationFileReader {
 	
 	public static void main(String[] args) {
 		SimulationFileReader s = new SimulationFileReader();
-		s.readSimFile();
+		Warehouse wh = s.readSimFile();
+		wh.tickAllObjects();
 	}
 }

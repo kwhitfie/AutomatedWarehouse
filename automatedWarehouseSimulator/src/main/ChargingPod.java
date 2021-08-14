@@ -37,8 +37,8 @@ public class ChargingPod extends WarehouseObject implements Tick {
 	 * 
 	 */
 	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
+	public void tick(Warehouse wh) {
+		System.out.println("ChargingPod warehouse: " + wh.toString());
 		
 	}
 

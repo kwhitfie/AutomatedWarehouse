@@ -6,7 +6,7 @@ package main;
  *
  */
 
-public class StorageShelf extends WarehouseObject implements Tick{
+public class StorageShelf extends WarehouseObject {
 
 	
 	/**
@@ -24,12 +24,4 @@ public class StorageShelf extends WarehouseObject implements Tick{
 		return "Storage Shelf("+UID+")";
 	}
 
-	/**
-	 * 
-	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
-		
-	}
 }

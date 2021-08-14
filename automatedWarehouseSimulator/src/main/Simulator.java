@@ -6,7 +6,7 @@ package main;
  *
  */
 
-public class Simulator implements Tick{
+public class Simulator {
 
 
 	private Warehouse warehouse;
@@ -59,13 +59,6 @@ public class Simulator implements Tick{
 	 * 
 	 */
 	public void setUpSimulation() {
-		
-	}
-
-
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -29,12 +29,17 @@ public class PackingStation extends WarehouseObject implements Tick{
 		return order;
 	}
 	
+	public Order getNextOrder() {
+		return null;
+	}
+	
 	/**
 	 * 
 	 */
 	@Override
-	public void Tick() {
+	public void tick(Warehouse wh) {
 		// TODO Auto-generated method stub
+		System.out.println("Packing Stations warehouse: " + wh.toString());
 
 	}
 

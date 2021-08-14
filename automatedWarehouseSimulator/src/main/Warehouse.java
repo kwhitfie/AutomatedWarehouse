@@ -13,9 +13,11 @@ import javafx.application.Application;
  *
  */
 
-public class Warehouse implements Tick{
+public class Warehouse {
 	
-	private Queue<Order> oq;
+	private Queue<Order> unassignedOQ;
+	private Queue<Order> assignedOQ;
+	private Queue<Order> dispatchedOQ;
 	private HashMap<Position, ArrayList<String>> grid;
 	private ArrayList<PackingStation> packingStations;
 	private ArrayList<Robot> robots;
@@ -43,7 +45,9 @@ public class Warehouse implements Tick{
 		System.out.println("Orders: " + orders.toString());
 		
 		// TODO Auto-generated constructor stub
-		oq = new LinkedList<Order>();
+		unassignedOQ = new LinkedList<Order>();
+		assignedOQ = new LinkedList<Order>();
+		dispatchedOQ = new LinkedList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
 		
 		//Hello Kayley, instead of the Warehouse getting a single output ArrayList, the SimulationFileReader
@@ -102,7 +106,7 @@ public class Warehouse implements Tick{
 				s.add(parse[i]);
 			}
 			Order order = new Order(s,ticks);
-			oq.add(order);
+			unassignedOQ.add(order);
 			
 		}
 		
@@ -122,17 +126,47 @@ public class Warehouse implements Tick{
 	/**
 	 * 
 	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
+	public void tickAllObjects() {
+		
+		//Go through each object arraylist and call its ticket method and passes itself.
+		for(int i = 0; i<packingStations.size(); i++) {
+			System.out.println("Hello");
+			packingStations.get(i).tick(this);
+		}
+		
+		for(int i = 0; i<chargingPods.size(); i++) {
+			System.out.println("Hello");
+			chargingPods.get(i).tick(this);
+		}
+		
+		for(int i = 0; i<robots.size(); i++) {
+			System.out.println("Hello");
+			robots.get(i).tick(this);
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Queue<Order> getUnassignedOrderQueue() {
+		return unassignedOQ;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public Queue<Order> getOrderQueue() {
-		return oq;
+	public Queue<Order> getAssignedOrderQueue() {
+		return assignedOQ;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Queue<Order> geDispatchedOrderQueue() {
+		return dispatchedOQ;
 	}
 	
 	/**
@@ -157,12 +191,5 @@ public class Warehouse implements Tick{
 	 */
 	public void setGridSquare(String UID) {
 		
-	}
-	
-	/**
-	 * 
-	 */
-	public void tickAll() {
-		//tick tick tick tick tick tick tick tick tick tick tick 
 	}
 }
