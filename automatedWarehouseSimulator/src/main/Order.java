@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 
-public class Order implements Tick{
+public class Order {
 	
 	public ArrayList<String> shelfUIDs;
 	public int ticksToPack;
@@ -27,15 +27,6 @@ public class Order implements Tick{
 	 */
 	public ArrayList<String> getShelfUIDs() {
 		return shelfUIDs;
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public int getTicksToPack() {
