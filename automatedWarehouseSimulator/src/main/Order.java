@@ -10,13 +10,15 @@ import java.util.ArrayList;
 
 public class Order implements Tick{
 	
-	public ArrayList<String> shelfUID;
+	public ArrayList<String> shelfUIDs;
+	public int ticksToPack;
 	
 	/**
 	 * 
 	 */
-	public Order() {
-		// TODO Auto-generated constructor stub
+	public Order(ArrayList<String> shelves, int ticks) {
+		shelfUIDs = shelves;
+		ticksToPack = ticks;
 	}
 	
 	/**
@@ -24,7 +26,7 @@ public class Order implements Tick{
 	 * @return
 	 */
 	public ArrayList<String> getShelfUIDs() {
-		return shelfUID;
+		return shelfUIDs;
 	}
 
 	/**
@@ -34,6 +36,10 @@ public class Order implements Tick{
 	public void Tick() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public int getTicksToPack() {
+		return ticksToPack;
 	}
 
 }

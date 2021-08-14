@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javafx.application.Application;
 
@@ -13,7 +15,7 @@ import javafx.application.Application;
 
 public class Warehouse implements Tick{
 	
-	private OrderQueue oq;
+	private Queue<Order> oq;
 	private HashMap<Position, ArrayList<String>> grid;
 	private ArrayList<PackingStation> packingStations;
 	private ArrayList<Robot> robots;
@@ -41,7 +43,7 @@ public class Warehouse implements Tick{
 		System.out.println("Orders: " + orders.toString());
 		
 		// TODO Auto-generated constructor stub
-		oq = new OrderQueue();
+		oq = new LinkedList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
 		
 		//Hello Kayley, instead of the Warehouse getting a single output ArrayList, the SimulationFileReader
@@ -91,8 +93,16 @@ public class Warehouse implements Tick{
 			packingStations.add(station);
 		}
 		
+		
 		for(String o: orders) {
 			String[] parse = o.split("\\s+");
+			int ticks = Integer.parseInt(parse[0]);
+			ArrayList<String> s = new ArrayList<String>();
+			for(int i=1;i<parse.length;i++) {
+				s.add(parse[i]);
+			}
+			Order order = new Order(s,ticks);
+			oq.add(order);
 			
 		}
 		
@@ -107,13 +117,6 @@ public class Warehouse implements Tick{
 		UserInterface ui = new UserInterface(width, height,grid);
 		String[] arguments = new String[] {"123"};
 		ui.main(arguments);
-		//hehe :3
-		// raz daz the daz
-		
-	
-		
-		
-
 	}
 	
 	/**
@@ -128,7 +131,7 @@ public class Warehouse implements Tick{
 	 * 
 	 * @return
 	 */
-	public OrderQueue getOrderQueue() {
+	public Queue<Order> getOrderQueue() {
 		return oq;
 	}
 	
