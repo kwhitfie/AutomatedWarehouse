@@ -90,13 +90,14 @@ public class PackingStation extends WarehouseObject implements Tick{
 		//If this packing station needs to pack an order after the robot has got the items
 		else if(packing) {
 			
-			ticksToPackOrder--;
-			
 			if(ticksToPackOrder == 0) {
 				wh.moveOrderFromAssignedToDispactedQueue(order);
 				packing = false;
 				needsRobot = true;
+			}else {
+				ticksToPackOrder--;
 			}
+
 		}
 	}
 
