@@ -52,7 +52,7 @@ public class ChargingPod extends WarehouseObject implements Tick {
 	 */
 	@Override
 	public void tick(Warehouse wh) {
-		System.out.println("ChargingPod warehouse: " + wh.toString());
+		//System.out.println("ChargingPod warehouse: " + wh.toString());
 		
 	}
 }

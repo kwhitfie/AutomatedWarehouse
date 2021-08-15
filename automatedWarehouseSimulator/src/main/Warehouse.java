@@ -209,6 +209,7 @@ public class Warehouse {
 	 */
 	public String checkRobotAvailability() {
 		
+		//return "r0";
 		return null;
 	}
 	
