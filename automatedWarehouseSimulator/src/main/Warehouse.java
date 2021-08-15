@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javafx.application.Application;
-
 /**
  * Details here
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
@@ -130,7 +128,6 @@ public class Warehouse {
 		
 		//Go through each object arraylist and call its ticket method and passes itself.
 		for(int i = 0; i<packingStations.size(); i++) {
-			System.out.println("Hello");
 			packingStations.get(i).tick(this);
 		}
 		
