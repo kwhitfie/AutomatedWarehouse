@@ -191,7 +191,7 @@ public class Warehouse {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Order> getAssignedOrderQueue() {
+	public ArrayList<Order> getAssignedOrderList() {
 		return assignedOQ;
 	}
 	
@@ -199,7 +199,15 @@ public class Warehouse {
 	 * 
 	 * @return
 	 */
-	public void moveOrderFromAssignedToDispactedQueue(Order order) {
+	public ArrayList<Order> getDispatchedOrderList() {
+		return assignedOQ;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public void moveOrderFromAssignedToDispactedList(Order order) {
 		assignedOQ.remove(order);
 		dispatchedOQ.add(order);
 	}
@@ -209,8 +217,8 @@ public class Warehouse {
 	 */
 	public String checkRobotAvailability() {
 		
-		//return "r0";
-		return null;
+		return "r0";
+		//return null;
 	}
 	
 	/**
