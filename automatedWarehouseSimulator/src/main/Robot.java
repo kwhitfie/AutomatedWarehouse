@@ -27,6 +27,7 @@ public class Robot extends WarehouseObject implements Tick{
 		super(UID);
 		this.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
+		batteryChargePercent = 50;
 	}
 	
 	public int getManhattanDistance(Position a, Position b) {
@@ -51,10 +52,17 @@ public class Robot extends WarehouseObject implements Tick{
 	
 	/**
 	 * 
+	 */
+	public void setBatteryChargePercentage(int battery) {
+		batteryChargePercent = battery;
+	}
+	
+	/**
+	 * 
 	 * @return
 	 */
-	public int checkBatteryStatus() {
-		return 0;
+	public int getBatteryStatus() {
+		return batteryChargePercent;
 	}
 	
 	/**

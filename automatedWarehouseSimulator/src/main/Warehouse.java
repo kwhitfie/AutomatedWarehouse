@@ -68,7 +68,7 @@ public class Warehouse {
 			Position pos = new Position(Integer.parseInt(parse[2]),Integer.parseInt(parse[3]));
 			grid.put(pos, s);
 			
-			ChargingPod cPod = new ChargingPod(parse[0],chargeSpeed);
+			ChargingPod cPod = new ChargingPod(parse[0],chargeSpeed, parse[1]);
 			Robot robot = new Robot(parse[1],capacity,pos);
 			chargingPods.add(cPod);
 			robots.add(robot);
@@ -143,6 +143,30 @@ public class Warehouse {
 			System.out.println("Hello");
 			robots.get(i).tick(this);
 		}
+	}
+	
+	/**
+	 * Return a specified robot. 
+	 */
+	public Robot getRobot (String UID) {
+		for(Robot r : robots) {
+			if(r.getUID().contentEquals(UID)) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Return a specified charging pod. 
+	 */
+	public ChargingPod getChargingPod(String UID) {
+		for(ChargingPod cp : chargingPods) {
+			if(cp.getUID().contentEquals(UID)) {
+				return cp;
+			}
+		}
+		return null;
 	}
 
 	/**
