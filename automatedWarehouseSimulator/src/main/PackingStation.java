@@ -24,6 +24,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 	private boolean sleeping;
 	private boolean packing;
 	private Order order;
+	private int ticksToPackOrder;
 	
 	/**
 	 * 
@@ -54,6 +55,15 @@ public class PackingStation extends WarehouseObject implements Tick{
 	 */
 	public void getNextOrder(Warehouse wh) {
 		order =  wh.getNextUnassignedOrder();
+		ticksToPackOrder = order.getTicksToPack();
+	}
+	
+	/**
+	 * 
+	 */
+	public void orderRetreivedByRobot() {
+		sleeping = false;
+		packing = true; 
 	}
 	
 	/**
@@ -72,13 +82,21 @@ public class PackingStation extends WarehouseObject implements Tick{
 			
 			String potentialRobotUID = wh.checkRobotAvailability();
 			if(!(potentialRobotUID == null)) {
+				needsRobot = false;
+				sleeping = true; 
 				wh.getRobot(potentialRobotUID); //call the method which engages the robot to get the items, once complete.
 			}
-			
 		}
 		//If this packing station needs to pack an order after the robot has got the items
 		else if(packing) {
-			//pack...
+			
+			ticksToPackOrder--;
+			
+			if(ticksToPackOrder == 0) {
+				wh.moveOrderFromAssignedToDispactedQueue(order);
+				packing = false;
+				needsRobot = true;
+			}
 		}
 	}
 

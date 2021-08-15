@@ -14,8 +14,8 @@ import java.util.Queue;
 public class Warehouse {
 	
 	private Queue<Order> unassignedOQ;
-	private Queue<Order> assignedOQ;
-	private Queue<Order> dispatchedOQ;
+	private ArrayList<Order> assignedOQ;
+	private ArrayList<Order> dispatchedOQ;
 	private HashMap<Position, ArrayList<String>> grid;
 	private ArrayList<PackingStation> packingStations;
 	private ArrayList<Robot> robots;
@@ -44,8 +44,8 @@ public class Warehouse {
 		
 		// TODO Auto-generated constructor stub
 		unassignedOQ = new LinkedList<Order>();
-		assignedOQ = new LinkedList<Order>();
-		dispatchedOQ = new LinkedList<Order>();
+		assignedOQ = new ArrayList<Order>();
+		dispatchedOQ = new ArrayList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
 		
 		//Hello Kayley, instead of the Warehouse getting a single output ArrayList, the SimulationFileReader
@@ -191,7 +191,7 @@ public class Warehouse {
 	 * 
 	 * @return
 	 */
-	public Queue<Order> getAssignedOrderQueue() {
+	public ArrayList<Order> getAssignedOrderQueue() {
 		return assignedOQ;
 	}
 	
@@ -199,8 +199,9 @@ public class Warehouse {
 	 * 
 	 * @return
 	 */
-	public Queue<Order> geDispatchedOrderQueue() {
-		return dispatchedOQ;
+	public void moveOrderFromAssignedToDispactedQueue(Order order) {
+		assignedOQ.remove(order);
+		dispatchedOQ.add(order);
 	}
 	
 	/**
