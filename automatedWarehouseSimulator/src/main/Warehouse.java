@@ -132,12 +132,10 @@ public class Warehouse {
 		}
 		
 		for(int i = 0; i<chargingPods.size(); i++) {
-			System.out.println("Hello");
 			chargingPods.get(i).tick(this);
 		}
 		
 		for(int i = 0; i<robots.size(); i++) {
-			System.out.println("Hello");
 			robots.get(i).tick(this);
 		}
 	}
