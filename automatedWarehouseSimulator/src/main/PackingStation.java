@@ -69,7 +69,12 @@ public class PackingStation extends WarehouseObject implements Tick{
 			if(order == null) {
 				getNextOrder(wh);
 			}
-			wh.checkRobotAvailability();
+			
+			String potentialRobotUID = wh.checkRobotAvailability();
+			if(!(potentialRobotUID == null)) {
+				wh.getRobot(potentialRobotUID); //call the method which engages the robot to get the items, once complete.
+			}
+			
 		}
 		//If this packing station needs to pack an order after the robot has got the items
 		else if(packing) {
