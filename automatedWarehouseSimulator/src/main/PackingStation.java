@@ -94,6 +94,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 			//Is the packing complete? Check if ticks to pack is 0, and if yes, move the order to the dispatched list.
 			if(ticksToPackOrder == 0) {
 				wh.moveOrderFromAssignedToDispactedList(order);
+				System.out.println(wh.getDispatchedOrderList().toString());
 				packing = false;
 				needsRobot = true;
 				order = null;

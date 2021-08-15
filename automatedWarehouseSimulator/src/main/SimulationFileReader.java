@@ -126,7 +126,6 @@ public class SimulationFileReader {
 		wh.tickAllObjects();
 		wh.tickAllObjects();
 		wh.tickAllObjects();
-		System.out.println(wh.getDispatchedOrderList().toString());
 		wh.tickAllObjects();
 		
 	
