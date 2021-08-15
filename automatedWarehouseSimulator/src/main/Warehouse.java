@@ -200,7 +200,7 @@ public class Warehouse {
 	 * @return
 	 */
 	public ArrayList<Order> getDispatchedOrderList() {
-		return assignedOQ;
+		return dispatchedOQ;
 	}
 	
 	/**
@@ -216,9 +216,13 @@ public class Warehouse {
 	 * Check if a robot is available to perform a job for the PackingStation
 	 */
 	public String checkRobotAvailability() {
-		
-		return "r0";
-		//return null;
+		String robotUID = null;
+		for(Robot r : robots) {
+			if(r.checkIfPossibleToAcceptJob()) {
+				robotUID = r.getUID();
+			}
+		}
+		return robotUID;
 	}
 	
 	/**
