@@ -20,6 +20,9 @@ public class PackingStation extends WarehouseObject implements Tick{
 	// 2. - The PS is sleeping while the Robot retrieves the Orders items.
 	// 3. - Once the Orders items are retrieved, begin packing the Order for the x tickets it specifies. Once finished packing, dispatch the Order and move the Order to the dispatchedOrderQueue in the Warehouse.
 	
+	private boolean needsRobot;
+	private boolean sleeping;
+	private boolean packing;
 	private Order order;
 	
 	/**
@@ -27,6 +30,9 @@ public class PackingStation extends WarehouseObject implements Tick{
 	 */
 	public PackingStation(String UID) {
 		super(UID);
+		needsRobot = true;
+		sleeping = false;
+		packing = false;
 	}
 	
 	public String toString() {
@@ -41,8 +47,13 @@ public class PackingStation extends WarehouseObject implements Tick{
 		return order;
 	}
 	
-	public Order getNextOrder() {
-		return null;
+	/**
+	 * Gets the next order from the warehouse and assigns it to the order field.
+	 * @param wh the warehouse
+	 * @return the next order
+	 */
+	public void getNextOrder(Warehouse wh) {
+		order =  wh.getNextUnassignedOrder();
 	}
 	
 	/**
@@ -52,7 +63,18 @@ public class PackingStation extends WarehouseObject implements Tick{
 	public void tick(Warehouse wh) {
 		// TODO Auto-generated method stub
 		System.out.println("Packing Stations warehouse: " + wh.toString());
-
+		
+		//If this packingStations needs a robot to serve an order
+		if(needsRobot){
+			if(order == null) {
+				getNextOrder(wh);
+			}
+			wh.checkRobotAvailability();
+		}
+		//If this packing station needs to pack an order after the robot has got the items
+		else if(packing) {
+			//pack...
+		}
 	}
 
 }

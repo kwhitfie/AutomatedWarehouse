@@ -128,8 +128,14 @@ public class SimulationFileReader {
 		wh.getChargingPod("c0").chargeRobot("r0", wh);
 		System.out.println(wh.getRobot("r0").getBatteryStatus());
 		
-		
-		
+		//Tests PackingStation getNextOrder method
+//		wh.getPS("ps0").getNextOrder(wh);
+//		System.out.println("UAOR: " + wh.getPS("ps0").getCurrentOrder().getTicksToPack());
+//		System.out.println("AOQ: " + wh.getAssignedOrderQueue().peek().getTicksToPack());
+//		
+//		wh.getPS("ps0").getNextOrder(wh);
+//		System.out.println("UAOR: " + wh.getPS("ps0").getCurrentOrder().getTicksToPack());
+//		System.out.println("AOQ: " + wh.getAssignedOrderQueue().peek().getTicksToPack());
 		
 	}
 }

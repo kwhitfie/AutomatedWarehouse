@@ -163,13 +163,28 @@ public class Warehouse {
 		}
 		return null;
 	}
+	
+	/**
+	 * Return a specified packingStation 
+	 * Might not be needed outside of testing.
+	 */
+	public PackingStation getPS(String UID) {
+		for(PackingStation ps : packingStations) {
+			if(ps.getUID().contentEquals(UID)) {
+				return ps;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Queue<Order> getUnassignedOrderQueue() {
-		return unassignedOQ;
+	public Order getNextUnassignedOrder() {
+		Order o = unassignedOQ.poll();
+		assignedOQ.add(o);
+		return o;
 	}
 	
 	/**
@@ -186,6 +201,14 @@ public class Warehouse {
 	 */
 	public Queue<Order> geDispatchedOrderQueue() {
 		return dispatchedOQ;
+	}
+	
+	/**
+	 * Check if a robot is available to perform a job for the PackingStation
+	 */
+	public String checkRobotAvailability() {
+		
+		return null;
 	}
 	
 	/**

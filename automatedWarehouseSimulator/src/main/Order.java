@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class Order {
 	
-	public ArrayList<String> shelfUIDs;
-	public int ticksToPack;
+	private ArrayList<String> shelfUIDs;
+	private int ticksToPack;
 	
 	/**
 	 * 
