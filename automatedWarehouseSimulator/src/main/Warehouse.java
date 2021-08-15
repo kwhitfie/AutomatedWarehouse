@@ -116,7 +116,7 @@ public class Warehouse {
 		System.out.println("Charging Pods:"+chargingPods);
 		System.out.println("Storage Shelves:"+storageShelves);
 		
-		UserInterface ui = new UserInterface(width, height,grid);
+		UserInterface ui = new UserInterface(width, height,this);
 		String[] arguments = new String[] {"123"};
 		ui.main(arguments);
 	}
@@ -239,6 +239,10 @@ public class Warehouse {
 	 */
 	public Position getGridSquare() {
 		return null;
+	}
+	
+	public HashMap<Position, ArrayList<String>> getGrid(){
+		return grid;
 	}
 	
 	/**

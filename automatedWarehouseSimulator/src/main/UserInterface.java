@@ -26,7 +26,7 @@ public class UserInterface extends Application{
 	
 	private static int ysize;
 	private static int xsize;
-	private static HashMap<Position, ArrayList<String>> grid;
+	private static Warehouse warehouse;
 	private HashMap<Position, Button> buttons;
 	private Stage stageT;
 	private Scene sceneT;
@@ -41,10 +41,10 @@ public class UserInterface extends Application{
 		currentTick = 0;
 	}
 	
-	public UserInterface(int x, int y, HashMap<Position, ArrayList<String>> grid) {
+	public UserInterface(int x, int y, Warehouse warehouse) {
 		ysize = y; 
 		xsize = x; 
-		this.grid = grid;
+		this.warehouse = warehouse;
 		buttons = new HashMap<Position, Button>();
 		currentTick = 0;
 		
@@ -58,7 +58,7 @@ public class UserInterface extends Application{
 	 * @param args
 	 */
 	public static void main(String[] args) {		
-		UserInterface ui = new UserInterface(xsize,ysize,grid);
+		UserInterface ui = new UserInterface(xsize,ysize,warehouse);
 		
 		Application.launch(args);
 
@@ -168,7 +168,7 @@ public class UserInterface extends Application{
 		      }
 	      }
 	      
-	      updateGrid(grid);
+	      updateGrid(warehouse.getGrid());
 	      
 	      Label l = new Label("Current tick: "+currentTick);
 	      l.setAlignment(Pos.CENTER);
@@ -185,6 +185,8 @@ public class UserInterface extends Application{
 	                currentTick += 1;
 	                l.setText("Current tick: "+currentTick);
 	                //Make the tick stuff run here :)
+	                warehouse.tickAllObjects();
+	                updateGrid(warehouse.getGrid());
 	            }
 	        };
 	        b.setOnAction(event);
