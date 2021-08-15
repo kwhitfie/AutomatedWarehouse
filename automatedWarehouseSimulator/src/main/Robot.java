@@ -70,6 +70,9 @@ public class Robot extends WarehouseObject implements Tick{
 	 * @return
 	 */
 	public boolean checkIfPossibleToAcceptJob() {
+		//The robot will decide if it
+		//wants to accept the assignment or not: this will depend on the current battery level and how far
+		//the shelf and the packing station are.
 		return false;
 	}
 	

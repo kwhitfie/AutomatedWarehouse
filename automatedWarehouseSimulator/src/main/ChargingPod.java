@@ -16,7 +16,7 @@ public class ChargingPod extends WarehouseObject implements Tick {
 	 */
 	public ChargingPod(String UID, int POWER_UNITS_PER_TICK, String assignedRobotUID) {
 		super(UID);
-		this.POWER_UNITS_PER_TICK = POWER_UNITS_PER_TICK;
+		ChargingPod.POWER_UNITS_PER_TICK = POWER_UNITS_PER_TICK;
 		this.assignedRobotUID = assignedRobotUID;
 	}
 	
