@@ -71,9 +71,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 	 */
 	@Override
 	public void tick(Warehouse wh) {
-		// TODO Auto-generated method stub
-		System.out.println("Packing Stations warehouse: " + wh.toString());
-		
+	
 		//If this packingStations needs a robot to serve an order
 		if(needsRobot){
 			if(order == null) {
@@ -89,11 +87,12 @@ public class PackingStation extends WarehouseObject implements Tick{
 		}
 		//If this packing station needs to pack an order after the robot has got the items
 		else if(packing) {
-			
+			//Is the packing complete? Check if ticks to pack is 0, and if yes, move the order to the dispatched list.
 			if(ticksToPackOrder == 0) {
 				wh.moveOrderFromAssignedToDispactedQueue(order);
 				packing = false;
 				needsRobot = true;
+			//If ticks to pack is not 0, decrease the ticks to pack by 1. 
 			}else {
 				ticksToPackOrder--;
 			}
