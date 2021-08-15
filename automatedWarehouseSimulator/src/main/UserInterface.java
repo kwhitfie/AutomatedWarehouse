@@ -78,7 +78,29 @@ public class UserInterface extends Application{
 				if(buttonP.getX()==gridP.getX() && buttonP.getY()==gridP.getY())
 				{
 					//If positions match, update text to be string
-					buttons.get(buttonP).setText(grid.get(gridP).toString());
+					String t = "";
+					ArrayList<String> uids = grid.get(gridP);
+					for(String uid: uids) {
+						switch(uid.substring(0,2)) {
+						case "ps":
+							t += "Packing Station ("+uid+") \n";
+							break;
+						case "ss":
+							t += "Storage Shelf ("+uid+") \n";
+							break;
+						default:
+							if (uid.startsWith("c")){
+								t += "Charging Pod ("+uid+") \n";
+								break;
+								
+							}
+							if (uid.startsWith("r")){
+								t += "Robot ("+uid+") \n";
+								break;							
+							}
+					}
+					}
+					buttons.get(buttonP).setText(t);
 				}
 			}
 			
@@ -137,6 +159,8 @@ public class UserInterface extends Application{
 	      for(int x =0; x<=xsize;x++) {
 	    	  for(int y =0; y<=ysize;y++) {
 	    		  Button b = new Button(); 
+	    		  b.wrapTextProperty().setValue(true);
+	    		  b.setStyle("-fx-font-size:10");
 	    		  buttons.put(new Position(x,y), b);
 	    		  b.setPrefSize(70,70);
 	    		  gridPane.add(b, x, y);
