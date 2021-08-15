@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
-import javafx.scene.control.Button; 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane; 
 import javafx.scene.text.Text; 
 import javafx.scene.control.TextField; 
@@ -27,6 +30,7 @@ public class UserInterface extends Application{
 	private HashMap<Position, Button> buttons;
 	private Stage stageT;
 	private Scene sceneT;
+	private int currentTick;
 	
 	/**
 	 * 
@@ -34,6 +38,7 @@ public class UserInterface extends Application{
 	public UserInterface() {			
 		buttons = new HashMap<Position, Button>();
 		//grid = new HashMap<Position, ArrayList<String>>();
+		currentTick = 0;
 	}
 	
 	public UserInterface(int x, int y, HashMap<Position, ArrayList<String>> grid) {
@@ -41,6 +46,7 @@ public class UserInterface extends Application{
 		xsize = x; 
 		this.grid = grid;
 		buttons = new HashMap<Position, Button>();
+		currentTick = 0;
 		
 	}
 
@@ -139,6 +145,28 @@ public class UserInterface extends Application{
 	      }
 	      
 	      updateGrid(grid);
+	      
+	      Label l = new Label("Current tick: "+currentTick);
+	      l.setAlignment(Pos.CENTER);
+	      
+	      Button b = new Button("Next tick");
+	      b.setPrefHeight(70);
+	      b.setMaxWidth(Double.MAX_VALUE);
+	      l.setMaxWidth(Double.MAX_VALUE);
+	      GridPane.setFillWidth(b, true);	 
+	      GridPane.setFillWidth(l, true);
+	      EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+	            public void handle(ActionEvent e)
+	            {
+	                currentTick += 1;
+	                l.setText("Current tick: "+currentTick);
+	                //Make the tick stuff run here :)
+	            }
+	        };
+	        b.setOnAction(event);
+	      gridPane.add(b, 0, ysize+1, xsize+1, 1);
+	      gridPane.add(l, 0, ysize+2, xsize+1, 1);
+	      
 	      
 	      
 	       
