@@ -56,7 +56,7 @@ public class Warehouse {
 		//Please could you look to set up the grid when you have the time tomorrow using the width and height parameters that is passed
 		//to the Warehouse. Thanks. We'll look to start creating the objects and adding them to the grid once the grid is properly set up. 
 		
-		
+
 		
 		for(String r: podRobots) {
 			String[] parse = r.split("\\s+");
@@ -107,6 +107,16 @@ public class Warehouse {
 			unassignedOQ.add(order);
 			
 		}
+		
+		for(int x=0; x<=width; x++) {
+		for(int y=0; y<=height; y++) {
+			if(!grid.containsKey(getPositionFromCoordinates(x,y))) {
+			ArrayList<String> al = new ArrayList<String>();
+			Position p = new Position(x,y);
+			grid.put(p, al);
+			}
+		}
+	}
 		
 		System.out.println();
 		System.out.println("Grid information: "+grid);
@@ -159,6 +169,26 @@ public class Warehouse {
 		for(ChargingPod cp : chargingPods) {
 			if(cp.getUID().contentEquals(UID)) {
 				return cp;
+			}
+		}
+		return null;
+	}
+	
+	public Position getPositionFromUID(String UID) {
+		for(Position p: getGrid().keySet()) {
+			for(String s: getGrid().get(p)) {
+				if(s.equals(UID)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Position getPositionFromCoordinates(int x, int y) {
+		for(Position p: getGrid().keySet()) {
+			if(p.getX()==x && p.getY()==y) {
+				return p;
 			}
 		}
 		return null;

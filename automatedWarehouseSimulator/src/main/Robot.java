@@ -7,11 +7,16 @@ package main;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map.Entry;
+import java.util.Queue;
 	
 
 public class Robot extends WarehouseObject implements Tick{
 	
-	private ArrayList<Position> path;
+	//private ArrayList<Position> path;
 	private ChargingPod chargingPod;
 	private String[] storageShelfIDs;
 	private boolean hasItem = false;
@@ -34,11 +39,101 @@ public class Robot extends WarehouseObject implements Tick{
 		return (a.getX()-b.getX())+(a.getY()-b.getX());
 	}
 	
+	
 	/**
 	 * 
 	 */
-	public void move() {
+	public void move(Position destination, Warehouse wh) {
 		
+		Position up = new Position(position.getX(),(position.getY()-1));
+		Position down = new Position(position.getX(),(position.getY()+1));
+		Position left = new Position(position.getX()-1,(position.getY()));
+		Position right = new Position(position.getX()+1,(position.getY()));
+		
+		int upDistance = 0;
+		int downDistance = 0;
+		int leftDistance = 0;
+		int rightDistance = 0;
+		
+		if(!doesSquareHaveRobot(up,wh))
+		{
+			upDistance = getManhattanDistance(up,destination);
+		}
+		if(!doesSquareHaveRobot(down,wh))
+		{
+			downDistance = getManhattanDistance(down,destination);
+		}
+		if(!doesSquareHaveRobot(left,wh))
+		{
+			leftDistance = getManhattanDistance(left,destination);
+		}
+		if(!doesSquareHaveRobot(right,wh))
+		{
+			rightDistance = getManhattanDistance(right,destination);
+		}
+		
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		HashMap<Position,Integer> map = new HashMap<Position,Integer>();
+		
+		if(upDistance!=0)
+		{
+			list.add(upDistance);
+			map.put(up, upDistance);
+		}
+		
+		if(downDistance!=0)
+		{
+			list.add(downDistance);
+			map.put(down, downDistance);
+		}
+		if(upDistance!=0)
+		{
+			list.add(leftDistance);
+			map.put(left, leftDistance);
+		}
+		if(upDistance!=0)
+		{
+			list.add(rightDistance);
+			map.put(right, rightDistance);
+		}
+		
+		Collections.sort(list);
+		
+		for(Entry<Position, Integer> entry: map.entrySet()) {
+			if(entry.getValue()==list.get(0)) {
+				wh.getGrid().get(position).remove(UID); 
+				
+				Position p = new Position(0,0);
+				p = wh.getPositionFromCoordinates(entry.getKey().getX(),entry.getKey().getY());
+				wh.getGrid().get(p).add(UID); 
+			}
+		}
+		
+		
+	}
+	
+	public boolean doesSquareHaveRobot(Position p, Warehouse wh) {
+		ArrayList<String> UIDs = new ArrayList<String>();
+		for(Position keyP:wh.getGrid().keySet()) {
+			if(keyP.getX()==p.getX()&&keyP.getY()==p.getY()) {
+				UIDs = wh.getGrid().get(keyP);
+			}
+		}
+		
+		if(UIDs.isEmpty()) {
+			return false;
+		}
+		
+		else {
+			for(String s: UIDs) {
+				if(s.startsWith("r")) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -95,5 +190,10 @@ public class Robot extends WarehouseObject implements Tick{
 	public void tick(Warehouse wh) {
 		// TODO Auto-generated method stub
 		//System.out.println("Robots warehouse: " + wh.toString());
+		position = wh.getPositionFromUID(UID);
+		Position p = new Position(0,0);
+		move(p,wh);
+		
+			
 	}
 }
