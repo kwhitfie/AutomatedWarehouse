@@ -9,22 +9,29 @@ package main;
 import java.util.ArrayList;
 	
 
-public class Robot implements Tick{
+public class Robot extends WarehouseObject implements Tick{
 	
-	private String UID;
 	private ArrayList<Position> path;
 	private ChargingPod chargingPod;
 	private String[] storageShelfIDs;
-	private boolean hasItem;
-	private boolean isBusy;
+	private boolean hasItem = false;
+	private boolean isBusy = false;
 	private int batteryChargePercent;
-	private static final int MAX_BATTERY = 0;
+	private static int MAX_BATTERY;
+	private Position position;
 
 	/**
 	 * 
 	 */
-	public Robot() {
-		// TODO Auto-generated constructor stub
+	public Robot(String UID, int MAX_BATTERY, Position position) {
+		super(UID);
+		this.MAX_BATTERY = MAX_BATTERY;
+		this.position = position;
+		batteryChargePercent = 50;
+	}
+	
+	public int getManhattanDistance(Position a, Position b) {
+		return (a.getX()-b.getX())+(a.getY()-b.getX());
 	}
 	
 	/**
@@ -42,21 +49,20 @@ public class Robot implements Tick{
 	public String[] getPathToDestination(String UID) {
 		return null;
 	}
-
+	
 	/**
 	 * 
-	 * @return
 	 */
-	public String getUID() {
-		return UID;
+	public void setBatteryChargePercentage(int battery) {
+		batteryChargePercent = battery;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public int checkBatteryStatus() {
-		return 0;
+	public int getBatteryStatus() {
+		return batteryChargePercent;
 	}
 	
 	/**
@@ -64,6 +70,9 @@ public class Robot implements Tick{
 	 * @return
 	 */
 	public boolean checkIfPossibleToAcceptJob() {
+		//The robot will decide if it
+		//wants to accept the assignment or not: this will depend on the current battery level and how far
+		//the shelf and the packing station are.
 		return false;
 	}
 	
@@ -76,12 +85,15 @@ public class Robot implements Tick{
 		return false;
 	}
 	
+	public String toString() {
+		return "Robot("+UID+")";
+	}
+	
 	/**
 	 * 
 	 */
-	@Override
-	public void Tick() {
+	public void tick(Warehouse wh) {
 		// TODO Auto-generated method stub
-		
+		//System.out.println("Robots warehouse: " + wh.toString());
 	}
 }

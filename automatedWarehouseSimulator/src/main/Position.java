@@ -6,7 +6,7 @@ package main;
  *
  */
 
-public class Position implements Tick{
+public class Position {
 	
 	private int y;
 	private int x;
@@ -44,13 +44,9 @@ public class Position implements Tick{
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
-		
+	
+	public String toString() {
+		return "("+x+","+y+")";
 	}
+
 }

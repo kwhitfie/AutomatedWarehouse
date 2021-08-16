@@ -1,37 +1,36 @@
 package main;
 
+import java.util.ArrayList;
+
 /**
  * Details here
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
  *
  */
 
-public class Order implements Tick{
+public class Order {
 	
-	public int[] shelfUID;
+	private ArrayList<String> shelfUIDs;
+	private int ticksToPack;
 	
 	/**
 	 * 
 	 */
-	public Order() {
-		// TODO Auto-generated constructor stub
+	public Order(ArrayList<String> shelves, int ticks) {
+		shelfUIDs = shelves;
+		ticksToPack = ticks;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public int[] getShelfUIDs() {
-		return shelfUID;
+	public ArrayList<String> getShelfUIDs() {
+		return shelfUIDs;
 	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
-		
+	
+	public int getTicksToPack() {
+		return ticksToPack;
 	}
 
 }

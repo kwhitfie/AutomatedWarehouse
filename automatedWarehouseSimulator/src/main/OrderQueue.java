@@ -8,7 +8,7 @@ import java.util.Queue;
  *
  */
 
-public class OrderQueue implements Tick{
+public class OrderQueue {
 
 	private Queue orderQueue;
 	
@@ -22,10 +22,6 @@ public class OrderQueue implements Tick{
 	/**
 	 * 
 	 */
-	@Override
-	public void Tick() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }
