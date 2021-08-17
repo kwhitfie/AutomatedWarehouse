@@ -81,11 +81,6 @@ public class Robot extends WarehouseObject implements Tick{
 			rightDistance = getManhattanDistance(right,destination);
 		}
 		
-//		upDistance = getManhattanDistance(up,destination);
-//		downDistance = getManhattanDistance(down,destination);
-//		leftDistance = getManhattanDistance(left,destination);
-//		rightDistance = getManhattanDistance(right,destination);
-		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		HashMap<Position,Integer> map = new HashMap<Position,Integer>();
 		
