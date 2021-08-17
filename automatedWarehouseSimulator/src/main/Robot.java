@@ -55,22 +55,22 @@ public class Robot extends WarehouseObject implements Tick{
 		int leftDistance = 0;
 		int rightDistance = 0;
 		
-//		if(!doesSquareHaveRobot(up,wh))
-//		{
-//			upDistance = getManhattanDistance(up,destination);
-//		}
-//		if(!doesSquareHaveRobot(down,wh))
-//		{
-//			downDistance = getManhattanDistance(down,destination);
-//		}
-//		if(!doesSquareHaveRobot(left,wh))
-//		{
-//			leftDistance = getManhattanDistance(left,destination);
-//		}
-//		if(!doesSquareHaveRobot(right,wh))
-//		{
-//			rightDistance = getManhattanDistance(right,destination);
-//		}
+		if(!doesSquareHaveRobot(up,wh) || 0 > up.getX() || up.getX() > wh.getX() || 0 > up.getY() || up.getY() > wh.getY())
+		{
+			upDistance = getManhattanDistance(up,destination);
+		}
+		if(!doesSquareHaveRobot(down,wh) || 0 > down.getX() || down.getX() > wh.getX() || 0 > down.getY() || down.getY() > wh.getY())
+		{
+			downDistance = getManhattanDistance(down,destination);
+		}
+		if(!doesSquareHaveRobot(left,wh) || 0 > left.getX() || left.getX() > wh.getX() || 0 > left.getY() || left.getY() > wh.getY())
+		{
+			leftDistance = getManhattanDistance(left,destination);
+		}
+		if(!doesSquareHaveRobot(right,wh) || 0 > right.getX() || right.getX() > wh.getX() || 0 > right.getY() || right.getY() > wh.getY())
+		{
+			rightDistance = getManhattanDistance(right,destination);
+		}
 		
 		upDistance = getManhattanDistance(up,destination);
 		downDistance = getManhattanDistance(down,destination);

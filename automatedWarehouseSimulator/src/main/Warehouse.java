@@ -21,6 +21,8 @@ public class Warehouse {
 	private ArrayList<Robot> robots;
 	private ArrayList<ChargingPod> chargingPods;
 	private ArrayList<StorageShelf> storageShelves;
+	private int x;
+	private int y;
 	
 	/**
 	 * 
@@ -32,6 +34,9 @@ public class Warehouse {
 		packingStations = new ArrayList<PackingStation>();
 		robots = new ArrayList<Robot>();
 		chargingPods = new ArrayList<ChargingPod>();
+		
+		x = width;
+		y = height;
 		
 		System.out.println("Width: " + width);
 		System.out.println("Height: " + height);
@@ -294,5 +299,13 @@ public class Warehouse {
 	 */
 	public void setGridSquare(String UID) {
 		
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 }
