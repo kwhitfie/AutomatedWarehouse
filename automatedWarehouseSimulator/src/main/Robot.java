@@ -310,6 +310,7 @@ public class Robot extends WarehouseObject implements Tick{
 				//If the robot is at the packing station
 				if(position.equals(destination)) {
 					//Remove shelf from queue
+					System.out.println("HELLO - SHELVES: " + shelves.toString());
 					shelves.poll();
 					//Check if the shelf is empty
 					if(shelves.isEmpty()) {
@@ -323,12 +324,12 @@ public class Robot extends WarehouseObject implements Tick{
 						destination = null;
 						//Set hasItem to false;
 						hasItem = false;
-					}else {
+					}}else {
 						//If the robot is not at the packing station, move a step towards it.
 						move(destination,wh);
 					}
 				}
-			}
+			
 		
 			
 			//When a robot reaches a shelf it needs too...
