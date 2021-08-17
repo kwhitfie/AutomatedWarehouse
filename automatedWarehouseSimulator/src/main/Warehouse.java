@@ -250,7 +250,6 @@ public class Warehouse {
 	 */
 	public Position moveObjectToCell(int oldX, int oldY, int newX, int newY, String UID) {
 		grid.get(getPositionFromCoordinates(oldX, oldY)).remove(UID);
-		System.out.print(newX + "<-x y->" + newY);
 		grid.get(getPositionFromCoordinates(newX, newY)).add(UID);
 		return getPositionFromCoordinates(newX, newY);
 	}
