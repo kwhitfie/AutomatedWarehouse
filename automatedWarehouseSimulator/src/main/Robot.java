@@ -18,7 +18,6 @@ public class Robot extends WarehouseObject implements Tick{
 	
 	//private ArrayList<Position> path;
 	private ChargingPod chargingPod;
-	private String[] storageShelfIDs;
 	private boolean hasItem = false;
 	private boolean isBusy = false;
 	private int batteryChargePercent;
@@ -26,7 +25,8 @@ public class Robot extends WarehouseObject implements Tick{
 	private Position position;
 	private Position destination;
 	private Queue<String> shelves;
-	private Position requestingPackingStationPosition;
+	private String requestingPackingStationUID;
+	private Position targetShelfPosition;
 
 	/**
 	 * 
@@ -36,7 +36,8 @@ public class Robot extends WarehouseObject implements Tick{
 		this.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
 		batteryChargePercent = 50;
-		requestingPackingStationPosition = null;
+		requestingPackingStationUID = null;
+		targetShelfPosition = null;
 		shelves = new LinkedList<String>();
 	}
 	
@@ -278,8 +279,8 @@ public class Robot extends WarehouseObject implements Tick{
 			shelves.add(s);
 		}
 		isBusy = true;
-		destination = getDestinationPosition(wh, shelves.peek());
-		requestingPackingStationPosition = wh.getPositionFromUID(packingStationUID);
+		targetShelfPosition = getDestinationPosition(wh, shelves.peek());
+		requestingPackingStationUID = wh.getPS(packingStationUID).getUID();
 	}
 	
 	/**
@@ -292,10 +293,34 @@ public class Robot extends WarehouseObject implements Tick{
 		if(isBusy) {
 			System.out.println("I AM ROBOT " + UID + ". THESE ARE MY SHELVES " + shelves.toString());
 			position = wh.getPositionFromUID(UID);
-			destination = getDestinationPosition(wh, shelves.peek());
+			if(!hasItem) {
+				destination = targetShelfPosition;
+			}else if (hasItem) {
+				//Set the destination to the packing stations position
+				destination = wh.getPositionFromUID(requestingPackingStationUID);
+				//If the robot is at the packing station
+				if(position.equals(destination)) {
+					//Remove shelf from queue
+					shelves.poll();
+					//Check if the shelf is empty
+					if(shelves.isEmpty()) {
+						//If yes, tell the packing station that the job has been completed.
+						wh.getPS(requestingPackingStationUID).orderRetrievedByRobot();
+						//Set the robot as not busy.
+						isBusy = false;
+						//Set the requesting packing station to null
+						requestingPackingStationUID = null;
+						//Set the destination to null;
+						destination = null;
+					}else {
+						//If the robot is not at the packing station, move a step towards it.
+						move(destination,wh);
+					}
+				}
+			}
 			System.out.println(destination.toString());
 		
-			
+			//if position == destination (shelf, or the packingstation position)
 			move(destination,wh);
 			
 			//When a robot reaches a shelf it needs too...
