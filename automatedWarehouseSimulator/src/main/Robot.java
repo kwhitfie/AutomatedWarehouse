@@ -17,7 +17,7 @@ import java.util.Queue;
 public class Robot extends WarehouseObject implements Tick{
 	
 	//private ArrayList<Position> path;
-	private ChargingPod chargingPod;
+	private String chargingPodUID;
 	private boolean hasItem = false;
 	private boolean isBusy = false;
 	private int batteryChargePercent;
@@ -27,18 +27,21 @@ public class Robot extends WarehouseObject implements Tick{
 	private Queue<String> shelves;
 	private String requestingPackingStationUID;
 	private Position targetShelfPosition;
+	private boolean needsToCharge;
 
 	/**
 	 * 
 	 */
-	public Robot(String UID, int MAX_BATTERY, Position position) {
-		super(UID);
+	public Robot(String robotUID, int MAX_BATTERY, Position position, String chargingPodUID) {
+		super(robotUID);
 		this.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
 		batteryChargePercent = 50;
 		requestingPackingStationUID = null;
 		targetShelfPosition = null;
 		shelves = new LinkedList<String>();
+		needsToCharge = false;
+		this.chargingPodUID = chargingPodUID;
 	}
 	
 	public int getManhattanDistance(Position a, Position b) {
@@ -271,13 +274,37 @@ public class Robot extends WarehouseObject implements Tick{
 		requestingPackingStationUID = wh.getPS(packingStationUID).getUID();
 	}
 	
+	private boolean doesRobotNeedToCharge(Warehouse wh) {
+		int manhattanValueSum = getManhattanDistance(position,destination) + getManhattanDistance(destination,wh.getPositionFromUID(chargingPodUID));
+		//need to * manhattan value by the charge per tick, how to calculate charge per tick?
+		return false;
+	}
+	
 	/**
 	 * 
 	 */
 	public void tick(Warehouse wh) {
 		
+		position = wh.getPositionFromUID(UID);
+		
+		//Battery
+		
+		//needsToCharge = false/true
+		
+		//Check if needsToCharge needs to be true
+		
+		//If the robot needsToCharge is true
+			//change destination to charging pod
+			//check if robot is at charging pod
+			//if true, 
+				//if battery is >50%, 
+					//is true, stop charging and set needsToCharge to false
+					//is false, charge depending on hasItem method
+			//if false, 
+				//move to charging pod
+
+		//add extra check to see if needsToCharge is false.
 		if(isBusy) {
-			position = wh.getPositionFromUID(UID);
 			if(!hasItem) {
 				//Set the target shelf position.
 				targetShelfPosition = getDestinationPosition(wh, shelves.peek());
