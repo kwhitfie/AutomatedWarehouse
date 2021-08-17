@@ -187,6 +187,10 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		//Is the robot already completing a job?
 		
+		if(!isBusy) {
+			return true;
+		}
+		
 		//If the queue is NOT null, then it is currently completing a job. Return false.
 		
 		//If it is null, then the robot is not completing a job. Next if statement.
