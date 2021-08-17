@@ -156,8 +156,8 @@ public class UserInterface extends Application{
 	      
 	      //Creating buttons and adding to grid based on specified grid size
 	      
-	      for(int x =0; x<=xsize;x++) {
-	    	  for(int y =0; y<=ysize;y++) {
+	      for(int x =0; x<xsize;x++) {
+	    	  for(int y =0; y<ysize;y++) {
 	    		  Button b = new Button(); 
 	    		  b.wrapTextProperty().setValue(true);
 	    		  b.setStyle("-fx-font-size:10");
