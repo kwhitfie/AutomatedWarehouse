@@ -245,6 +245,15 @@ public class Warehouse {
 	}
 	
 	/**
+	 * 
+	 */
+	public void moveObjectToCell(int oldX, int oldY, int newX, int newY, String UID) {
+		System.out.println("HELLOOOOOOO THERE!");
+		grid.get(getPositionFromCoordinates(oldX, oldY)).remove(UID);
+		grid.get(getPositionFromCoordinates(newX, newY)).add(UID);
+	}
+	
+	/**
 	 * Check if a robot is available to perform a job for the PackingStation
 	 */
 	public String checkRobotAvailability() {

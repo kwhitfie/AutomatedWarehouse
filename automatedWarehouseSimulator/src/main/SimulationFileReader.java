@@ -120,21 +120,21 @@ public class SimulationFileReader {
 		Warehouse wh = s.readSimFile();
 		
 		//Tests the warehouse tick all objects method.
-		wh.tickAllObjects();
-		wh.getPS("ps0").orderRetrievedByRobot();
-		wh.tickAllObjects();
-		wh.tickAllObjects();
-		wh.tickAllObjects();
-		wh.tickAllObjects();
-		wh.tickAllObjects();
+		//wh.tickAllObjects();
+		//wh.getPS("ps0").orderRetrievedByRobot();
+		//wh.tickAllObjects();
+		//wh.tickAllObjects();
+		//wh.tickAllObjects();
+		//wh.tickAllObjects();
+		//wh.tickAllObjects();
 		
 	
 	
 		//Tests the charging pod and whether it does update the correct robot.
-		System.out.println(wh.getChargingPod("c1").getUID());
-		System.out.println(wh.getRobot("r0").getBatteryStatus());
-		wh.getChargingPod("c0").chargeRobot("r0", wh);
-		System.out.println(wh.getRobot("r0").getBatteryStatus());
+		//System.out.println(wh.getChargingPod("c1").getUID());
+		//System.out.println(wh.getRobot("r0").getBatteryStatus());
+		//wh.getChargingPod("c0").chargeRobot("r0", wh);
+		//System.out.println(wh.getRobot("r0").getBatteryStatus());
 		
 		//Tests PackingStation getNextOrder method
 //		wh.getPS("ps0").getNextOrder(wh);

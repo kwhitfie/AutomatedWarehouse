@@ -102,11 +102,7 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
-				wh.getGrid().get(position).remove(UID); 
-				
-				Position p = new Position(0,0);
-				p = wh.getPositionFromCoordinates(entry.getKey().getX(),entry.getKey().getY());
-				wh.getGrid().get(p).add(UID); 
+				wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
 			}
 		}
 		
