@@ -195,7 +195,7 @@ public class Warehouse {
 	}
 	
 	public void addToMessage(String s) {
-		message += "\n"+ s;
+		message += s+ "\n";
 	}
 	
 	/**

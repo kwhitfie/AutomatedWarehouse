@@ -82,7 +82,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 			
 			String potentialRobotUID = wh.checkRobotAvailability();
 			if(!(potentialRobotUID == null)) {
-				System.out.println("Robot available");
+				wh.addToMessage(this.toString()+" successfully gives order to Robot ("+potentialRobotUID+"). ");
 				needsRobot = false;
 				sleeping = true; 
 				wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); //call the method which engages the robot to get the items, once complete.
@@ -101,7 +101,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 			//If ticks to pack is not 0, decrease the ticks to pack by 1. 
 			}else {
 				ticksToPackOrder--;
-				System.out.println("ticks left: " + ticksToPackOrder);
+				wh.addToMessage(this.toString()+ "is packing. Ticks left: " + ticksToPackOrder);
 			}
 		}
 	}
