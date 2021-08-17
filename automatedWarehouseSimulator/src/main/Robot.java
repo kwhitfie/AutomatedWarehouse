@@ -294,8 +294,18 @@ public class Robot extends WarehouseObject implements Tick{
 			System.out.println("I AM ROBOT " + UID + ". THESE ARE MY SHELVES " + shelves.toString());
 			position = wh.getPositionFromUID(UID);
 			if(!hasItem) {
+				//Destination is the shelf in the queue
 				destination = targetShelfPosition;
+				//If the robot is at the target shelf
+				if(position.equals(destination)) {
+					//Pick up all items and set hasItem to true
+					hasItem = true;
+				}else {
+					//If not, move towards the target shelf. 
+					move(destination,wh);
+				}
 			}else if (hasItem) {
+				System.out.println("\n\nHELLO THERE\n\n");
 				//Set the destination to the packing stations position
 				destination = wh.getPositionFromUID(requestingPackingStationUID);
 				//If the robot is at the packing station
@@ -312,6 +322,8 @@ public class Robot extends WarehouseObject implements Tick{
 						requestingPackingStationUID = null;
 						//Set the destination to null;
 						destination = null;
+						//Set hasItem to false;
+						hasItem = false;
 					}else {
 						//If the robot is not at the packing station, move a step towards it.
 						move(destination,wh);
@@ -320,8 +332,6 @@ public class Robot extends WarehouseObject implements Tick{
 			}
 			System.out.println(destination.toString());
 		
-			//if position == destination (shelf, or the packingstation position)
-			move(destination,wh);
 			
 			//When a robot reaches a shelf it needs too...
 				//pick up and say it has items (hasItems = true). This will cost 1 tick.
