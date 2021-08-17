@@ -56,7 +56,6 @@ public class PackingStation extends WarehouseObject implements Tick{
 	public void getNextOrder(Warehouse wh) {
 		order =  wh.getNextUnassignedOrder();
 		ticksToPackOrder = order.getTicksToPack();
-		System.out.println("New ttpo: " + ticksToPackOrder);
 	}
 	
 	/**

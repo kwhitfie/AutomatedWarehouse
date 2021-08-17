@@ -28,7 +28,7 @@ public class SimulationFileReader {
 	public Warehouse readSimFile() {
 
 		//The path for the Simulation file we want to read
-		String path = "twoRobotsTwoShelves.sim";
+		String path = "bottomStationsWin.sim";
 		
 		//Intialises variables based on contents in sim file
 		

@@ -11,7 +11,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane; 
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text; 
 import javafx.scene.control.TextField; 
 import javafx.stage.Stage;
@@ -172,6 +174,8 @@ public class UserInterface extends Application{
 	      
 	      Label l = new Label("Current tick: "+currentTick);
 	      l.setAlignment(Pos.CENTER);
+	      Font font = Font.font(null, FontWeight.BOLD, 15);
+	      l.setFont(font);
 	      
 	      Label m = new Label("Welcome to the automated warehouse simulator");
 	      m.setAlignment(Pos.CENTER);

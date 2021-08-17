@@ -63,26 +63,21 @@ public class Robot extends WarehouseObject implements Tick{
 		int leftDistance = 10000;
 		int rightDistance = 10000;
 		
-		System.out.println("MAX X: " + wh.getX() + " MAX Y = " + wh.getY());
 		
 		if(!doesSquareHaveRobot(up,wh) && up.getX() >= 0 && up.getX() < wh.getX() && up.getY() >= 0 && up.getY() < wh.getY())
 		{
-			System.out.println("\nUp position: X = " + up.getX() + " Y = " + up.getY());
 			upDistance = getManhattanDistance(up,destination);
 		}
 		if(!doesSquareHaveRobot(down,wh) && down.getX() >= 0 && down.getX() < wh.getX() && down.getY() >= 0 && down.getY() < wh.getY())
 		{
-			System.out.println("\nDown position: X = " + down.getX() + " Y = " + down.getY());
 			downDistance = getManhattanDistance(down,destination);
 		}
 		if(!doesSquareHaveRobot(left,wh) && left.getX() >= 0 && left.getX() < wh.getX() && left.getY() >= 0 && left.getY() < wh.getY())
 		{
-			System.out.println("\nLeft position: X = " + left.getX() + " Y = " + left.getY());
 			leftDistance = getManhattanDistance(left,destination);
 		}
 		if(!doesSquareHaveRobot(right,wh) && right.getX() >= 0  && right.getX() < wh.getX() && right.getY() >= 0 && right.getY() < wh.getY())
 		{
-			System.out.println("\nRight position: X = " + right.getX() + " Y = " + right.getY());
 			rightDistance = getManhattanDistance(right,destination);
 		}
 		
@@ -112,16 +107,10 @@ public class Robot extends WarehouseObject implements Tick{
 		}
 		
 		Collections.sort(list);
-		
-		System.out.println("HASHMAP OF POSSIBLE POSITIONS");
-		for(Entry<Position, Integer> entry: map.entrySet()) {
-			System.out.println("X: " + entry.getKey().getX() + " Y: " + entry.getKey().getY());
-		}
+
 		
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
-				System.out.println("CHOSEN POSITION");
-				System.out.println("X: " + entry.getKey().getX() + " Y: " + entry.getKey().getY());
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
 				break;
 			}
@@ -286,11 +275,8 @@ public class Robot extends WarehouseObject implements Tick{
 	 * 
 	 */
 	public void tick(Warehouse wh) {
-		// TODO Auto-generated method stub
-		//System.out.println("Robots warehouse: " + wh.toString());
 		
 		if(isBusy) {
-			System.out.println("I AM ROBOT " + UID + ". THESE ARE MY SHELVES " + shelves.toString());
 			position = wh.getPositionFromUID(UID);
 			if(!hasItem) {
 				//Set the target shelf position.
@@ -311,7 +297,6 @@ public class Robot extends WarehouseObject implements Tick{
 				//If the robot is at the packing station
 				if(position.equals(destination)) {
 					//Remove shelf from queue
-					System.out.println("HELLO - SHELVES: " + shelves.toString());
 					shelves.poll();
 					//Check if the shelf is empty
 					if(shelves.isEmpty()) {

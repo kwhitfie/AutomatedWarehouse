@@ -153,6 +153,11 @@ public class Warehouse {
 		message = "";
 		tick += 1;
 		
+		System.out.println("Unnassigned: "+unassignedOQ);
+		System.out.println("Assigned: "+assignedOQ);
+		System.out.println("Dispatched: "+dispatchedOQ);
+		
+		
 		//Go through each object arraylist and call its ticket method and passes itself.
 		for(int i = 0; i<packingStations.size(); i++) {
 			packingStations.get(i).tick(this);

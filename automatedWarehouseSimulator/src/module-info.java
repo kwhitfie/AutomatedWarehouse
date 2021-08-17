@@ -3,4 +3,5 @@ module automatedWarehouseSimulator {
 	opens main to javafx.graphics;
 	requires javafx.controls;
 	requires javafx.base;
+	requires javafx.graphics;
 }
