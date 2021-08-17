@@ -271,6 +271,7 @@ public class Warehouse {
 		for(Robot r : robots) {
 			if(r.checkIfPossibleToAcceptJob(this)) {
 				robotUID = r.getUID();
+				break;
 			}
 		}
 		return robotUID;
