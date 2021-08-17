@@ -185,7 +185,6 @@ public class UserInterface extends Application{
 	                currentTick += 1;
 	                l.setText("Current tick: "+currentTick);
 	                //Make the tick stuff run here :)
-	                System.out.println("DO I GET CALLED 2 TIMES???");
 	                warehouse.tickAllObjects();
 	                updateGrid(warehouse.getGrid());
 	            }
