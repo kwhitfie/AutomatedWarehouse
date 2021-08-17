@@ -147,6 +147,7 @@ public class Warehouse {
 			chargingPods.get(i).tick(this);
 		}
 		
+		System.out.println(robots.size());
 		for(int i = 0; i<robots.size(); i++) {
 			robots.get(i).tick(this);
 		}
