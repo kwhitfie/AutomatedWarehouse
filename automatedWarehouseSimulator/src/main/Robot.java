@@ -57,31 +57,31 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		System.out.println("MAX X: " + wh.getX() + " MAX Y = " + wh.getY());
 		
-		if(!doesSquareHaveRobot(up,wh) || up.getX() > 0 || up.getX() < wh.getX() || up.getY() > 0 || up.getY() < wh.getY())
+		if(!doesSquareHaveRobot(up,wh) && up.getX() > 0 && up.getX() < wh.getX() && up.getY() > 0 && up.getY() < wh.getY())
 		{
 			System.out.println("\nUp position: X = " + up.getX() + " Y = " + up.getY());
 			upDistance = getManhattanDistance(up,destination);
 		}
-		if(!doesSquareHaveRobot(down,wh) || down.getX() > 0 || down.getX() < wh.getX() || down.getY() > 0 || down.getY() < wh.getY())
+		if(!doesSquareHaveRobot(down,wh) && down.getX() > 0 && down.getX() < wh.getX() && down.getY() > 0 && down.getY() < wh.getY())
 		{
 			System.out.println("\nDown position: X = " + down.getX() + " Y = " + down.getY());
 			downDistance = getManhattanDistance(down,destination);
 		}
-		if(!doesSquareHaveRobot(left,wh) || left.getX() > 0 || left.getX() < wh.getX() || left.getY() > 0 || left.getY() < wh.getY())
+		if(!doesSquareHaveRobot(left,wh) && left.getX() > 0 && left.getX() < wh.getX() && left.getY() > 0 && left.getY() < wh.getY())
 		{
 			System.out.println("\nLeft position: X = " + left.getX() + " Y = " + left.getY());
 			leftDistance = getManhattanDistance(left,destination);
 		}
-		if(!doesSquareHaveRobot(right,wh) || right.getX() > 0  || right.getX() < wh.getX() || right.getY() > 0 || right.getY() < wh.getY())
+		if(!doesSquareHaveRobot(right,wh) && right.getX() > 0  && right.getX() < wh.getX() && right.getY() > 0 && right.getY() < wh.getY())
 		{
 			System.out.println("\nRight position: X = " + right.getX() + " Y = " + right.getY());
 			rightDistance = getManhattanDistance(right,destination);
 		}
 		
-		upDistance = getManhattanDistance(up,destination);
-		downDistance = getManhattanDistance(down,destination);
-		leftDistance = getManhattanDistance(left,destination);
-		rightDistance = getManhattanDistance(right,destination);
+//		upDistance = getManhattanDistance(up,destination);
+//		downDistance = getManhattanDistance(down,destination);
+//		leftDistance = getManhattanDistance(left,destination);
+//		rightDistance = getManhattanDistance(right,destination);
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		HashMap<Position,Integer> map = new HashMap<Position,Integer>();
@@ -112,6 +112,8 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
+				System.out.println(entry.getKey().getX());
+				System.out.println(entry.getKey().getY());
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
 				break;
 			}
