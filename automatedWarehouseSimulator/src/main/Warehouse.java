@@ -181,6 +181,11 @@ public class Warehouse {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param UID
+	 * @return
+	 */
 	public Position getPositionFromUID(String UID) {
 		for(Position p: getGrid().keySet()) {
 			for(String s: getGrid().get(p)) {

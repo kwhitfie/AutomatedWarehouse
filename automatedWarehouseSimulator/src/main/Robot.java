@@ -25,6 +25,8 @@ public class Robot extends WarehouseObject implements Tick{
 	private static int MAX_BATTERY;
 	private Position position;
 	private Position destination;
+	private Queue<String> shelves;
+	private String requestingPackingStationUID;
 
 	/**
 	 * 
@@ -34,10 +36,12 @@ public class Robot extends WarehouseObject implements Tick{
 		this.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
 		batteryChargePercent = 50;
+		requestingPackingStationUID = null;
+		shelves = new LinkedList<String>();
 	}
 	
 	public int getManhattanDistance(Position a, Position b) {
-		return (a.getX()-b.getX())+(a.getY()-b.getX());
+		return (a.getX()-b.getX())+(a.getY()-b.getY());
 	}
 	
 	
@@ -176,11 +180,64 @@ public class Robot extends WarehouseObject implements Tick{
 	 * 
 	 * @return
 	 */
-	public boolean checkIfPossibleToAcceptJob() {
+	public boolean checkIfPossibleToAcceptJob(Warehouse wh) {
 		//The robot will decide if it
 		//wants to accept the assignment or not: this will depend on the current battery level and how far
 		//the shelf and the packing station are.
-		return false;
+		
+		//Is the robot already completing a job?
+		
+		//If the queue is NOT null, then it is currently completing a job. Return false.
+		
+		//If it is null, then the robot is not completing a job. Next if statement.
+		
+		if(!shelves.isEmpty()) {
+			return false;
+		}
+		
+		
+		//Does the robot have enough battery? 
+		
+		//If battery is >50%, return false.
+		
+		if(batteryChargePercent < MAX_BATTERY/2) {
+			return false;
+		}
+		
+		
+		
+		//Can it reach the locations with existing battery?
+		
+		//Get the current position. 
+		//Get the shelves position (peek at the shelves queue)
+		//Plug into manhatten distance.
+		//Take this manhatten distance and * it by 1 or 2 depending on whether the robot is holding an item.
+		//If battery goes below 50% - return false. 
+		
+		Position shelfP = wh.getPositionFromUID(shelves.peek());
+
+		int manhattanDistance = getManhattanDistance(position, shelfP);
+		
+		int futureBattery = batteryChargePercent - (manhattanDistance * batteryCostPerTick());
+		
+		if(futureBattery <= MAX_BATTERY/2) {
+			return false;
+		}
+		
+		//return true if none of the if statements above are triggered. 
+		
+		return true;
+	}
+	
+	/**
+	 * 
+	 */
+	public int batteryCostPerTick() {
+		if(hasItem) {
+			return 2;
+		}else {
+			return 1;
+		}
 	}
 	
 	/**
@@ -192,8 +249,24 @@ public class Robot extends WarehouseObject implements Tick{
 		return false;
 	}
 	
+	/**
+	 * 
+	 */
 	public String toString() {
 		return "Robot("+UID+")";
+	}
+	
+	/**
+	 * 
+	 * @param order
+	 * @param packingStationUID
+	 */
+	public void acceptOrder(Order order, String packingStationUID) {
+		ArrayList<String> temp = order.getShelfUIDs();
+		for(String s : temp) {
+			shelves.add(s);
+		}
+		requestingPackingStationUID = packingStationUID;
 	}
 	
 	/**
