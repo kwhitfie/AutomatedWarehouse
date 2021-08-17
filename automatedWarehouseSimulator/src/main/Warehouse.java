@@ -2,8 +2,10 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * Details here
@@ -26,6 +28,7 @@ public class Warehouse {
 	private String message;
 	private ArrayList<String> log;
 	private int tick;
+	private boolean isRunning = true;
 	
 	/**
 	 * 
@@ -152,7 +155,7 @@ public class Warehouse {
 		
 		message = "";
 		tick += 1;
-		
+				
 		System.out.println("Unnassigned: "+unassignedOQ);
 		System.out.println("Assigned: "+assignedOQ);
 		System.out.println("Dispatched: "+dispatchedOQ);
@@ -171,7 +174,14 @@ public class Warehouse {
 			robots.get(i).tick(this);
 		}
 		
-		log.add("Tick "+tick+": "+message);
+		if(!message.equals(""))
+		{
+			log.add("Tick "+tick+": "+message);
+		}
+		
+		if(crashMonitor()) {
+			isRunning = false;
+		}
 	}
 	
 	/**
@@ -303,6 +313,26 @@ public class Warehouse {
 	 * @return
 	 */
 	public boolean crashMonitor() {
+		if(unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
+			return true;
+		}
+		
+		ArrayList<Position> positionArray = new ArrayList<Position>();
+		Set<Position> positionSet = new HashSet<Position>();
+		for(Robot r: robots) {
+			if(r.getBatteryStatus() <= 0) {
+				return true;
+			}
+			
+			
+			positionArray.add(getPositionFromUID(r.getUID()));
+			positionSet.add(getPositionFromUID(r.getUID()));
+		}
+		
+		if(positionArray.size() != positionSet.size()) {
+			return true;
+		}
+		
 		return false;
 	}
 	
@@ -340,5 +370,13 @@ public class Warehouse {
 
 	public ArrayList<String> getLog() {
 		return log;
+	}
+
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 }
