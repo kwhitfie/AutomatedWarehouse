@@ -295,7 +295,7 @@ public class Robot extends WarehouseObject implements Tick{
 			destination = getDestinationPosition(wh, shelves.peek());
 			System.out.println(destination.toString());
 		
-				move(destination,wh);
+			move(destination,wh);
 			
 		}
 		
