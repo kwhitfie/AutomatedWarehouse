@@ -279,7 +279,6 @@ public class Robot extends WarehouseObject implements Tick{
 			shelves.add(s);
 		}
 		isBusy = true;
-		targetShelfPosition = getDestinationPosition(wh, shelves.peek());
 		requestingPackingStationUID = wh.getPS(packingStationUID).getUID();
 	}
 	
@@ -294,6 +293,8 @@ public class Robot extends WarehouseObject implements Tick{
 			System.out.println("I AM ROBOT " + UID + ". THESE ARE MY SHELVES " + shelves.toString());
 			position = wh.getPositionFromUID(UID);
 			if(!hasItem) {
+				//Set the target shelf position.
+				targetShelfPosition = getDestinationPosition(wh, shelves.peek());
 				//Destination is the shelf in the queue
 				destination = targetShelfPosition;
 				//If the robot is at the target shelf
