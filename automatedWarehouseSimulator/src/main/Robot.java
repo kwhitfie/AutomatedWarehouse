@@ -55,8 +55,11 @@ public class Robot extends WarehouseObject implements Tick{
 		int leftDistance = 0;
 		int rightDistance = 0;
 		
-		if(!doesSquareHaveRobot(up,wh) || 0 > up.getX() || up.getX() > wh.getX() || 0 > up.getY() || up.getY() > wh.getY())
+		System.out.println("MAX X: " + wh.getX() + " MAX Y = " + wh.getY());
+		
+		if(!doesSquareHaveRobot(up,wh) || up.getX() < 0 || up.getX() > wh.getX() || up.getY() < 0 || up.getY() > wh.getY())
 		{
+			System.out.println("\nUp position: X = " + up.getX() + " Y = " + up.getY());
 			upDistance = getManhattanDistance(up,destination);
 		}
 		if(!doesSquareHaveRobot(down,wh) || 0 > down.getX() || down.getX() > wh.getX() || 0 > down.getY() || down.getY() > wh.getY())
