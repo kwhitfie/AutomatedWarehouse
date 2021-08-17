@@ -97,12 +97,12 @@ public class Robot extends WarehouseObject implements Tick{
 			list.add(downDistance);
 			map.put(down, downDistance);
 		}
-		if(upDistance!=0)
+		if(leftDistance!=0)
 		{
 			list.add(leftDistance);
 			map.put(left, leftDistance);
 		}
-		if(upDistance!=0)
+		if(rightDistance!=0)
 		{
 			list.add(rightDistance);
 			map.put(right, rightDistance);
