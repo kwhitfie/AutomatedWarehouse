@@ -290,13 +290,20 @@ public class Robot extends WarehouseObject implements Tick{
 		//System.out.println("Robots warehouse: " + wh.toString());
 		
 		if(isBusy) {
-			System.out.println(shelves.toString());
+			System.out.println("I AM ROBOT " + UID + ". THESE ARE MY SHELVES " + shelves.toString());
 			position = wh.getPositionFromUID(UID);
 			destination = getDestinationPosition(wh, shelves.peek());
 			System.out.println(destination.toString());
 		
 			move(destination,wh);
 			
+			//When a robot reaches a shelf it needs too...
+				//pick up and say it has items (hasItems = true). This will cost 1 tick.
+				//start moving towards the packing station. 2 battery cost per movement. 
+				//once it reaches the packingstation, check if the job is finished or not
+					// if job finished - call the packingstation method and pop the shelf off the queue.
+					// if job not finished, pop shelf off queue, change hasItems to null and go to next shelf. 
+				
 		}
 		
 			
