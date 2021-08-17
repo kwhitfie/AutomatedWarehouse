@@ -113,10 +113,15 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		Collections.sort(list);
 		
+		System.out.println("HASHMAP OF POSSIBLE POSITIONS");
+		for(Entry<Position, Integer> entry: map.entrySet()) {
+			System.out.println("X: " + entry.getKey().getX() + " Y: " + entry.getKey().getY());
+		}
+		
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
-				System.out.println(entry.getKey().getX());
-				System.out.println(entry.getKey().getY());
+				System.out.println("CHOSEN POSITION");
+				System.out.println("X: " + entry.getKey().getX() + " Y: " + entry.getKey().getY());
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
 				break;
 			}
