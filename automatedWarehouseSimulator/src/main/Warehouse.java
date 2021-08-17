@@ -167,7 +167,6 @@ public class Warehouse {
 		}
 		
 		log.add("Tick "+tick+": "+message);
-		System.out.println(log);
 	}
 	
 	/**
