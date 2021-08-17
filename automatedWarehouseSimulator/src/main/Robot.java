@@ -204,7 +204,7 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		//If battery is >50%, return false.
 		
-		if(batteryChargePercent < MAX_BATTERY/2) {
+		if(batteryChargePercent <= MAX_BATTERY/2) {
 			return false;
 		}
 		
