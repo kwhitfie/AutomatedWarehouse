@@ -324,7 +324,10 @@ public class Robot extends WarehouseObject implements Tick{
 						destination = null;
 						//Set hasItem to false;
 						hasItem = false;
-					}}else {
+					}else {
+						hasItem = false;
+					}
+					}else {
 						//If the robot is not at the packing station, move a step towards it.
 						move(destination,wh);
 					}
