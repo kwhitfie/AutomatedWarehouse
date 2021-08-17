@@ -295,6 +295,11 @@ public class Robot extends WarehouseObject implements Tick{
 			destination = getDestinationPosition(wh, shelves.peek());
 			System.out.println(destination.toString());
 		
+			if(position.equals(destination)) {
+				hasItem = true;
+				destination = wh.getPositionFromUID(requestingPackingStationUID);
+			}
+			
 			move(destination,wh);
 			
 			//When a robot reaches a shelf it needs too...
@@ -303,7 +308,7 @@ public class Robot extends WarehouseObject implements Tick{
 				//once it reaches the packingstation, check if the job is finished or not
 					// if job finished - call the packingstation method and pop the shelf off the queue.
 					// if job not finished, pop shelf off queue, change hasItems to null and go to next shelf. 
-				
+			
 		}
 		
 			
