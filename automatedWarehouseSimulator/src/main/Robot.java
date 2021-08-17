@@ -289,14 +289,14 @@ public class Robot extends WarehouseObject implements Tick{
 		// TODO Auto-generated method stub
 		//System.out.println("Robots warehouse: " + wh.toString());
 		position = wh.getPositionFromUID(UID);
-		Position p = new Position(0,0);
-		destination = p;
+		//Position p = new Position(0,0);
+		destination = getDestinationPosition(wh, shelves.peek());
 		if(position.getX()==destination.getX() && position.getY()==destination.getY())
 		{
 			
 		}
 		else {
-			move(p,wh);
+			move(destination,wh);
 		}
 		
 		
