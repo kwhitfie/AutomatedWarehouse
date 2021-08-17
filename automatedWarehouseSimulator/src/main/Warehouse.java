@@ -269,7 +269,7 @@ public class Warehouse {
 	public String checkRobotAvailability() {
 		String robotUID = null;
 		for(Robot r : robots) {
-			if(r.checkIfPossibleToAcceptJob()) {
+			if(r.checkIfPossibleToAcceptJob(this)) {
 				robotUID = r.getUID();
 			}
 		}
