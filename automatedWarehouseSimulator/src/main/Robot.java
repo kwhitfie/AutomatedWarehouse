@@ -41,7 +41,7 @@ public class Robot extends WarehouseObject implements Tick{
 	}
 	
 	public int getManhattanDistance(Position a, Position b) {
-		return java.lang.Math.abs((a.getX()-b.getX())+(a.getY()-b.getY()));
+		return (java.lang.Math.abs(a.getX()-b.getX()))+(java.lang.Math.abs((a.getY()-b.getY())));
 	}
 	
 	
