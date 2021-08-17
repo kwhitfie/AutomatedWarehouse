@@ -305,7 +305,6 @@ public class Robot extends WarehouseObject implements Tick{
 					move(destination,wh);
 				}
 			}else if (hasItem) {
-				System.out.println("\n\nHELLO THERE\n\n");
 				//Set the destination to the packing stations position
 				destination = wh.getPositionFromUID(requestingPackingStationUID);
 				//If the robot is at the packing station
@@ -330,7 +329,6 @@ public class Robot extends WarehouseObject implements Tick{
 					}
 				}
 			}
-			System.out.println(destination.toString());
 		
 			
 			//When a robot reaches a shelf it needs too...
