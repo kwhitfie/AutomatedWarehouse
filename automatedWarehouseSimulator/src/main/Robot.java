@@ -115,6 +115,7 @@ public class Robot extends WarehouseObject implements Tick{
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
+				batteryChargePercent =- batteryCostPerTick();
 				break;
 			}
 		}
@@ -274,10 +275,17 @@ public class Robot extends WarehouseObject implements Tick{
 		requestingPackingStationUID = wh.getPS(packingStationUID).getUID();
 	}
 	
-	private boolean doesRobotNeedToCharge(Warehouse wh) {
-		int manhattanValueSum = getManhattanDistance(position,destination) + getManhattanDistance(destination,wh.getPositionFromUID(chargingPodUID));
-		//need to * manhattan value by the charge per tick, how to calculate charge per tick?
-		return false;
+	private boolean doesRobotNeedToCharge(Warehouse wh, Position destination) {
+		int manhattanValuePD = getManhattanDistance(position,destination); 
+		int manhattanValueDCP = getManhattanDistance(destination,wh.getPositionFromUID(chargingPodUID)); 
+		int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick();
+		System.out.println("Battery loss sum: " + batteryLossSum);
+		
+		if((batteryChargePercent - batteryLossSum) <= 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	/**
