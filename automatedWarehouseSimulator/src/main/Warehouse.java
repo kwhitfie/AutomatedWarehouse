@@ -23,6 +23,9 @@ public class Warehouse {
 	private ArrayList<StorageShelf> storageShelves;
 	private int x;
 	private int y;
+	private String message;
+	private ArrayList<String> log;
+	private int tick;
 	
 	/**
 	 * 
@@ -34,9 +37,13 @@ public class Warehouse {
 		packingStations = new ArrayList<PackingStation>();
 		robots = new ArrayList<Robot>();
 		chargingPods = new ArrayList<ChargingPod>();
+		log = new ArrayList<String>();
 		
 		x = width;
 		y = height;
+		
+		message = "Welcome to the automated warehouse simulator";
+		log.add(message);
 		
 		System.out.println("Width: " + width);
 		System.out.println("Height: " + height);
@@ -143,6 +150,9 @@ public class Warehouse {
 	 */
 	public void tickAllObjects() {
 		
+		message = "";
+		tick += 1;
+		
 		//Go through each object arraylist and call its ticket method and passes itself.
 		for(int i = 0; i<packingStations.size(); i++) {
 			packingStations.get(i).tick(this);
@@ -155,6 +165,9 @@ public class Warehouse {
 		for(int i = 0; i<robots.size(); i++) {
 			robots.get(i).tick(this);
 		}
+		
+		log.add("Tick "+tick+": "+message);
+		System.out.println(log);
 	}
 	
 	/**
@@ -179,6 +192,10 @@ public class Warehouse {
 			}
 		}
 		return null;
+	}
+	
+	public void addToMessage(String s) {
+		message += "\n"+ s;
 	}
 	
 	/**
@@ -311,5 +328,13 @@ public class Warehouse {
 
 	public int getY() {
 		return y;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public ArrayList<String> getLog() {
+		return log;
 	}
 }

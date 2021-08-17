@@ -173,10 +173,14 @@ public class UserInterface extends Application{
 	      Label l = new Label("Current tick: "+currentTick);
 	      l.setAlignment(Pos.CENTER);
 	      
+	      Label m = new Label("Welcome to the automated warehouse simulator");
+	      m.setAlignment(Pos.CENTER);
+	      
 	      Button b = new Button("Next tick");
 	      b.setPrefHeight(70);
 	      b.setMaxWidth(Double.MAX_VALUE);
 	      l.setMaxWidth(Double.MAX_VALUE);
+	      m.setMaxWidth(Double.MAX_VALUE);
 	      GridPane.setFillWidth(b, true);	 
 	      GridPane.setFillWidth(l, true);
 	      EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
@@ -187,11 +191,13 @@ public class UserInterface extends Application{
 	                //Make the tick stuff run here :)
 	                warehouse.tickAllObjects();
 	                updateGrid(warehouse.getGrid());
+	                m.setText(warehouse.getMessage());
 	            }
 	        };
 	        b.setOnAction(event);
 	      gridPane.add(b, 0, ysize+1, xsize+1, 1);
 	      gridPane.add(l, 0, ysize+2, xsize+1, 1);
+	      gridPane.add(m, 0, ysize+3, xsize+1, 1);
 	      
 	      
 	      
