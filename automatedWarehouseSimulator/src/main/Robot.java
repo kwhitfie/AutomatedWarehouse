@@ -26,7 +26,7 @@ public class Robot extends WarehouseObject implements Tick{
 	private Position position;
 	private Position destination;
 	private Queue<String> shelves;
-	private String requestingPackingStationUID;
+	private Position requestingPackingStationPosition;
 
 	/**
 	 * 
@@ -36,7 +36,7 @@ public class Robot extends WarehouseObject implements Tick{
 		this.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
 		batteryChargePercent = 50;
-		requestingPackingStationUID = null;
+		requestingPackingStationPosition = null;
 		shelves = new LinkedList<String>();
 	}
 	
@@ -279,7 +279,7 @@ public class Robot extends WarehouseObject implements Tick{
 		}
 		isBusy = true;
 		destination = getDestinationPosition(wh, shelves.peek());
-		requestingPackingStationUID = packingStationUID;
+		requestingPackingStationPosition = wh.getPositionFromUID(packingStationUID);
 	}
 	
 	/**
@@ -295,10 +295,6 @@ public class Robot extends WarehouseObject implements Tick{
 			destination = getDestinationPosition(wh, shelves.peek());
 			System.out.println(destination.toString());
 		
-			if(position.equals(destination)) {
-				hasItem = true;
-				destination = wh.getPositionFromUID(requestingPackingStationUID);
-			}
 			
 			move(destination,wh);
 			
