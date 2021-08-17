@@ -218,7 +218,7 @@ public class Robot extends WarehouseObject implements Tick{
 		//Take this manhatten distance and * it by 1 or 2 depending on whether the robot is holding an item.
 		//If battery goes below 50% - return false. 
 		
-		Position shelfP = wh.getPositionFromUID(shelves.peek());
+		Position shelfP = getDestinationPosition(wh, shelves.peek());
 
 		int manhattanDistance = getManhattanDistance(position, shelfP);
 		
@@ -229,8 +229,15 @@ public class Robot extends WarehouseObject implements Tick{
 		}
 		
 		//return true if none of the if statements above are triggered. 
-		
 		return true;
+	}
+	
+	/**
+	 * 
+	 */
+	public Position getDestinationPosition(Warehouse wh, String UID) {
+		return wh.getPositionFromUID(UID);
+		
 	}
 	
 	/**
@@ -265,11 +272,13 @@ public class Robot extends WarehouseObject implements Tick{
 	 * @param order
 	 * @param packingStationUID
 	 */
-	public void acceptOrder(Order order, String packingStationUID) {
+	public void acceptOrder(Order order, String packingStationUID, Warehouse wh) {
 		ArrayList<String> temp = order.getShelfUIDs();
 		for(String s : temp) {
 			shelves.add(s);
 		}
+		isBusy = true;
+		destination = getDestinationPosition(wh, shelves.peek());
 		requestingPackingStationUID = packingStationUID;
 	}
 	

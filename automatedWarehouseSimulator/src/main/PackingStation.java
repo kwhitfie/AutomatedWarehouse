@@ -85,7 +85,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 				System.out.println("Robot available");
 				needsRobot = false;
 				sleeping = true; 
-				wh.getRobot(potentialRobotUID).acceptOrder(order, UID); //call the method which engages the robot to get the items, once complete.
+				wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); //call the method which engages the robot to get the items, once complete.
 			}
 		}
 		//If this packing station needs to pack an order after the robot has got the items
