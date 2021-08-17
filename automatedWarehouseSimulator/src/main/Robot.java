@@ -55,23 +55,27 @@ public class Robot extends WarehouseObject implements Tick{
 		int leftDistance = 0;
 		int rightDistance = 0;
 		
-		if(!doesSquareHaveRobot(up,wh))
-		{
-			upDistance = getManhattanDistance(up,destination);
-		}
-		if(!doesSquareHaveRobot(down,wh))
-		{
-			downDistance = getManhattanDistance(down,destination);
-		}
-		if(!doesSquareHaveRobot(left,wh))
-		{
-			leftDistance = getManhattanDistance(left,destination);
-		}
-		if(!doesSquareHaveRobot(right,wh))
-		{
-			rightDistance = getManhattanDistance(right,destination);
-		}
+//		if(!doesSquareHaveRobot(up,wh))
+//		{
+//			upDistance = getManhattanDistance(up,destination);
+//		}
+//		if(!doesSquareHaveRobot(down,wh))
+//		{
+//			downDistance = getManhattanDistance(down,destination);
+//		}
+//		if(!doesSquareHaveRobot(left,wh))
+//		{
+//			leftDistance = getManhattanDistance(left,destination);
+//		}
+//		if(!doesSquareHaveRobot(right,wh))
+//		{
+//			rightDistance = getManhattanDistance(right,destination);
+//		}
 		
+		upDistance = getManhattanDistance(up,destination);
+		downDistance = getManhattanDistance(down,destination);
+		leftDistance = getManhattanDistance(left,destination);
+		rightDistance = getManhattanDistance(right,destination);
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		HashMap<Position,Integer> map = new HashMap<Position,Integer>();
@@ -103,6 +107,7 @@ public class Robot extends WarehouseObject implements Tick{
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
 				wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
+				break;
 			}
 		}
 		
