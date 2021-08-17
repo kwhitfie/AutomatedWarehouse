@@ -179,9 +179,9 @@ public class Warehouse {
 			log.add("Tick "+tick+": "+message);
 		}
 		
-		if(crashMonitor()) {
-			isRunning = false;
-		}
+//		if(crashMonitor()) {
+//			isRunning = false;
+//		}
 	}
 	
 	/**
