@@ -295,6 +295,8 @@ public class Robot extends WarehouseObject implements Tick{
 		
 		position = wh.getPositionFromUID(UID);
 		
+		wh.addToMessage(UID + " PACKING STATION IS: " + requestingPackingStationUID);
+		
 		//Battery
 		
 		//needsToCharge = false/true
@@ -307,64 +309,85 @@ public class Robot extends WarehouseObject implements Tick{
 			//if true, 
 				//if battery is >50%, 
 					//is true, stop charging and set needsToCharge to false
-					//is false, charge depending on hasItem method
+					//is false, charge 
 			//if false, 
 				//move to charging pod
 
 		//add extra check to see if needsToCharge is false.
-		if(isBusy) {
-			if(!hasItem) {
-				//Set the target shelf position.
-				targetShelfPosition = getDestinationPosition(wh, shelves.peek());
-				//Destination is the shelf in the queue
-				destination = targetShelfPosition;
-				//If the robot is at the target shelf
-				if(position.equals(destination)) {
-					//Pick up all items and set hasItem to true
-					hasItem = true;
+		
+		//check if it needsToCharge
+		if(needsToCharge) {
+			if(position.equals(destination)) {
+				if(batteryChargePercent >= MAX_BATTERY/2) {
+					needsToCharge = false;
 				}else {
-					//If not, move towards the target shelf. 
+					wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
+				}
+			}
+		}else {
+		
+			if(isBusy) {
+				if(!hasItem) {
+					//Set the target shelf position.
+					targetShelfPosition = getDestinationPosition(wh, shelves.peek());
+					//Destination is the shelf in the queue
+					destination = targetShelfPosition; 
+					//call method which checks if it can reach the destination, and if it can't, make needsToCharge to be true and change the destination to the chargingPod, and move. 
+					if(doesRobotNeedToCharge(wh, destination)) {
+						needsToCharge = true;
+						destination = wh.getPositionFromUID(chargingPodUID);
+						move(destination,wh);
+					}else {
+						//If the robot is at the target shelf
+						if(position.equals(destination)) {
+							//Pick up all items and set hasItem to true
+							hasItem = true;
+						}else {
+							//If not, move towards the target shelf. 
+							move(destination,wh);
+						}
+					}
+				}else if (hasItem) {
+					//Set the destination to the packing stations position
+					destination = wh.getPositionFromUID(requestingPackingStationUID);
+					//call method which checks if it can reach the destination, and if it can't, make needsToCharge to be true and change the destination to the chargingPod, and move. 
+					if(doesRobotNeedToCharge(wh, destination)) {
+						needsToCharge = true;
+						destination = wh.getPositionFromUID(chargingPodUID);
+						move(destination,wh);
+					}else {
+						//If the robot is at the packing station
+						if(position.equals(destination)) {
+							//Remove shelf from queue
+							shelves.poll();
+							//Check if the shelf is empty
+							if(shelves.isEmpty()) {
+								//If yes, tell the packing station that the job has been completed.
+								wh.getPS(requestingPackingStationUID).orderRetrievedByRobot();
+								//Set the robot as not busy.
+								isBusy = false;
+								//Set the requesting packing station to null
+								requestingPackingStationUID = null;
+								//Set the destination to null;
+								destination = null;
+								//Set hasItem to false;
+								hasItem = false;
+							}else {
+								hasItem = false;
+							}
+							}else {
+								//If the robot is not at the packing station, move a step towards it.
+								move(destination,wh);
+							}
+						}
+					}
+			}else {
+				destination = wh.getPositionFromUID(chargingPodUID);
+				//If not busy, travel back to the ChargingPod.
+				if(!position.equals(destination)) {
 					move(destination,wh);
 				}
-			}else if (hasItem) {
-				//Set the destination to the packing stations position
-				destination = wh.getPositionFromUID(requestingPackingStationUID);
-				//If the robot is at the packing station
-				if(position.equals(destination)) {
-					//Remove shelf from queue
-					shelves.poll();
-					//Check if the shelf is empty
-					if(shelves.isEmpty()) {
-						//If yes, tell the packing station that the job has been completed.
-						wh.getPS(requestingPackingStationUID).orderRetrievedByRobot();
-						//Set the robot as not busy.
-						isBusy = false;
-						//Set the requesting packing station to null
-						requestingPackingStationUID = null;
-						//Set the destination to null;
-						destination = null;
-						//Set hasItem to false;
-						hasItem = false;
-					}else {
-						hasItem = false;
-					}
-					}else {
-						//If the robot is not at the packing station, move a step towards it.
-						move(destination,wh);
-					}
-				}
-			
-		
-			
-			//When a robot reaches a shelf it needs too...
-				//pick up and say it has items (hasItems = true). This will cost 1 tick.
-				//start moving towards the packing station. 2 battery cost per movement. 
-				//once it reaches the packingstation, check if the job is finished or not
-					// if job finished - call the packingstation method and pop the shelf off the queue.
-					// if job not finished, pop shelf off queue, change hasItems to null and go to next shelf. 
-			
-		}
-		
-			
+			}
+		}	
 	}
 }

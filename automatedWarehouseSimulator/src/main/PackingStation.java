@@ -72,19 +72,24 @@ public class PackingStation extends WarehouseObject implements Tick{
 	 */
 	@Override
 	public void tick(Warehouse wh) {
-	
 		//If this packingStations needs a robot to serve an order
 		if(needsRobot){
-			if(order == null) {
-				getNextOrder(wh);
-			}
-			
-			String potentialRobotUID = wh.checkRobotAvailability();
-			if(!(potentialRobotUID == null)) {
-				wh.addToMessage(this.toString()+" successfully gives order to Robot ("+potentialRobotUID+"). ");
-				needsRobot = false;
-				sleeping = true; 
-				wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); //call the method which engages the robot to get the items, once complete.
+			if(wh.isUnassignedOrderQueueEmpty()) {
+				wh.addToMessage(UID + " is sleeping." + " No more orders left to be assigned.");
+				wh.addToMessage(UID + " has order " + order);
+			}else {
+				if(order == null) {
+					getNextOrder(wh);
+				}
+				
+				String potentialRobotUID = wh.checkRobotAvailability();
+				if(!(potentialRobotUID == null)) {
+					wh.addToMessage(this.toString()+" successfully gives order to Robot ("+potentialRobotUID+"). ");
+					needsRobot = false;
+					sleeping = true; 
+					wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); //call the method which engages the robot to get the items, once complete.
+				}
+
 			}
 		}
 		//If this packing station needs to pack an order after the robot has got the items
@@ -101,6 +106,7 @@ public class PackingStation extends WarehouseObject implements Tick{
 			}else {
 				ticksToPackOrder--;
 				wh.addToMessage(this.toString()+ "is packing. Ticks left: " + ticksToPackOrder);
+				
 			}
 		}
 	}

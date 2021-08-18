@@ -182,6 +182,11 @@ public class Warehouse {
 //		if(crashMonitor()) {
 //			isRunning = false;
 //		}
+		
+		if(unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
+			addToMessage("All orders have been completed and dispatched. Simulation terminated.");
+			isRunning = false;
+		}
 	}
 	
 	/**
@@ -258,6 +263,18 @@ public class Warehouse {
 		Order o = unassignedOQ.poll();
 		assignedOQ.add(o);
 		return o;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isUnassignedOrderQueueEmpty() {
+		if(unassignedOQ.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	/**
