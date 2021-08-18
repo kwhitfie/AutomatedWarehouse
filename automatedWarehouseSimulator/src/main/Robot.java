@@ -422,7 +422,10 @@ public class Robot extends WarehouseObject implements Tick {
 				if (!position.equals(destination)) {
 					move(destination, wh);
 				}
+				
+				
 			}
 		}
+		System.out.println(this+ "battery is: "+batteryChargePercent);
 	}
 }

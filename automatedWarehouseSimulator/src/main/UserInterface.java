@@ -190,7 +190,7 @@ public class UserInterface extends Application {
 		
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				if (warehouse.isRunning()) {
+				if(warehouse.isRunning()) {
 					currentTick += 1;
 					l.setText("Current tick: " + currentTick);
 					// Make the tick stuff run here :)

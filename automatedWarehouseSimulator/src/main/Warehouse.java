@@ -156,10 +156,12 @@ public class Warehouse {
 
 		message = "";
 		tick += 1;
+		
+		message += "Orders left: "+ (unassignedOQ.size() + assignedOQ.size())+"\n";
 
-		System.out.println("Unnassigned: " + unassignedOQ);
-		System.out.println("Assigned: " + assignedOQ);
-		System.out.println("Dispatched: " + dispatchedOQ);
+		//System.out.println("Unnassigned: " + unassignedOQ);
+		//System.out.println("Assigned: " + assignedOQ);
+		//System.out.println("Dispatched: " + dispatchedOQ);
 
 		// Go through each object arraylist and call its ticket method and passes
 		// itself.
