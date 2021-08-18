@@ -279,6 +279,10 @@ public class Robot extends WarehouseObject implements Tick {
 		//if total loss sum is not greater than half the battery, charge to half. 
 		//if total battery loss sum is greater than half the battery, charge to full. 
 	}
+	
+	public int getMaxBattery() {
+		return MAX_BATTERY;
+	}
 
 	/**
 	 * 
