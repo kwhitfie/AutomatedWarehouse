@@ -290,8 +290,8 @@ public class Robot extends WarehouseObject implements Tick {
 		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID)); //2 
 		//int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick(); //doesn't account for the second line, only first
 	
-
-		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick);
+		//8 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
+		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 8;
 		
 		System.out.println("Robot UID: " + UID + " and it's battery loss sum: " + batteryLossSum);
 
@@ -437,6 +437,8 @@ public class Robot extends WarehouseObject implements Tick {
 				// If not busy, travel back to the ChargingPod.
 				if (!position.equals(destination)) {
 					move(destination, wh);
+				}else if((position.equals(destination))) {
+					wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
 				}
 				
 				
