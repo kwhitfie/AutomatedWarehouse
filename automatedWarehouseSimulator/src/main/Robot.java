@@ -194,16 +194,6 @@ public class Robot extends WarehouseObject implements Tick{
 		}
 		
 		
-		//Does the robot have enough battery? 
-		
-		//If battery is >50%, return false.
-		
-		if(batteryChargePercent <= MAX_BATTERY/2) {
-			return false;
-		}
-		
-		
-		
 		//Can it reach the locations with existing battery?
 		
 		//Get the current position. 
