@@ -115,7 +115,7 @@ public class Robot extends WarehouseObject implements Tick{
 		for(Entry<Position, Integer> entry: map.entrySet()) {
 			if(entry.getValue()==list.get(0)) {
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(), entry.getKey().getY(), UID);
-				batteryChargePercent =- batteryCostPerTick();
+				batteryChargePercent -= batteryCostPerTick();
 				break;
 			}
 		}
