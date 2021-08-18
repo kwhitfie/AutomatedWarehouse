@@ -182,6 +182,12 @@ public class UserInterface extends Application {
 		m.setMaxWidth(Double.MAX_VALUE);
 		GridPane.setFillWidth(b, true);
 		GridPane.setFillWidth(l, true);
+		
+		ScrollPane messagePane = new ScrollPane();
+		messagePane.setContent(m);
+		messagePane.setMaxWidth(Double.MAX_VALUE);
+		messagePane.setPrefHeight(100);
+		
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				if (warehouse.isRunning()) {
@@ -217,7 +223,7 @@ public class UserInterface extends Application {
 		b.setOnAction(event);
 		gridPane.add(b, 0, ysize + 1, xsize + 1, 1);
 		gridPane.add(l, 0, ysize + 2, xsize + 1, 1);
-		gridPane.add(m, 0, ysize + 3, xsize + 1, 1);
+		gridPane.add(messagePane, 0, ysize + 3, xsize + 1, 1);
 
 		// Creating a scene object
 		Scene scene = new Scene(gridPane);
