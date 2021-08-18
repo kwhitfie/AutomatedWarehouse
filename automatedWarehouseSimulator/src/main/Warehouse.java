@@ -330,6 +330,7 @@ public class Warehouse {
 	 */
 	public boolean crashMonitor() {
 		if (unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
+			addToMessage("No more oders. Stopping simulation.");
 			return true;
 		}
 
@@ -339,12 +340,17 @@ public class Warehouse {
 			if (r.getBatteryStatus() <= 0) {
 				return true;
 			}
+			
+			else {
+				addToMessage(r+" has run out of battery. Stopping simulation.");
+			}
 
 			positionArray.add(getPositionFromUID(r.getUID()));
 			positionSet.add(getPositionFromUID(r.getUID()));
 		}
 
 		if (positionArray.size() != positionSet.size()) {
+			addToMessage("Robots have crashed. Stopping simulation.");
 			return true;
 		}
 
