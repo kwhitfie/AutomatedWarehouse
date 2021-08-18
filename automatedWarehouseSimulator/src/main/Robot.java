@@ -239,6 +239,13 @@ public class Robot extends WarehouseObject implements Tick {
 	public boolean getItemFromShelf(int StorageShelfID) {
 		return false;
 	}
+	
+	/**
+	 * 
+	 */
+	public int getMaxBattery() {
+		return MAX_BATTERY;
+	}
 
 	/**
 	 * 
