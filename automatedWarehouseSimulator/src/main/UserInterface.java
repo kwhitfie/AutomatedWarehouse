@@ -40,6 +40,7 @@ public class UserInterface extends Application {
 	private Stage stageT;
 	private Scene sceneT;
 	private int currentTick;
+	private Stage nStage;
 
 	/**
 	 * 
@@ -190,7 +191,7 @@ public class UserInterface extends Application {
 		
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				if(warehouse.isRunning()) {
+				if (warehouse.isRunning()) {
 					currentTick += 1;
 					l.setText("Current tick: " + currentTick);
 					// Make the tick stuff run here :)
@@ -198,25 +199,27 @@ public class UserInterface extends Application {
 					updateGrid(warehouse.getGrid());
 					m.setText(warehouse.getMessage());
 				} else {
-					b.setText("Show log");
-					m.setText(warehouse.getMessage());
-					Stage stage = new Stage();
-					ScrollPane pane = new ScrollPane();
-					GridPane grid = new GridPane();
-					stage.setTitle("Log");
-					stage.setScene(new Scene(pane, 500, 200));
-					for (int i = 0; i < warehouse.getLog().size(); i++) {
-						Label l = new Label(warehouse.getLog().get(i));
-						l.setWrapText(true);
-						l.setPrefWidth(500);
-						l.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
-								BorderWidths.DEFAULT)));
-						grid.add(l, 0, i);
+					if (nStage == null || !nStage.isShowing()) {
+						b.setText("Show log");
+						m.setText(warehouse.getMessage());
+						nStage = new Stage();
+						ScrollPane pane = new ScrollPane();
+						GridPane grid = new GridPane();
+						nStage.setTitle("Log");
+						nStage.setScene(new Scene(pane, 500, 200));
+						for (int i = 0; i < warehouse.getLog().size(); i++) {
+							Label l = new Label(warehouse.getLog().get(i));
+							l.setWrapText(true);
+							l.setPrefWidth(500);
+							l.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+									CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+							grid.add(l, 0, i);
 
+						}
+						m.setText("Simulation has ended, please see log for details");
+						pane.setContent(grid);
+						nStage.show();
 					}
-					m.setText("Simulation has ended, please see log for details");
-					pane.setContent(grid);
-					stage.show();
 				}
 			}
 		};

@@ -65,9 +65,8 @@ public class Warehouse {
 		dispatchedOQ = new ArrayList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
 
-		// Hello Kayley, instead of the Warehouse getting a single output ArrayList, the
+		// instead of the Warehouse getting a single output ArrayList, the
 		// SimulationFileReader
-		// Hello Alfie o/
 		// reads the sim file, and breaks it down by storing each Object type into it's
 		// own variable/collection.
 		// This saves the hassle of having to loop through the arraylist.
@@ -136,13 +135,13 @@ public class Warehouse {
 			}
 		}
 
-		System.out.println();
-		System.out.println("Grid information: " + grid);
-		System.out.println();
-		System.out.println("Packing Stations:" + packingStations);
-		System.out.println("Robots:" + robots);
-		System.out.println("Charging Pods:" + chargingPods);
-		System.out.println("Storage Shelves:" + storageShelves);
+//		System.out.println();
+//		System.out.println("Grid information: " + grid);
+//		System.out.println();
+//		System.out.println("Packing Stations:" + packingStations);
+//		System.out.println("Robots:" + robots);
+//		System.out.println("Charging Pods:" + chargingPods);
+//		System.out.println("Storage Shelves:" + storageShelves);
 
 		UserInterface ui = new UserInterface(width, height, this);
 		String[] arguments = new String[] { "123" };
@@ -157,7 +156,7 @@ public class Warehouse {
 		message = "";
 		tick += 1;
 		
-		message += "Orders left: "+ (unassignedOQ.size() + assignedOQ.size())+"\n";
+		message += "Orders left: "+ (unassignedOQ.size() + assignedOQ.size())+" Orders Dispatched: "+dispatchedOQ.size()+"\n";
 
 		//System.out.println("Unnassigned: " + unassignedOQ);
 		//System.out.println("Assigned: " + assignedOQ);
