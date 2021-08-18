@@ -320,9 +320,10 @@ public class Robot extends WarehouseObject implements Tick {
 			if (position.equals(destination)) {
 				//if(chargeToFull is true, do this, false, do whats already written)
 				if(chargeToFull) {
-					if (batteryChargePercent >= MAX_BATTERY) {
+					if (batteryChargePercent == MAX_BATTERY) {
 						wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
 						needsToCharge = false;
+						chargeToFull = false;
 					} else {
 						wh.addToMessage("Robot " + UID + "is charging.");
 						wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);

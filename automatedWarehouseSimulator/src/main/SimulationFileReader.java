@@ -147,7 +147,7 @@ public class SimulationFileReader {
 				hasInput = true;
 				break;
 			case "c":
-				fileName = "buttomStationsWin.sim";
+				fileName = "bottomStationsWin.sim";
 				hasInput = true;
 				break;
 			case "d":
