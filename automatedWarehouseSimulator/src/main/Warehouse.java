@@ -338,11 +338,12 @@ public class Warehouse {
 		Set<Position> positionSet = new HashSet<Position>();
 		for (Robot r : robots) {
 			if (r.getBatteryStatus() <= 0) {
+				addToMessage(r+" has run out of battery. Stopping simulation.");
 				return true;
 			}
 			
 			else {
-				addToMessage(r+" has run out of battery. Stopping simulation.");
+				
 			}
 
 			positionArray.add(getPositionFromUID(r.getUID()));
