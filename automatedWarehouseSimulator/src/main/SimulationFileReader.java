@@ -11,24 +11,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SimulationFileReader {
+	
+	private static Scanner stdIn;
 	
 	/**
 	 * 
 	 */
 	public SimulationFileReader() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public Warehouse readSimFile() {
+	public Warehouse readSimFile(String file) {
 
 		//The path for the Simulation file we want to read
-		String path = "bottomStationsWin.sim";
+		String path = file;
 		
 		//Intialises variables based on contents in sim file
 		
@@ -115,9 +118,77 @@ public class SimulationFileReader {
 		return new Warehouse(width, height, capacity, chargeSpeed, podRobots, shelves, stations, orders);
 	}
 	
+	public static void printMessage() {
+		System.out.println("Welcome to the automated warehouse simulator, please choose which file you wish to open: \n"
+				+ "a) Bottom Stations \n"
+				+ "b) Bottom stations Old Mac \n"
+				+ "c) Bottom Stations Win \n"
+				+ "d) One of Everything \n"
+				+ "e) Three of everything \n"
+				+ "f) Two Robots \n"
+				+ "g) Two Robots Two Shelves \n"
+				+ "h) Two Shelves - bad \n"
+				+ "i) Two Shelves v2");
+	}
+	
 	public static void main(String[] args) {
+		
+		stdIn = new Scanner(System.in);
+		
+		boolean hasInput = false;
+		String fileName = "";
+		
+		printMessage();
+		
+		while(!hasInput) {
+			
+			String command = stdIn.nextLine().trim();
+			switch(command) {
+			case "a":
+				fileName = "bottomStations.sim";
+				hasInput = true;
+				break;
+			case "b":
+				fileName = "bottomStationsOldMac.sim";
+				hasInput = true;
+				break;
+			case "c":
+				fileName = "buttomStationsWin.sim";
+				hasInput = true;
+				break;
+			case "d":
+				fileName = "oneOfEverything.sim";
+				hasInput = true;
+				break;
+			case "e":
+				fileName = "threeOfEverything.sim";
+				hasInput = true;
+				break;
+			case "f":
+				fileName = "twoRobots.sim";
+				hasInput = true;
+				break;
+			case "g":
+				fileName = "twoRobotsTwoShelves.sim";
+				hasInput = true;
+				break;
+			case "h":
+				fileName = "twoShelves-bad.sim";
+				hasInput = true;
+				break;
+			case "i":
+				fileName = "twoShelves-v2.sim";
+				hasInput = true;
+				break;
+			default:
+				System.out.println("Input not recognised, please try again");
+			}
+		}
+		
+		
+		
 		SimulationFileReader s = new SimulationFileReader();
-		Warehouse wh = s.readSimFile();
+		Warehouse wh = s.readSimFile(fileName);
 		
 		//Tests the warehouse tick all objects method.
 		//wh.tickAllObjects();
