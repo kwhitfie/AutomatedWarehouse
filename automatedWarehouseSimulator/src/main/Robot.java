@@ -293,7 +293,6 @@ public class Robot extends WarehouseObject implements Tick {
 		//8 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
 		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 8;
 		
-		System.out.println("Robot UID: " + UID + " and it's battery loss sum: " + batteryLossSum);
 
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
 			if(batteryLossSum > MAX_BATTERY/2) {
@@ -316,9 +315,9 @@ public class Robot extends WarehouseObject implements Tick {
 
 		position = wh.getPositionFromUID(UID);
 
-		wh.addToMessage(UID + " PACKING STATION IS: " + requestingPackingStationUID);
-		wh.addToMessage(UID + " BUSY?: " + isBusy);
-		wh.addToMessage(UID + " NEED TO CHARGE?: " + needsToCharge);
+//		wh.addToMessage(UID + " PACKING STATION IS: " + requestingPackingStationUID);
+//		wh.addToMessage(UID + " BUSY?: " + isBusy);
+//		wh.addToMessage(UID + " NEED TO CHARGE?: " + needsToCharge);
 		
 		// Battery
 
@@ -344,25 +343,25 @@ public class Robot extends WarehouseObject implements Tick {
 				//if(chargeToFull is true, do this, false, do whats already written)
 				if(chargeToFull) {
 					if (batteryChargePercent == MAX_BATTERY) {
-						wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
+						wh.addToMessage("Robot " + UID + " is done charging. Battery: " + batteryChargePercent);
 						needsToCharge = false;
 						chargeToFull = false;
 					} else {
-						wh.addToMessage("Robot " + UID + "is charging.");
-						wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
+						wh.addToMessage("Robot " + UID + " has started charging.");
+						//wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
 						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
-						wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
+						//wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
 	
 					}
 				}else {
 					if (batteryChargePercent >= MAX_BATTERY / 2) {
-						wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
+						wh.addToMessage("Robot " + UID + " is done charging. Battery: " + batteryChargePercent);
 						needsToCharge = false;
 					} else {
-						wh.addToMessage("Robot " + UID + "is charging.");
-						wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
+						wh.addToMessage("Robot " + UID + " is charging.");
+						//wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
 						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
-						wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
+						//wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
 	
 					}
 				}
@@ -382,7 +381,7 @@ public class Robot extends WarehouseObject implements Tick {
 					// and move.
 					if (doesRobotNeedToCharge(wh, destination)) {
 						needsToCharge = true;
-						wh.addToMessage("Robot " + UID + "needs to charge. Has no item.");
+						wh.addToMessage("Robot " + UID + " needs to charge. Has no item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination, wh);
 					} else {
@@ -403,7 +402,7 @@ public class Robot extends WarehouseObject implements Tick {
 					// and move.
 					if (doesRobotNeedToCharge(wh, destination)) {
 						needsToCharge = true;
-						wh.addToMessage("Robot " + UID + "needs to charge. Has item.");
+						wh.addToMessage("Robot " + UID + " needs to charge. Has item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination, wh);
 					} else {
@@ -444,6 +443,5 @@ public class Robot extends WarehouseObject implements Tick {
 				
 			}
 		}
-		System.out.println(this+ "battery is: "+batteryChargePercent);
 	}
 }

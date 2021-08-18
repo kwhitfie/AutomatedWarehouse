@@ -1,6 +1,6 @@
 package main;
 
-public class ChargingPod extends WarehouseObject implements Tick {
+public class ChargingPod extends WarehouseObject {
 	
 	/**
 	 * Details here
@@ -46,17 +46,7 @@ public class ChargingPod extends WarehouseObject implements Tick {
 			
 			//Set the battery charge to this new value.
 			wh.getRobot(robotUID).setBatteryChargePercentage(battery);
-		}else {
-			System.out.println("This robot is not authorised to use this charging pod!");
 		}
 	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void tick(Warehouse wh) {
-		//System.out.println("ChargingPod warehouse: " + wh.toString());
-		
-	}
+
 }

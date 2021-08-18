@@ -47,11 +47,13 @@ public class Warehouse {
 
 		message = "Welcome to the automated warehouse simulator";
 		log.add(message);
+		
+		System.out.println("Warehouse information:");
 
 		System.out.println("Width: " + width);
 		System.out.println("Height: " + height);
 		System.out.println("Capacity: " + capacity);
-		System.out.println("cCharge Speed: " + chargeSpeed);
+		System.out.println("Charge Speed: " + chargeSpeed);
 		System.out.println("Pod Robots: " + podRobots.toString());
 		System.out.println("Shelves: " + shelves.toString());
 		System.out.println("Stations: " + stations.toString());
@@ -166,10 +168,6 @@ public class Warehouse {
 		// itself.
 		for (int i = 0; i < packingStations.size(); i++) {
 			packingStations.get(i).tick(this);
-		}
-
-		for (int i = 0; i < chargingPods.size(); i++) {
-			chargingPods.get(i).tick(this);
 		}
 
 		for (int i = 0; i < robots.size(); i++) {
@@ -331,7 +329,9 @@ public class Warehouse {
 	 */
 	public boolean crashMonitor() {
 		if (unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
+			System.out.println("yooooooo");
 			addToMessage("No more orders. Stopping simulation.");
+			log.add(message);
 			return true;
 		}
 
@@ -340,6 +340,7 @@ public class Warehouse {
 		for (Robot r : robots) {
 			if (r.getBatteryStatus() <= 0) {
 				addToMessage(r+" has run out of battery. Stopping simulation.");
+				log.add(message);
 				return true;
 			}
 			
@@ -353,6 +354,7 @@ public class Warehouse {
 
 		if (positionArray.size() != positionSet.size()) {
 			addToMessage("Robots have crashed. Stopping simulation.");
+			log.add(message);
 			return true;
 		}
 
