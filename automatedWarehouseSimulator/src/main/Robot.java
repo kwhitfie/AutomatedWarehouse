@@ -275,9 +275,23 @@ public class Robot extends WarehouseObject implements Tick {
 	 * @return
 	 */
 	private boolean doesRobotNeedToCharge(Warehouse wh, Position destination) {
-		int manhattanValuePD = getManhattanDistance(position, destination);
-		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID));
-		int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick();
+		
+		int futureCostPerTick = 0; 
+
+		if(hasItem = true){
+			futureCostPerTick = 1;
+		}
+
+		if(hasItem = false) {
+			futureCostPerTick = 2;
+		}
+		
+		int manhattanValuePD = getManhattanDistance(position, destination); //1 
+		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID)); //2 
+		//int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick(); //doesn't account for the second line, only first
+	
+		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick);
+		
 		System.out.println("Robot UID: " + UID + " and it's battery loss sum: " + batteryLossSum);
 
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
@@ -303,6 +317,7 @@ public class Robot extends WarehouseObject implements Tick {
 
 		wh.addToMessage(UID + " PACKING STATION IS: " + requestingPackingStationUID);
 		wh.addToMessage(UID + " BUSY?: " + isBusy);
+		wh.addToMessage(UID + " NEED TO CHARGE?: " + needsToCharge);
 		
 		// Battery
 
