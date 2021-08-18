@@ -330,7 +330,7 @@ public class Warehouse {
 	 */
 	public boolean crashMonitor() {
 		if (unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
-			addToMessage("No more oders. Stopping simulation.");
+			addToMessage("No more orders. Stopping simulation.");
 			return true;
 		}
 
