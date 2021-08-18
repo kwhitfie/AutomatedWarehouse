@@ -279,7 +279,7 @@ public class Robot extends WarehouseObject implements Tick{
 		int manhattanValuePD = getManhattanDistance(position,destination); 
 		int manhattanValueDCP = getManhattanDistance(destination,wh.getPositionFromUID(chargingPodUID)); 
 		int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick();
-		System.out.println("Battery loss sum: " + batteryLossSum);
+		System.out.println("Robot UID: " + UID + " and it's battery loss sum: " + batteryLossSum);
 		
 		if((batteryChargePercent - batteryLossSum) <= 0) {
 			return true;
@@ -319,10 +319,17 @@ public class Robot extends WarehouseObject implements Tick{
 		if(needsToCharge) {
 			if(position.equals(destination)) {
 				if(batteryChargePercent >= MAX_BATTERY/2) {
+					wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
 					needsToCharge = false;
 				}else {
+					wh.addToMessage("Robot " + UID + "is charging.");
+					wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
 					wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
+					wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
+					
 				}
+			}else {
+				move(destination, wh);
 			}
 		}else {
 		
@@ -335,6 +342,7 @@ public class Robot extends WarehouseObject implements Tick{
 					//call method which checks if it can reach the destination, and if it can't, make needsToCharge to be true and change the destination to the chargingPod, and move. 
 					if(doesRobotNeedToCharge(wh, destination)) {
 						needsToCharge = true;
+						wh.addToMessage("Robot " + UID + "needs to charge. Has no item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination,wh);
 					}else {
@@ -353,6 +361,7 @@ public class Robot extends WarehouseObject implements Tick{
 					//call method which checks if it can reach the destination, and if it can't, make needsToCharge to be true and change the destination to the chargingPod, and move. 
 					if(doesRobotNeedToCharge(wh, destination)) {
 						needsToCharge = true;
+						wh.addToMessage("Robot " + UID + "needs to charge. Has item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination,wh);
 					}else {
