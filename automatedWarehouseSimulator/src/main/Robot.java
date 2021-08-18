@@ -27,13 +27,14 @@ public class Robot extends WarehouseObject implements Tick {
 	private String requestingPackingStationUID;
 	private Position targetShelfPosition;
 	private boolean needsToCharge;
+	private boolean chargeToFull;
 
 	/**
 	 * 
 	 */
 	public Robot(String robotUID, int MAX_BATTERY, Position position, String chargingPodUID) {
 		super(robotUID);
-		this.MAX_BATTERY = MAX_BATTERY;
+		Robot.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
 		batteryChargePercent = 50;
 		requestingPackingStationUID = null;
@@ -41,6 +42,7 @@ public class Robot extends WarehouseObject implements Tick {
 		shelves = new LinkedList<String>();
 		needsToCharge = false;
 		this.chargingPodUID = chargingPodUID;
+		chargeToFull = false;
 	}
 
 	public int getManhattanDistance(Position a, Position b) {
@@ -266,10 +268,16 @@ public class Robot extends WarehouseObject implements Tick {
 		System.out.println("Robot UID: " + UID + " and it's battery loss sum: " + batteryLossSum);
 
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
+			if(batteryLossSum >= MAX_BATTERY/2) {
+				chargeToFull = true;
+			}
 			return true;
 		} else {
 			return false;
 		}
+		
+		//if total loss sum is not greater than half the battery, charge to half. 
+		//if total battery loss sum is greater than half the battery, charge to full. 
 	}
 
 	/**
@@ -302,15 +310,29 @@ public class Robot extends WarehouseObject implements Tick {
 		// check if it needsToCharge
 		if (needsToCharge) {
 			if (position.equals(destination)) {
-				if (batteryChargePercent >= MAX_BATTERY / 2) {
-					wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
-					needsToCharge = false;
-				} else {
-					wh.addToMessage("Robot " + UID + "is charging.");
-					wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
-					wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
-					wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
-
+				//if(chargeToFull is true, do this, false, do whats already written)
+				if(chargeToFull) {
+					if (batteryChargePercent >= MAX_BATTERY) {
+						wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
+						needsToCharge = false;
+					} else {
+						wh.addToMessage("Robot " + UID + "is charging.");
+						wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
+						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
+						wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
+	
+					}
+				}else {
+					if (batteryChargePercent >= MAX_BATTERY / 2) {
+						wh.addToMessage("Robot " + UID + "is done charging. Battery: " + batteryChargePercent);
+						needsToCharge = false;
+					} else {
+						wh.addToMessage("Robot " + UID + "is charging.");
+						wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
+						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
+						wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
+	
+					}
 				}
 			} else {
 				move(destination, wh);
