@@ -36,7 +36,7 @@ public class Robot extends WarehouseObject implements Tick {
 		super(robotUID);
 		Robot.MAX_BATTERY = MAX_BATTERY;
 		this.position = position;
-		batteryChargePercent = 50;
+		batteryChargePercent = MAX_BATTERY;
 		requestingPackingStationUID = null;
 		targetShelfPosition = null;
 		shelves = new LinkedList<String>();
