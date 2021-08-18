@@ -40,6 +40,10 @@ public class ChargingPod extends WarehouseObject implements Tick {
 			//Take this percentage, and add the POWER_UNITS_PER_TICK to it.
 			battery += POWER_UNITS_PER_TICK;
 			
+			if(wh.getRobot(robotUID).getBatteryStatus()>wh.getRobot(robotUID).getMaxBattery()) {
+				battery = wh.getRobot(robotUID).getMaxBattery();
+			}
+			
 			//Set the battery charge to this new value.
 			wh.getRobot(robotUID).setBatteryChargePercentage(battery);
 		}else {
