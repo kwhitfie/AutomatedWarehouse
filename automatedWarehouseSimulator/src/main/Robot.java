@@ -271,10 +271,7 @@ public class Robot extends WarehouseObject implements Tick {
 			return false;
 		}
 	}
-	
-	public int getMaxBattery() {
-		return MAX_BATTERY;
-	}
+
 
 	/**
 	 * 
