@@ -525,7 +525,7 @@ public class Warehouse {
 	}
 	
 	/**
-	 * Return a specific dispatched order
+	 * Return the dispatched order on the specified index.
 	 * @return Order
 	 */
 	public Order getDispatchedOrder(int x){
