@@ -116,8 +116,6 @@ public class PackingStation extends WarehouseObject implements Tick {
 	@Override
 	public void tick(Warehouse wh) {
 		
-		System.out.println(UID + " HAS THE ORDER: " + order);
-		
 		if (needsRobot) {
 			if (wh.isUnassignedOrderQueueEmpty() && order == null) {
 				wh.addToMessage(UID + " is sleeping." + " No more orders left to be assigned.");
