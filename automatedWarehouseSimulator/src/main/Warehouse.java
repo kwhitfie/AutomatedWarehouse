@@ -16,8 +16,8 @@ import java.util.Set;
 public class Warehouse {
 
 	private Queue<Order> unassignedOQ;
-	private ArrayList<Order> assignedOQ;
-	private ArrayList<Order> dispatchedOQ;
+	private ArrayList<Order> assignedOL;
+	private ArrayList<Order> dispatchedOL;
 	private HashMap<Position, ArrayList<String>> grid;
 	private ArrayList<PackingStation> packingStations;
 	private ArrayList<Robot> robots;
@@ -91,8 +91,8 @@ public class Warehouse {
 		System.out.println("Orders: " + orders.toString());
 
 		unassignedOQ = new LinkedList<Order>();
-		assignedOQ = new ArrayList<Order>();
-		dispatchedOQ = new ArrayList<Order>();
+		assignedOL = new ArrayList<Order>();
+		dispatchedOL = new ArrayList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
 
 		for (String r : podRobots) {
@@ -159,21 +159,28 @@ public class Warehouse {
 	}
 
 	/**
+	 * This method is called each tick of the simulation.
 	 * 
+	 * The method checks if the simulation has finished/crashed through the crashOrCompletedMonitor method. 
+	 * 
+	 * The method also calls the tick method of each object that in the Warehouse
+	 * by looping through the ArrayLists containing these objects to ensure all
+	 * objects perform their actions this tick.
+	 * 
+	 * Each object type is called sequentially, in this order:
+	 * 
+	 * PackingStations -> Robots
+	 *
 	 */
 	public void tickAllObjects() {
 
 		message = "";
 		tick += 1;
 		
-		message += "Orders left: "+ (unassignedOQ.size() + assignedOQ.size())+" Orders Dispatched: "+dispatchedOQ.size()+"\n";
+		message += "Orders left: "+ (unassignedOQ.size() + assignedOL.size())+" Orders Dispatched: "+dispatchedOL.size()+"\n";
 
-		//System.out.println("Unnassigned: " + unassignedOQ);
-		//System.out.println("Assigned: " + assignedOQ);
-		//System.out.println("Dispatched: " + dispatchedOQ);
-
-		// Go through each object arraylist and call its ticket method and passes
-		// itself.
+		
+		// Go through each object arraylist. Call its tick method and passes itself as a param.
 		for (int i = 0; i < packingStations.size(); i++) {
 			packingStations.get(i).tick(this);
 		}
@@ -186,18 +193,17 @@ public class Warehouse {
 			log.add("Tick " + tick + ": " + message);
 		}
 
-		if(crashMonitor()) {
-			isRunning = false;
-		}
-
-		if (unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
-			addToMessage("All orders have been completed and dispatched. Simulation terminated.");
+		if(crashOrCompletedMonitor()) {
 			isRunning = false;
 		}
 	}
 
 	/**
-	 * Return a specified robot.
+	 * Return a specific Robot from the Warehouse
+	 * via it's UID as a parameter.
+	 * 
+	 * @param target Robot UID
+	 * @return a Robot object
 	 */
 	public Robot getRobot(String UID) {
 		for (Robot r : robots) {
@@ -209,7 +215,11 @@ public class Warehouse {
 	}
 
 	/**
-	 * Return a specified charging pod.
+	 * Return a specified charging pod
+	 * via it's UID as a parameter.
+	 * 
+	 * @param target ChargingPod UID
+	 * @return a ChargingPod object.
 	 */
 	public ChargingPod getChargingPod(String UID) {
 		for (ChargingPod cp : chargingPods) {
@@ -225,9 +235,11 @@ public class Warehouse {
 	}
 
 	/**
+	 * Return a objects Position in the grid
+	 * via it's UID.
 	 * 
-	 * @param UID
-	 * @return
+	 * @param target Objects UID
+	 * @return a Position object
 	 */
 	public Position getPositionFromUID(String UID) {
 		for (Position p : getGrid().keySet()) {
@@ -240,6 +252,13 @@ public class Warehouse {
 		return null;
 	}
 
+	/**
+	 * Return a objects Position in the grid
+	 * via it's coordinates (x and y).
+	 * 
+	 * @param target Objects coordinates (x and y)
+	 * @return a Position object
+	 */
 	public Position getPositionFromCoordinates(int x, int y) {
 		for (Position p : getGrid().keySet()) {
 			if (p.getX() == x && p.getY() == y) {
@@ -250,9 +269,13 @@ public class Warehouse {
 	}
 
 	/**
-	 * Return a specified packingStation Might not be needed outside of testing.
+	 * Return a specified PackingStation
+	 * via it's UID as a parameter.
+	 * 
+	 * @param target PackingStation UID
+	 * @return a PackingStation object.
 	 */
-	public PackingStation getPS(String UID) {
+	public PackingStation getPackingStation(String UID) {
 		for (PackingStation ps : packingStations) {
 			if (ps.getUID().contentEquals(UID)) {
 				return ps;
@@ -262,18 +285,26 @@ public class Warehouse {
 	}
 
 	/**
+	 * Return the next order object from the
+	 * unassigned order queue.
 	 * 
-	 * @return
+	 * This method removes the returned order from the queue,
+	 * and adds it to the assigned order list.
+	 * 
+	 * @return order object
 	 */
 	public Order getNextUnassignedOrder() {
 		Order o = unassignedOQ.poll();
-		assignedOQ.add(o);
+		assignedOL.add(o);
 		return o;
 	}
 
 	/**
+	 * This method checks if the order queue is empty.
 	 * 
-	 * @return
+	 * True if empty, false if not empty.
+	 * 
+	 * @return boolean
 	 */
 	public boolean isUnassignedOrderQueueEmpty() {
 		if (unassignedOQ.isEmpty()) {
@@ -284,32 +315,43 @@ public class Warehouse {
 	}
 
 	/**
+	 * This method returns the assigned order list.
 	 * 
-	 * @return
+	 * @return order object
 	 */
 	public ArrayList<Order> getAssignedOrderList() {
-		return assignedOQ;
+		return assignedOL;
 	}
 
 	/**
+	 * This method returns the dispatched order list.
 	 * 
-	 * @return
+	 * @return order object
 	 */
 	public ArrayList<Order> getDispatchedOrderList() {
-		return dispatchedOQ;
+		return dispatchedOL;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Moves a specified order from the assigned order list 
+	 * to the dispatched order list.
+	 * @param order - specified order
 	 */
 	public void moveOrderFromAssignedToDispactedList(Order order) {
-		assignedOQ.remove(order);
-		dispatchedOQ.add(order);
+		assignedOL.remove(order);
+		dispatchedOL.add(order);
 	}
 
 	/**
+	 * Moves a specified object via the UID to a new cell in the grid, and
+	 * removes the object from the old cell.
 	 * 
+	 * @param oldX - current x position
+	 * @param oldY - current y position
+	 * @param newX - desired x position
+	 * @param newY - desired y position
+	 * @param UID - object UID to be moved
+	 * @return the new Position of the object.
 	 */
 	public Position moveObjectToCell(int oldX, int oldY, int newX, int newY, String UID) {
 		grid.get(getPositionFromCoordinates(oldX, oldY)).remove(UID);
@@ -318,7 +360,10 @@ public class Warehouse {
 	}
 
 	/**
-	 * Check if a robot is available to perform a job for the PackingStation
+	 * Checks if a Robot in the Warehouse is 
+	 * available to perform a job.
+	 * 
+	 * @return a RobotUID is one is available, or null.
 	 */
 	public String checkRobotAvailability() {
 		String robotUID = null;
@@ -332,12 +377,15 @@ public class Warehouse {
 	}
 
 	/**
+	 * Checks if the simulation has finished by checking if the 
+	 * unassigned order queue and assigned order list is empty, or
+	 * checks if the simulation has crashed by checking if two robots
+	 * are in the same grid cell or if a robot has run out of battery.
 	 * 
-	 * @return
+	 * @return boolean - true if crashed/finished, false if not. 
 	 */
-	public boolean crashMonitor() {
-		if (unassignedOQ.isEmpty() && assignedOQ.isEmpty()) {
-			System.out.println("yooooooo");
+	public boolean crashOrCompletedMonitor() {
+		if (unassignedOQ.isEmpty() && assignedOL.isEmpty()) {
 			addToMessage("No more orders. Stopping simulation.");
 			log.add(message);
 			return true;
@@ -370,45 +418,66 @@ public class Warehouse {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns the grid.
+	 * @return the grid
 	 */
-	public Position getGridSquare() {
-		return null;
-	}
-
 	public HashMap<Position, ArrayList<String>> getGrid() {
 		return grid;
 	}
 
 	/**
-	 * 
-	 * @param UID
+	 * Returns the width/x value of the grid
+	 * @return x
 	 */
-	public void setGridSquare(String UID) {
-
-	}
-
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Returns the height/y value of the grid
+	 * @return y
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * Returns the message field that contains the 
+	 * details of what has occured in the Warehouse
+	 * for the current tick.
+	 * @return String
+	 */
 	public String getMessage() {
 		return message;
 	}
 
+	/**
+	 * Returns the log field that contains the 
+	 * details of what has occured in the Warehouse
+	 * for the each tick.
+	 * @return String
+	 */
 	public ArrayList<String> getLog() {
 		return log;
 	}
-
+	
+	/**
+	 * Returns whether the Warehouse is currently running or not
+	 * through the isRunning field.
+	 * @return boolean
+	 */
 	public boolean isRunning() {
 		return isRunning;
 	}
-
+	
+	/**
+	 * Sets the isRunning field to determine whether the 
+	 * Warehouse is running or not.
+	 * 
+	 * Setting this to false stops the simulation.
+	 * 
+	 * @param isRunning
+	 */
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}

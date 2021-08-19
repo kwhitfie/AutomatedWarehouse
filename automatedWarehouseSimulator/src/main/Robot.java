@@ -265,7 +265,7 @@ public class Robot extends WarehouseObject implements Tick {
 			shelves.add(s);
 		}
 		isBusy = true;
-		requestingPackingStationUID = wh.getPS(packingStationUID).getUID();
+		requestingPackingStationUID = wh.getPackingStation(packingStationUID).getUID();
 	}
 
 	/**
@@ -290,8 +290,9 @@ public class Robot extends WarehouseObject implements Tick {
 		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID)); //2 
 		//int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick(); //doesn't account for the second line, only first
 	
-		//4 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
-		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 4;
+		//3 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
+		//Contingency ideally should be dynamic in conjunction with the max battery of the robot.
+		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 3;
 		
 
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
@@ -413,7 +414,7 @@ public class Robot extends WarehouseObject implements Tick {
 							// Check if the shelf is empty
 							if (shelves.isEmpty()) {
 								// If yes, tell the packing station that the job has been completed.
-								wh.getPS(requestingPackingStationUID).orderRetrievedByRobot();
+								wh.getPackingStation(requestingPackingStationUID).orderRetrievedByRobot();
 								// Set the robot as not busy.
 								isBusy = false;
 								// Set the requesting packing station to null
