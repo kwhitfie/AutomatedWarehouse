@@ -44,28 +44,49 @@ public class Robot extends WarehouseObject implements Tick {
 		this.chargingPodUID = chargingPodUID;
 		chargeToFull = false;
 	}
-
+	
+	/**
+	* Gets the number of squares from one position to another using the Manhattan Distance formula
+	* Gets the difference in the x and adds it to the difference in the y. Both of these numbers are
+	* made to be absolute so they will not be negative if moving from right to left or upwards.
+	*
+	* @param a, the starting position
+	* @param b, the destination
+	* 
+	* @return int, distance from point a to point b.
+	*/
 	public int getManhattanDistance(Position a, Position b) {
 		return (java.lang.Math.abs(a.getX() - b.getX())) + (java.lang.Math.abs((a.getY() - b.getY())));
 	}
 
 	/**
-	 * 
-	 */
+	* Moves the robot 1 square towards the current destination.
+	* 1) Position objects are created for the positions up, down, left and right of the current position.
+	* 2) Gets the distance from each position to the destination
+	* 3) If any position already contains a robot or is out of bounds, it is not considered.
+	* 4) Robot moves to in the direction that is closest to the destination and is not blocked. 
+	*
+	* @param wh, the current warehouse
+	* @param destination, the desired destination
+	*/
 	public void move(Position destination, Warehouse wh) {
 
 		this.destination = destination;
-
+		
+		//Gets positions objects for the surrounding squares from current position
 		Position up = new Position(position.getX(), (position.getY() - 1));
 		Position down = new Position(position.getX(), (position.getY() + 1));
 		Position left = new Position(position.getX() - 1, (position.getY()));
 		Position right = new Position(position.getX() + 1, (position.getY()));
 
+		//Sets the distance to a high number for later checks
 		int upDistance = 10000;
 		int downDistance = 10000;
 		int leftDistance = 10000;
 		int rightDistance = 10000;
 
+		
+		//For each position, set the distance if there is no robot on that square and if it is within bounds
 		if (!doesSquareHaveRobot(up, wh) && up.getX() >= 0 && up.getX() < wh.getX() && up.getY() >= 0
 				&& up.getY() < wh.getY()) {
 			upDistance = getManhattanDistance(up, destination);
@@ -83,9 +104,12 @@ public class Robot extends WarehouseObject implements Tick {
 			rightDistance = getManhattanDistance(right, destination);
 		}
 
+		//Creates an ArrayList of each distance and a HashMap to store which distance correlates which position
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		HashMap<Position, Integer> map = new HashMap<Position, Integer>();
 
+		
+		//Adds the distance to the list if it passed the earlier checks
 		if (upDistance != 10000) {
 			list.add(upDistance);
 			map.put(up, upDistance);
@@ -104,8 +128,10 @@ public class Robot extends WarehouseObject implements Tick {
 			map.put(right, rightDistance);
 		}
 
+		//Sorts the list in ascending order so the first (and lowest) value can be used
 		Collections.sort(list);
 
+		//Gets the desired position and moves the robot 1 square in that direction.
 		for (Entry<Position, Integer> entry : map.entrySet()) {
 			if (entry.getValue() == list.get(0)) {
 				position = wh.moveObjectToCell(position.getX(), position.getY(), entry.getKey().getX(),
