@@ -116,8 +116,10 @@ public class PackingStation extends WarehouseObject implements Tick {
 	@Override
 	public void tick(Warehouse wh) {
 		
+		System.out.println(UID + " HAS THE ORDER: " + order);
+		
 		if (needsRobot) {
-			if (wh.isUnassignedOrderQueueEmpty()) {
+			if (wh.isUnassignedOrderQueueEmpty() && order == null) {
 				wh.addToMessage(UID + " is sleeping." + " No more orders left to be assigned.");
 			} else {
 				if (order == null) {
@@ -129,7 +131,7 @@ public class PackingStation extends WarehouseObject implements Tick {
 					wh.addToMessage(
 							this.toString() + " successfully gives order to Robot (" + potentialRobotUID + "). ");
 					needsRobot = false;
-					wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); // call the method which engages the
+					wh.getRobot(potentialRobotUID).acceptOrder(order, UID); // call the method which engages the
 																				// robot to get the items, once
 																				// complete.
 				}

@@ -390,7 +390,7 @@ public class Warehouse {
 	 * 
 	 * @return boolean - true if crashed/finished, false if not. 
 	 */
-	public boolean crashOrCompletedMonitor() {
+	private boolean crashOrCompletedMonitor() {
 		if (unassignedOQ.isEmpty() && assignedOL.isEmpty()) {
 			addToMessage("No more orders. Stopping simulation.");
 			log.add(message);
@@ -406,10 +406,6 @@ public class Warehouse {
 				return true;
 			}
 			
-			else {
-				
-			}
-
 			positionArray.add(getPositionFromUID(r.getUID()));
 			positionSet.add(getPositionFromUID(r.getUID()));
 		}
