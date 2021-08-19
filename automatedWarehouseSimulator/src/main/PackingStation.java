@@ -162,10 +162,20 @@ public class PackingStation extends WarehouseObject implements Tick {
 
 	}
 	
+	/**
+	 * Return true or false depending on whether
+	 * this PackingStation needs a robot. 
+	 * @return needsRobot boolean
+	 */
 	public boolean needRobot() {
 		return needsRobot;
 	}
 	
+	/**
+	 * Return true or false depending on whether
+	 * this PackingStation needs to pack. 
+	 * @return packing boolean
+	 */
 	public boolean isPacking() {
 		return packing;
 	}
