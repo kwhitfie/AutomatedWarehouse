@@ -248,7 +248,7 @@ public class Robot extends WarehouseObject implements Tick {
 	 * Get the Position of the destination that the Robot needs to travel to.
 	 * @return destinations Position object
 	 */
-	public Position getDestinationPosition(Warehouse wh, String UID) {
+	private Position getDestinationPosition(Warehouse wh, String UID) {
 		return wh.getPositionFromUID(UID);
 	}
 
