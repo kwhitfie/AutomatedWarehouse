@@ -484,26 +484,51 @@ public class Warehouse {
 		this.isRunning = isRunning;
 	}
 	
+	/**
+	 * Returns the StorageShelves in the Warehouse
+	 * @return  ArrayList<StorageShelf>
+	 */
 	public ArrayList<StorageShelf> getStorageShelves(){
 		return storageShelves;
 	}
 	
+	/**
+	 * Returns the PackingStations in the Warehouse
+	 * @return  ArrayList<PackingStation>
+	 */
 	public ArrayList<PackingStation> getPackingStations(){
 		return packingStations;
 	}
 	
+	/**
+	 * Returns the Robots in the Warehouse
+	 * @return ArrayList<Robot>
+	 */
 	public ArrayList<Robot> getRobots(){
 		return robots;
 	}
 	
+	/**
+	 * Returns the ChargingPods in the Warehouse
+	 * @return ArrayList<ChargingPod>
+	 */
 	public ArrayList<ChargingPod> getChargingPods(){
 		return chargingPods;
 	}
 	
+	/**
+	 * Return the unassigned order queue 
+	 * @return Queue<Order>
+	 */
 	public Queue<Order> getUnassignedOQ(){
 		return unassignedOQ;
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public Order getDispatchedOrder(int x){
 		return dispatchedOL.get(x);
 	}

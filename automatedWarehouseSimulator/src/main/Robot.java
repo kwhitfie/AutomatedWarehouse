@@ -15,7 +15,6 @@ import java.util.Queue;
 
 public class Robot extends WarehouseObject implements Tick {
 
-	// private ArrayList<Position> path;
 	private String chargingPodUID;
 	private boolean hasItem = false;
 	private boolean isBusy = false;
