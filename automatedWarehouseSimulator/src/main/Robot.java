@@ -290,8 +290,8 @@ public class Robot extends WarehouseObject implements Tick {
 		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID)); //2 
 		//int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick(); //doesn't account for the second line, only first
 	
-		//8 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
-		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 8;
+		//4 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
+		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 4;
 		
 
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
