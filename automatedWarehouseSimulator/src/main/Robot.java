@@ -73,7 +73,7 @@ public class Robot extends WarehouseObject implements Tick {
 	* @param wh, the current warehouse
 	* @param destination, the desired destination
 	*/
-	private void move(Position destination, Warehouse wh) {
+	public void move(Position destination, Warehouse wh) {
 
 		this.destination = destination;
 		
@@ -471,42 +471,82 @@ public class Robot extends WarehouseObject implements Tick {
 		}
 	}
 	
+	/**
+	 * Get the assigned charging pod UID
+	 * @return chargingPodUID
+	 */
 	public String getChargingPodUID() {
 		return chargingPodUID;
 	}
 	
+	/**
+	 * Return whether this Robot has an item.
+	 * @return boolean - true if yes, false if no
+	 */
 	public Boolean hasItem() {
 		return hasItem;
 	}
 	
+	/**
+	 * Return whether this Robot is busy
+	 * @return boolean - true if yes, false if no
+	 */
 	public Boolean isBusy() {
 		return isBusy;
 	}
 	
+	/**
+	 * Return this Robots position
+	 * @return Position object
+	 */
 	public Position getPosition() {
 		return position;
 	}
 	
+	/**
+	 * Return this Robots destination
+	 * @return
+	 */
 	public Position getDestination() {
 		return destination;
 	}
 	
+	/**
+	 * Return this Robots target shelves
+	 * @return Queue of shelves
+	 */
 	public Queue<String> getShelves(){
 		return shelves;
 	}
 	
+	/**
+	 * Return whether this Robot needs to charge or not.
+	 * @return boolean
+	 */
 	public Boolean needsToCharge() {
 		return needsToCharge;
 	}
 	
+	/**
+	 * Return whether this Robot needs to charge to full or not.
+	 * @return - boolean
+	 */
 	public Boolean chargeToFull() {
 		return chargeToFull;
 	}
 	
+	/**
+	 * Return the requesting packing station UID for this job.
+	 * @return String
+	 */
 	public String getRequestingPackingStationUID() {
 		return requestingPackingStationUID;
 	}
 	
+	/**
+	 * Return this Robots target shelf.
+	 * @return Position
+	 */
 	public Position getTargetShelfPosition() {
 		return targetShelfPosition;
 	}
