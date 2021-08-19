@@ -86,9 +86,19 @@ public class WarehouseTest {
 		
 		
 		//test getPositionFromUID()
+		assertEquals(0, whs.getPositionFromUID("ps0").getX());
+		assertEquals(2, whs.getPositionFromUID("ps0").getY());
+		
 		//test getPositionFromCoordinates()
-		//test moveObjectToCell()
-	
+		assertEquals(4, whs.getPositionFromCoordinates(4,5).getX());
+		assertEquals(5, whs.getPositionFromCoordinates(4,5).getY());
+		
+		//test moveObjectToCell()	
+		whs.moveObjectToCell(0,2,1,3,"ps0");
+		assertEquals(3, whs.getPositionFromUID("ps0").getY());
+		assertEquals(1, whs.getPositionFromUID("ps0").getX());
+		
+		
 		//test tickAllObjects()
 		
 		
