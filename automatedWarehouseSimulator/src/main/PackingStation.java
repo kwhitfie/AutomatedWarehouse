@@ -44,7 +44,7 @@ public class PackingStation extends WarehouseObject implements Tick {
 	/**
 	 * Get the PackingStations current order.
 	 * 
-	 * @return
+	 * @return the current Order
 	 */
 	public Order getCurrentOrder() {
 		return order;

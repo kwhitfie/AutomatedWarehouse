@@ -18,22 +18,23 @@ public class SimulationFileReader {
 	private static Scanner stdIn;
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public SimulationFileReader() {
 
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Parses a given file and creates a Warehouse object from the contents.
+	 * @param file, contains the filename for the desired .sim file.
+	 * @return a warehouse created from the details in the .sim file.
 	 */
 	public Warehouse readSimFile(String file) {
 
 		// The path for the Simulation file we want to read
 		String path = file;
 
-		// Intialises variables based on contents in sim file
+		// Initialises variables based on contents in .sim file
 
 		Integer width = 0;
 		Integer height = 0;
@@ -118,12 +119,21 @@ public class SimulationFileReader {
 		return new Warehouse(width, height, capacity, chargeSpeed, podRobots, shelves, stations, orders);
 	}
 
+	/**
+	 * Prints the starting message for the user to select their desired .sim file.
+	 */
 	public static void printMessage() {
 		System.out.println("Welcome to the automated warehouse simulator, please choose which file you wish to open: \n"
 				+ "a) Bottom Stations \n" + "b) Bottom stations Old Mac \n" + "c) Bottom Stations Win \n"
 				+ "d) One of Everything \n" + "e) Three of everything \n" + "f) Two Robots \n"
 				+ "g) Two Robots Two Shelves \n" + "h) Two Shelves - bad \n" + "i) Two Shelves v2");
 	}
+	
+	/**
+	 * Print the starting message and scans the users input. Will not accept invalid input. Uses user input to start the simulation
+	 * for the chosen .sim file.
+	 * @param args
+	 */
 
 	public static void main(String[] args) {
 
@@ -181,30 +191,6 @@ public class SimulationFileReader {
 
 		SimulationFileReader s = new SimulationFileReader();
 		Warehouse wh = s.readSimFile(fileName);
-
-		// Tests the warehouse tick all objects method.
-		// wh.tickAllObjects();
-		// wh.getPS("ps0").orderRetrievedByRobot();
-		// wh.tickAllObjects();
-		// wh.tickAllObjects();
-		// wh.tickAllObjects();
-		// wh.tickAllObjects();
-		// wh.tickAllObjects();
-
-		// Tests the charging pod and whether it does update the correct robot.
-		// System.out.println(wh.getChargingPod("c1").getUID());
-		// System.out.println(wh.getRobot("r0").getBatteryStatus());
-		// wh.getChargingPod("c0").chargeRobot("r0", wh);
-		// System.out.println(wh.getRobot("r0").getBatteryStatus());
-
-		// Tests PackingStation getNextOrder method
-//		wh.getPS("ps0").getNextOrder(wh);
-//		System.out.println("UAOR: " + wh.getPS("ps0").getCurrentOrder().getTicksToPack());
-//		System.out.println("AOQ: " + wh.getAssignedOrderQueue().peek().getTicksToPack());
-//		
-//		wh.getPS("ps0").getNextOrder(wh);
-//		System.out.println("UAOR: " + wh.getPS("ps0").getCurrentOrder().getTicksToPack());
-//		System.out.println("AOQ: " + wh.getAssignedOrderQueue().peek().getTicksToPack());
 
 	}
 }
