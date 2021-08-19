@@ -21,13 +21,6 @@ public class SimulationFileReader {
 	private static Scanner stdIn;
 
 	/**
-	 * Constructor
-	 */
-	public SimulationFileReader() {
-
-	}
-
-	/**
 	 * Parses a given file and creates a Warehouse object from the contents.
 	 * @param file, contains the filename for the desired .sim file.
 	 * @return a warehouse created from the details in the .sim file.
