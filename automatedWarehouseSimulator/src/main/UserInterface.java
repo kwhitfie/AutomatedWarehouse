@@ -87,7 +87,7 @@ public class UserInterface extends Application {
 	 * 
 	 * @param grid, the information of the positions of each object in the warehouse
 	 */
-	public void updateGrid(HashMap<Position, ArrayList<String>> grid) {
+	private void updateGrid(HashMap<Position, ArrayList<String>> grid) {
 		// Loop in the buttons
 		for (Position buttonP : buttons.keySet()) {
 			// Loop in the grid
