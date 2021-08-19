@@ -8,9 +8,15 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * Details here
+ * The Warehouse stores the objects of a simulation
+ * in a grid and provides methods for these objects to 
+ * be accessed and mutated.
  * 
- * @author Alfie Smith, Kayley Whitfield, Dan Philpot hello there
+ * It is a controller to the simulation, ensuring that
+ * the simulation ends when it is either complete or has
+ * crashed.
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
  */
 
 public class Warehouse {
