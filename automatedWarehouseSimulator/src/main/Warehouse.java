@@ -487,4 +487,30 @@ public class Warehouse {
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
+	
+	public ArrayList<StorageShelf> getStorageShelves(){
+		return storageShelves;
+	}
+	
+	public ArrayList<PackingStation> getPackingStations(){
+		return packingStations;
+	}
+	
+	public ArrayList<Robot> getRobots(){
+		return robots;
+	}
+	
+	public ArrayList<ChargingPod> getChargingPods(){
+		return chargingPods;
+	}
+	
+	public Queue<Order> getUnassignedOQ(){
+		return unassignedOQ;
+	}
+	
+	public Order getDispatchedOrder(int x){
+		return dispatchedOL.get(x);
+	}
+	
+	
 }

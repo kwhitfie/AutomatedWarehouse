@@ -57,5 +57,14 @@ public class ChargingPod extends WarehouseObject {
 			wh.getRobot(robotUID).setBatteryChargePercentage(battery);
 		}
 	}
+	
+	
+	public int getPOWER_UNITS_PER_TICK() {
+		return POWER_UNITS_PER_TICK;
+	}
+	
+	public String getAssignedRobotUID() {
+		return assignedRobotUID;
+	}
 
 }

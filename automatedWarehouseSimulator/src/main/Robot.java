@@ -450,4 +450,44 @@ public class Robot extends WarehouseObject implements Tick {
 			}
 		}
 	}
+	
+	public String getChargingPodUID() {
+		return chargingPodUID;
+	}
+	
+	public Boolean hasItem() {
+		return hasItem;
+	}
+	
+	public Boolean isBusy() {
+		return isBusy;
+	}
+	
+	public Position getPosition() {
+		return position;
+	}
+	
+	public Position getDestination() {
+		return destination;
+	}
+	
+	public Queue<String> getShelves(){
+		return shelves;
+	}
+	
+	public Boolean needsToCharge() {
+		return needsToCharge;
+	}
+	
+	public Boolean chargeToFull() {
+		return chargeToFull;
+	}
+	
+	public String getRequestingPackingStationUID() {
+		return requestingPackingStationUID;
+	}
+	
+	public Position getTargetShelfPosition() {
+		return targetShelfPosition;
+	}
 }

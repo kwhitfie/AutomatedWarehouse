@@ -4,4 +4,5 @@ module automatedWarehouseSimulator {
 	requires javafx.controls;
 	requires javafx.base;
 	requires javafx.graphics;
+	requires junit;
 }
