@@ -31,10 +31,41 @@ public class Warehouse {
 	private boolean isRunning = true;
 
 	/**
-	 * 
+	 *  Constructor for a Warehouse object.
+	 *   
+	 * @param width - grid width
+	 * @param height - grid height
+	 * @param capacity - Robot battery capacity
+	 * @param chargeSpeed - ChargingPod charge speed
+	 * @param podRobots - Robot and ChargingPod UIDs
+	 * @param shelves - StorageShelf UIDs
+	 * @param stations - PackingStation UIDs
+	 * @param orders - Order details
 	 */
 	public Warehouse(int width, int height, Integer capacity, Integer chargeSpeed, ArrayList<String> podRobots,
 			ArrayList<String> shelves, ArrayList<String> stations, ArrayList<String> orders) {
+		
+		/*
+		 *  The constructor takes multiple parameters, and uses these
+		 *  parameters to set up the warehouse.
+		 *  
+		 *  It creates ArrayLists to store the ...
+		 *  
+		 *   - StorageShelf(s) 
+		 *   - PackingStations 
+		 *   - Robots
+		 *   - ChargingPods
+		 *   
+		 *  that a Warehouse will contain.
+		 *  
+		 *  It next takes the parameters to 
+		 *   - create the Warehouses unassigned order queue using orders (and the assigned and dispatched queues).
+		 *   - create the Warehouses grid using width and height.
+		 *   - create the Robots and Charging pods using capacity, chargeSpeed, podRobots.
+		 *   - create the StorageShelf(s) using shelves.
+		 *   - create the Orders using orders, and storing them into the unassigned order queue.
+		 *   - initialise the User Interface.
+		 */
 
 		storageShelves = new ArrayList<StorageShelf>();
 		packingStations = new ArrayList<PackingStation>();
@@ -59,24 +90,10 @@ public class Warehouse {
 		System.out.println("Stations: " + stations.toString());
 		System.out.println("Orders: " + orders.toString());
 
-		// comment
-
-		// TODO Auto-generated constructor stub
 		unassignedOQ = new LinkedList<Order>();
 		assignedOQ = new ArrayList<Order>();
 		dispatchedOQ = new ArrayList<Order>();
 		grid = new HashMap<Position, ArrayList<String>>();
-
-		// instead of the Warehouse getting a single output ArrayList, the
-		// SimulationFileReader
-		// reads the sim file, and breaks it down by storing each Object type into it's
-		// own variable/collection.
-		// This saves the hassle of having to loop through the arraylist.
-
-		// Please could you look to set up the grid when you have the time tomorrow
-		// using the width and height parameters that is passed
-		// to the Warehouse. Thanks. We'll look to start creating the objects and adding
-		// them to the grid once the grid is properly set up.
 
 		for (String r : podRobots) {
 			String[] parse = r.split("\\s+");
@@ -136,15 +153,6 @@ public class Warehouse {
 				}
 			}
 		}
-
-//		System.out.println();
-//		System.out.println("Grid information: " + grid);
-//		System.out.println();
-//		System.out.println("Packing Stations:" + packingStations);
-//		System.out.println("Robots:" + robots);
-//		System.out.println("Charging Pods:" + chargingPods);
-//		System.out.println("Storage Shelves:" + storageShelves);
-
 		UserInterface ui = new UserInterface(width, height, this);
 		String[] arguments = new String[] { "123" };
 		ui.main(arguments);

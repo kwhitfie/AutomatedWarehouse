@@ -12,7 +12,7 @@ public abstract class WarehouseObject {
 	protected String UID;
 	
 	/**
-	 * Constructor for a WarehouseObject
+	 * Constructor for a WarehouseObject.
 	 * @param UID - the objects UID
 	 */
 	public WarehouseObject (String UID) {
