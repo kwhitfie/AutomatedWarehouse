@@ -30,7 +30,11 @@ public class Robot extends WarehouseObject implements Tick {
 	private boolean chargeToFull;
 
 	/**
-	 * 
+	 * Constructor for a Robot object.
+	 * @param robotUID - the robots UID
+	 * @param MAX_BATTERY - the robots max battery
+	 * @param position - the robots position in the Warehouse grid
+	 * @param chargingPodUID - the assigned ChargingPod UID
 	 */
 	public Robot(String robotUID, int MAX_BATTERY, Position position, String chargingPodUID) {
 		super(robotUID);
@@ -55,7 +59,7 @@ public class Robot extends WarehouseObject implements Tick {
 	* 
 	* @return int, distance from point a to point b.
 	*/
-	public int getManhattanDistance(Position a, Position b) {
+	private int getManhattanDistance(Position a, Position b) {
 		return (java.lang.Math.abs(a.getX() - b.getX())) + (java.lang.Math.abs((a.getY() - b.getY())));
 	}
 
@@ -69,7 +73,7 @@ public class Robot extends WarehouseObject implements Tick {
 	* @param wh, the current warehouse
 	* @param destination, the desired destination
 	*/
-	public void move(Position destination, Warehouse wh) {
+	private void move(Position destination, Warehouse wh) {
 
 		this.destination = destination;
 		
@@ -142,8 +146,19 @@ public class Robot extends WarehouseObject implements Tick {
 		}
 
 	}
-
-	public boolean doesSquareHaveRobot(Position p, Warehouse wh) {
+	
+	/**
+	 * This method checks whether a square in the Warehouse
+	 * already contains a Robot.
+	 * 
+	 * If yes - return true.
+	 * If no - return false.
+	 * 
+	 * @param p - Position to check
+	 * @param wh - Warehouse to access position in grid. 
+	 * @return boolean 
+	 */
+	private boolean doesSquareHaveRobot(Position p, Warehouse wh) {
 		ArrayList<String> UIDs = new ArrayList<String>();
 		for (Position keyP : wh.getGrid().keySet()) {
 			if (keyP.getX() == p.getX() && keyP.getY() == p.getY()) {
@@ -183,8 +198,11 @@ public class Robot extends WarehouseObject implements Tick {
 	}
 
 	/**
+	 * This method checks if the Robot is able to accept a job.
 	 * 
-	 * @return
+	 * @param wh - the Warehouse
+	 * @param order - the order that the Robot will need to complete.
+	 * @return boolean - true if it can accept, false if it can't accept.
 	 */
 	public boolean checkIfPossibleToAcceptJob(Warehouse wh, Order order) {
 		
@@ -227,17 +245,18 @@ public class Robot extends WarehouseObject implements Tick {
 	}
 
 	/**
-	 * 
+	 * Get the Position of the destination that the Robot needs to travel to.
+	 * @return destinations Position object
 	 */
 	public Position getDestinationPosition(Warehouse wh, String UID) {
 		return wh.getPositionFromUID(UID);
-
 	}
 
 	/**
-	 * 
+	 * Return how much the battery will decrease by to move this tick.
+	 * @return int - battery decrease
 	 */
-	public int batteryCostPerTick() {
+	private int batteryCostPerTick() {
 		if (hasItem) {
 			return 2;
 		} else {
@@ -246,38 +265,42 @@ public class Robot extends WarehouseObject implements Tick {
 	}
 	
 	/**
-	 * 
+	 * Return the max battery of the robot.
+	 * @return int - max battery
 	 */
 	public int getMaxBattery() {
 		return MAX_BATTERY;
 	}
 
 	/**
-	 * 
+	 * Return a String representation of the Robot.
+	 * @return String representation
 	 */
 	public String toString() {
 		return "Robot(" + UID + ")";
 	}
 
 	/**
-	 * 
-	 * @param order
-	 * @param packingStationUID
+	 * This method is used to accept an order from a PackingStation.
+	 * @param order - the order that's been accepted
+	 * @param packingStationUID - the packingStation that has provided the order
 	 */
-	public void acceptOrder(Order order, String packingStationUID, Warehouse wh) {
+	public void acceptOrder(Order order, String packingStationUID) {
 		ArrayList<String> temp = order.getShelfUIDs();
 		for (String s : temp) {
 			shelves.add(s);
 		}
 		isBusy = true;
-		requestingPackingStationUID = wh.getPackingStation(packingStationUID).getUID();
+		requestingPackingStationUID = packingStationUID;
 	}
 
 	/**
+	 * This method is used to determine whether the Robot
+	 * needs to charge before heading to a destination.
 	 * 
-	 * @param wh
-	 * @param destination
-	 * @return
+	 * @param wh - the Warehouse
+	 * @param destination - the desired destination
+	 * @return boolean - true if it does need to charge, false if not.
 	 */
 	private boolean doesRobotNeedToCharge(Warehouse wh, Position destination) {
 		
@@ -293,126 +316,123 @@ public class Robot extends WarehouseObject implements Tick {
 		
 		int manhattanValuePD = getManhattanDistance(position, destination); //1 
 		int manhattanValueDCP = getManhattanDistance(destination, wh.getPositionFromUID(chargingPodUID)); //2 
-		//int batteryLossSum = (manhattanValuePD + manhattanValueDCP) * batteryCostPerTick(); //doesn't account for the second line, only first
 	
 		//3 is added as a contingency to account for another robot possibly blocking the robot from getting to the charging pod in time.
 		//Contingency ideally should be dynamic in conjunction with the max battery of the robot.
 		int batteryLossSum = (manhattanValuePD * batteryCostPerTick()) + (manhattanValueDCP * futureCostPerTick) + 3;
 		
-
+		//Check if the current battery is less or equal to 0 after minusing the batteryLossSum against it.
 		if ((batteryChargePercent - batteryLossSum) <= 0) {
+			//if total battery loss sum is not greater than half the battery, charge to half.
+			//if total battery loss sum is greater than half the battery, charge to full. 
 			if(batteryLossSum > MAX_BATTERY/2) {
 				chargeToFull = true;
 			}
+			//If it is less than or equal to 0, it needs to charge before taking the journey. Return true.
 			return true;
 		} else {
+			//If it isn't less than or equal to 0, it needs to charge before taking the journey. Return false.
 			return false;
 		}
-		
-		//if total loss sum is not greater than half the battery, charge to half. 
-		//if total battery loss sum is greater than half the battery, charge to full. 
 	}
 
 
 	/**
+	 * This tick method determines the logic behind the actions 
+	 * of a Robot each tick of the simulation, using methods
+	 * from the Warehouse to get all the required information/objects.
 	 * 
+	 * @param wh the Warehouse object.
 	 */
 	public void tick(Warehouse wh) {
 
 		position = wh.getPositionFromUID(UID);
-
-//		wh.addToMessage(UID + " PACKING STATION IS: " + requestingPackingStationUID);
-//		wh.addToMessage(UID + " BUSY?: " + isBusy);
-//		wh.addToMessage(UID + " NEED TO CHARGE?: " + needsToCharge);
 		
-		// Battery
-
-		// needsToCharge = false/true
-
-		// Check if needsToCharge needs to be true
-
-		// If the robot needsToCharge is true
-		// change destination to charging pod
-		// check if robot is at charging pod
-		// if true,
-		// if battery is >50%,
-		// is true, stop charging and set needsToCharge to false
-		// is false, charge
-		// if false,
-		// move to charging pod
-
-		// add extra check to see if needsToCharge is false.
-
+		
 		// check if it needsToCharge
 		if (needsToCharge) {
+			// if yes, check if the current position is at the designated charging pod
 			if (position.equals(destination)) {
-				//if(chargeToFull is true, do this, false, do whats already written)
+				//if at the charging pod,
+				//check if we need to charge to full battery or not
 				if(chargeToFull) {
+					//if do we need to charge to full battery, check if we are at full battery or not
 					if (batteryChargePercent == MAX_BATTERY) {
+						//if full battery, add a message to the simulation report 
 						wh.addToMessage("Robot " + UID + " is done charging. Battery: " + batteryChargePercent);
+						//set the charge boolean to false as its finished charging.
 						needsToCharge = false;
+						//set the chargeToFull boolean to false as its finished charging.
 						chargeToFull = false;
 					} else {
+						//if not charged, add a message to the report and charge the battery.
 						wh.addToMessage("Robot " + UID + " has started charging.");
-						//wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
 						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
-						//wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
 	
 					}
 				}else {
+					//if we don't need to charge to full, charge to half
 					if (batteryChargePercent >= MAX_BATTERY / 2) {
+						//if the battery is charged to half, 
+						//add a message to the simulation report
 						wh.addToMessage("Robot " + UID + " is done charging. Battery: " + batteryChargePercent);
+						//set the charge boolean to false as its finished charging.
 						needsToCharge = false;
 					} else {
+						//if not charged, add a message to the report and charge the battery.
 						wh.addToMessage("Robot " + UID + " is charging.");
-						//wh.addToMessage("Robot " + UID + "old battery: " + batteryChargePercent);
 						wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
-						//wh.addToMessage("Robot " + UID + "new battery: " + batteryChargePercent);
-	
 					}
 				}
 			} else {
+				//if not at the charging pod, move towards it this tick.
 				move(destination, wh);
 			}
 		} else {
-
+			//check if the robot has an order to complete
 			if (isBusy) {
+				//check if the robot has an item or not
 				if (!hasItem) {
-					// Set the target shelf position.
+					//if not, 
+					// Set the target shelf position to the next shelf in the shelves queue.
 					targetShelfPosition = getDestinationPosition(wh, shelves.peek());
-					// Destination is the shelf in the queue
+					// Set the destination to the targetShelfPosition.
 					destination = targetShelfPosition;
-					// call method which checks if it can reach the destination, and if it can't,
-					// make needsToCharge to be true and change the destination to the chargingPod,
-					// and move.
+					// call method which checks if it needs to charge before travelling to the destination
 					if (doesRobotNeedToCharge(wh, destination)) {
+						//if robot needs to charge before travelling to destination, 
+						//make needsToCharge to be true and change the destination to the chargingPod,
+						//and move.
 						needsToCharge = true;
 						wh.addToMessage("Robot " + UID + " needs to charge. Has no item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination, wh);
 					} else {
-						// If the robot is at the target shelf
+						//if the robot doesn't need to charge,
+						// Check if the robot is at the target shelf
 						if (position.equals(destination)) {
-							// Pick up all items and set hasItem to true
+							//If it at the target shelf,
+							//pick up all items and set hasItem to true
 							hasItem = true;
 						} else {
-							// If not, move towards the target shelf.
+							//If not, move towards the target shelf.
 							move(destination, wh);
 						}
 					}
 				} else if (hasItem) {
 					// Set the destination to the packing stations position
 					destination = wh.getPositionFromUID(requestingPackingStationUID);
-					// call method which checks if it can reach the destination, and if it can't,
-					// make needsToCharge to be true and change the destination to the chargingPod,
-					// and move.
+					// call method which checks if it can reach the destination
 					if (doesRobotNeedToCharge(wh, destination)) {
+						//if robot needs to charge before travelling to destination, 
+						//make needsToCharge to be true and change the destination to the chargingPod,
+						//and move.
 						needsToCharge = true;
 						wh.addToMessage("Robot " + UID + " needs to charge. Has item.");
 						destination = wh.getPositionFromUID(chargingPodUID);
 						move(destination, wh);
 					} else {
-						// If the robot is at the packing station
+						// Check if the robot is at the packing station
 						if (position.equals(destination)) {
 							// Remove shelf from queue
 							shelves.poll();
@@ -438,15 +458,15 @@ public class Robot extends WarehouseObject implements Tick {
 					}
 				}
 			} else {
+				// If Robot is not busy, travel back to the ChargingPod.
 				destination = wh.getPositionFromUID(chargingPodUID);
-				// If not busy, travel back to the ChargingPod.
 				if (!position.equals(destination)) {
+					//If not at the ChargingPod, travel to it's destination.
 					move(destination, wh);
 				}else if((position.equals(destination))) {
+					//If it is at the ChargingPod, charge while waiting for a job.
 					wh.getChargingPod(chargingPodUID).chargeRobot(UID, wh);
 				}
-				
-				
 			}
 		}
 	}

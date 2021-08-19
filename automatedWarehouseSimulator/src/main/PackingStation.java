@@ -129,7 +129,7 @@ public class PackingStation extends WarehouseObject implements Tick {
 					wh.addToMessage(
 							this.toString() + " successfully gives order to Robot (" + potentialRobotUID + "). ");
 					needsRobot = false;
-					wh.getRobot(potentialRobotUID).acceptOrder(order, UID, wh); // call the method which engages the
+					wh.getRobot(potentialRobotUID).acceptOrder(order, UID); // call the method which engages the
 																				// robot to get the items, once
 																				// complete.
 				}
