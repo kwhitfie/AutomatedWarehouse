@@ -2,6 +2,7 @@ package main;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 import org.junit.Test;
@@ -50,10 +51,26 @@ public class RobotTest {
 		
 		
 		//Require Warehouse
+		ArrayList<String> robots = new ArrayList<String>();
+		robots.add("c0 r0 4 1");
+		ArrayList<String> shelves= new ArrayList<String>();
+		shelves.add("ss1 2 3");
+		ArrayList<String> stations = new ArrayList<String>();
+		stations.add("ps0 0 2");
+		ArrayList<String> orders = new ArrayList<String>();
+		orders.add("3 ss1 ss1");
 		
+		Warehouse whs = new Warehouse(5,5,50,1,robots,shelves,stations,orders);
 		
 		//test move()
+		whs.getRobot("r0").move(whs.getPositionFromCoordinates(3,2), whs);
+		assertEquals(3, whs.getPositionFromUID("r0").getX());
+		assertEquals(2, whs.getPositionFromUID("r0").getY());
+		
 		//test doesSquareHaveRobot()	
+		assertEquals(true, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(3,2), whs));
+		assertEquals(false, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(1,2), whs));
+		
 		//test checkIfPossibleToAcceptJob()
 		//test getDestinationPosition()
 		//test acceptOrder()

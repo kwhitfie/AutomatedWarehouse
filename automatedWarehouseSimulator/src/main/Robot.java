@@ -158,7 +158,7 @@ public class Robot extends WarehouseObject implements Tick {
 	 * @param wh - Warehouse to access position in grid. 
 	 * @return boolean 
 	 */
-	private boolean doesSquareHaveRobot(Position p, Warehouse wh) {
+	public boolean doesSquareHaveRobot(Position p, Warehouse wh) {
 		ArrayList<String> UIDs = new ArrayList<String>();
 		for (Position keyP : wh.getGrid().keySet()) {
 			if (keyP.getX() == p.getX() && keyP.getY() == p.getY()) {
