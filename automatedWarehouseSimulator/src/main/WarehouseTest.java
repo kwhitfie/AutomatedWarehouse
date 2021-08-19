@@ -66,7 +66,7 @@ public class WarehouseTest {
 		assertNull(whs.getNextUnassignedOrder());
 		
 		//test isUnassignedOrderQueueEmpty()
-		assertEquals(true, whs.isUnassignedOrderQueueEmpty());
+		assertEquals(true, whs.isUnassignedOrderQueueEmpty());		
 		
 		//test getAssignedOrderList()
 		ArrayList<String> al = new ArrayList<>();
@@ -100,17 +100,9 @@ public class WarehouseTest {
 		
 		
 		//test tickAllObjects()
+		whs.tickAllObjects();
+		assertEquals(88, whs.getTick());		
 		
-		
-		
-		
-		
-		
-		
-
-
-
-
 	}
 
 }

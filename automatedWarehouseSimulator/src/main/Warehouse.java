@@ -525,13 +525,19 @@ public class Warehouse {
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @return
+	 * Return a specific dispatched order
+	 * @return Order
 	 */
 	public Order getDispatchedOrder(int x){
 		return dispatchedOL.get(x);
 	}
 	
+	/**
+	 * Return the tick number
+	 * @return int
+	 */
+	public int getTick() {
+		return tick;
+	}
 	
 }

@@ -255,7 +255,7 @@ public class Robot extends WarehouseObject implements Tick {
 	 * Return how much the battery will decrease by to move this tick.
 	 * @return int - battery decrease
 	 */
-	private int batteryCostPerTick() {
+	public int batteryCostPerTick() {
 		if (hasItem) {
 			return 2;
 		} else {

@@ -71,12 +71,32 @@ public class RobotTest {
 		assertEquals(true, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(3,2), whs));
 		assertEquals(false, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(1,2), whs));
 		
-		//test checkIfPossibleToAcceptJob()
+		//test checkIfPossibleToAcceptJob() and acceptOrder()
+		ArrayList<String> al = new ArrayList<>();
+		al.add("ss1");
+		Order tstOrder = new Order(al,5);
+		assertEquals(true, whs.getRobot("r0").checkIfPossibleToAcceptJob(whs, tstOrder));
+		
+		whs.getRobot("r0").acceptOrder(tstOrder, "ps0");
+		assertEquals("ss1", whs.getRobot("r0").getShelves().peek());
+		assertEquals(false, whs.getRobot("r0").checkIfPossibleToAcceptJob(whs, tstOrder));
+		
+		//test batteryCostPerTick()
+		assertEquals(1, whs.getRobot("r0").batteryCostPerTick());
+		
+		whs.moveObjectToCell(3,2,2,3,"r0");
+		whs.getRobot("r0").tick(whs);
+		assertEquals(2, whs.getRobot("r0").batteryCostPerTick());
+		
+		
+		
+		
+		
+		
 		//test getDestinationPosition()
-		//test acceptOrder()
 		//test doesRobotNeedToCharge()
 		//test tick()
-		//test batteryCostPerTick()
+		
 		
 	}
 
