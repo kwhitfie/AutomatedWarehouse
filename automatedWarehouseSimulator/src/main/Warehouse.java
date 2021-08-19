@@ -525,9 +525,9 @@ public class Warehouse {
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @return
+	 * Return the dispatched order on the specified index.
+	 * @param x - index
+	 * @return Order 
 	 */
 	public Order getDispatchedOrder(int x){
 		return dispatchedOL.get(x);
