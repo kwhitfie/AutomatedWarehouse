@@ -124,7 +124,7 @@ public class PackingStation extends WarehouseObject implements Tick {
 					getNextOrder(wh);
 				}
 
-				String potentialRobotUID = wh.checkRobotAvailability();
+				String potentialRobotUID = wh.checkRobotAvailability(order);
 				if (!(potentialRobotUID == null)) {
 					wh.addToMessage(
 							this.toString() + " successfully gives order to Robot (" + potentialRobotUID + "). ");

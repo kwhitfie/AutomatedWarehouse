@@ -371,10 +371,10 @@ public class Warehouse {
 	 * 
 	 * @return a RobotUID is one is available, or null.
 	 */
-	public String checkRobotAvailability() {
+	public String checkRobotAvailability(Order order) {
 		String robotUID = null;
 		for (Robot r : robots) {
-			if (r.checkIfPossibleToAcceptJob(this)) {
+			if (r.checkIfPossibleToAcceptJob(this, order)) {
 				robotUID = r.getUID();
 				break;
 			}

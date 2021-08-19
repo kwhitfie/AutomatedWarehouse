@@ -141,24 +141,16 @@ public class Robot extends WarehouseObject implements Tick {
 	}
 
 	/**
-	 * 
-	 * @param UID
-	 * @return
-	 */
-	public String[] getPathToDestination(String UID) {
-		return null;
-	}
-
-	/**
-	 * 
+	 * Set the current battery of the Robot
+	 * @param new battery charge
 	 */
 	public void setBatteryChargePercentage(int battery) {
 		batteryChargePercent = battery;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Return the current battery of the Robot
+	 * @return int - current Battery
 	 */
 	public int getBatteryStatus() {
 		return batteryChargePercent;
@@ -168,22 +160,17 @@ public class Robot extends WarehouseObject implements Tick {
 	 * 
 	 * @return
 	 */
-	public boolean checkIfPossibleToAcceptJob(Warehouse wh) {
-		// The robot will decide if it
-		// wants to accept the assignment or not: this will depend on the current
-		// battery level and how far
-		// the shelf and the packing station are.
-
-		// Is the robot already completing a job?
-
-		if (!isBusy) {
-			return true;
+	public boolean checkIfPossibleToAcceptJob(Warehouse wh, Order order) {
+		
+		Queue<String> possibleShelves = new LinkedList<String>();
+		
+		ArrayList<String> temp = order.getShelfUIDs();
+		for (String s : temp) {
+			possibleShelves.add(s);
 		}
 
 		// If the queue is NOT null, then it is currently completing a job. Return
 		// false.
-
-		// If it is null, then the robot is not completing a job. Next if statement.
 
 		if (!shelves.isEmpty()) {
 			return false;
@@ -192,19 +179,20 @@ public class Robot extends WarehouseObject implements Tick {
 		// Can it reach the locations with existing battery?
 
 		// Get the current position.
-		// Get the shelves position (peek at the shelves queue)
+		// Get the possible shelves position of the order that needs completing
 		// Plug into manhatten distance.
 		// Take this manhatten distance and * it by 1 or 2 depending on whether the
 		// robot is holding an item.
-		// If battery goes below 50% - return false.
+		// Take the this calculated value and take it away from the robots current battery
+		// If battery goes below 0% - return false to reject the job.
 
-		Position shelfP = getDestinationPosition(wh, shelves.peek());
+		Position shelfP = getDestinationPosition(wh, possibleShelves.peek());
 
 		int manhattanDistance = getManhattanDistance(position, shelfP);
 
 		int futureBattery = batteryChargePercent - (manhattanDistance * batteryCostPerTick());
 
-		if (futureBattery <= MAX_BATTERY / 2) {
+		if (futureBattery <= 0) {
 			return false;
 		}
 
@@ -229,15 +217,6 @@ public class Robot extends WarehouseObject implements Tick {
 		} else {
 			return 1;
 		}
-	}
-
-	/**
-	 * 
-	 * @param StorageShelfID
-	 * @return
-	 */
-	public boolean getItemFromShelf(int StorageShelfID) {
-		return false;
 	}
 	
 	/**
