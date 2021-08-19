@@ -25,7 +25,10 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- * Details here
+ * This class starts a Graphical User Interface based on information given from a warehouse object.
+ * 
+ * It creates a grid and allows for the user to progress the simulation when a button is pressed and see the simulation
+ * running in real-time in a way that is easy to understand.
  * 
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
  *

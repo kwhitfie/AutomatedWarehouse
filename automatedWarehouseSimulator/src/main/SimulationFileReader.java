@@ -1,7 +1,10 @@
 package main;
 
 /**
- * Details here
+ * Reads a sim file chosen by the user from a list and creates a Warehouse object from the parsed results
+ * 
+ * This class is the one that needs to be run to start the program.
+ * 
  * @author Alfie Smith, Kayley Whitfield, Dan Philpot
  *
  */
