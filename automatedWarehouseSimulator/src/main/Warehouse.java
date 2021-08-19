@@ -31,7 +31,7 @@ public class Warehouse {
 	private boolean isRunning = true;
 
 	/**
-	 *  Constructor for a Warehouse object.
+	 * Constructor for a Warehouse object.
 	 *   
 	 * @param width - grid width
 	 * @param height - grid height
