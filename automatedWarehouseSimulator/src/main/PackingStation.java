@@ -179,4 +179,9 @@ public class PackingStation extends WarehouseObject implements Tick {
 	public boolean isPacking() {
 		return packing;
 	}
+	
+	public int getTicksToPackOrder() {
+		return ticksToPackOrder;
+	}
+	
 }
