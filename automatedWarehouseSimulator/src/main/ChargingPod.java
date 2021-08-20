@@ -58,11 +58,18 @@ public class ChargingPod extends WarehouseObject {
 		}
 	}
 	
-	
+	/**
+	 * Get the power units per tick
+	 * @return int
+	 */
 	public int getPOWER_UNITS_PER_TICK() {
 		return POWER_UNITS_PER_TICK;
 	}
 	
+	/**
+	 * Get the assigned robot uid
+	 * @return assigned robot uid
+	 */
 	public String getAssignedRobotUID() {
 		return assignedRobotUID;
 	}
