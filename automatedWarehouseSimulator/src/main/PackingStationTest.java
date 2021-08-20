@@ -6,26 +6,33 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the Packing Station class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class PackingStationTest {
 
 	@Test
 	public void test() {
 		
-		//create new packing station
+		//Create new packing station
 		PackingStation pkSt1 = new PackingStation("pkSt1");
 		
-		//test constructor
+		//Constructor Tests
 		assertEquals("pkSt1",pkSt1.getUID());
 		assertEquals(true,pkSt1.needRobot());
 		assertEquals(false, pkSt1.isPacking());
 		assertEquals(0, pkSt1.getTicksToPackOrder());
 		assertNull(pkSt1.getCurrentOrder());
 		
-		//test toString()
+		//Test toString()
 		assertEquals("Packing Station (pkSt1)", pkSt1.toString());
 		
 		
-		//set up warehouse
+		//Create new warehouse
 		ArrayList<String> robots = new ArrayList<String>();
 		robots.add("c0 r0 4 1");
 		ArrayList<String> shelves= new ArrayList<String>();
@@ -40,7 +47,6 @@ public class PackingStationTest {
 			
 		
 		
-		//test tick()
 	}
 
 }

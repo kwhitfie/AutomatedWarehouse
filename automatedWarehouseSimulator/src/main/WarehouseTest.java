@@ -6,12 +6,19 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the Warehouse class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class WarehouseTest {
 
 	@Test
 	public void test() {
 		
-		//create robots, shelves, packing stations and orders
+		//Create robots, shelves, packing stations and orders
 		ArrayList<String> robots = new ArrayList<String>();
 		robots.add("c0 r0 4 1");
 		robots.add("c1 r1 4 3");
@@ -25,81 +32,81 @@ public class WarehouseTest {
 		orders.add("2 ss0");
 		orders.add("15 ss1 ss0");
 		
-		//create new warehouse
+		//Create new warehouse
 		Warehouse whs = new Warehouse(5,5,50,1,robots,shelves,stations,orders);
 		
-		//test constructor 
+		//Constructor Tests
 		
-		//robots
+		//Robots
 		assertEquals("r0", whs.getRobots().get(0).getUID());
 		assertEquals("r1", whs.getRobots().get(1).getUID());
 		
-		//charging pods
+		//Charging pods
 		assertEquals("c0", whs.getChargingPods().get(0).getUID());
 		assertEquals("c1", whs.getChargingPods().get(1).getUID());
 		
-		//storage shelves
+		//Storage shelves
 		assertEquals("ss1", whs.getStorageShelves().get(0).getUID());
 		assertEquals("ss0", whs.getStorageShelves().get(1).getUID());
 		
-		//packing stations
+		//Packing stations
 		assertEquals("ps0", whs.getPackingStations().get(0).getUID());
 		
 		
-		//orders  
+		//Orders  
 		assertEquals(0, whs.getUnassignedOQ().size());
 		assertEquals(0, whs.getAssignedOrderList().size());
 		assertEquals(3, whs.getDispatchedOrderList().size());
 		
-		//test getRobot()
+		//Test getRobot()
 		assertEquals("r1", whs.getRobot("r1").getUID());
 		assertEquals("r0", whs.getRobot("r0").getUID());
 		
-		//test getChargingPod()
+		//Test getChargingPod()
 		assertEquals("c0", whs.getChargingPod("c0").getUID());
 		assertEquals("c1", whs.getChargingPod("c1").getUID());
 		
-		//test getPackingStation()
+		//Test getPackingStation()
 		assertEquals("ps0", whs.getPackingStation("ps0").getUID());
 		
-		//test getNextUnassignedOrder()
+		//Test getNextUnassignedOrder()
 		assertNull(whs.getNextUnassignedOrder());
 		
-		//test isUnassignedOrderQueueEmpty()
+		//Test isUnassignedOrderQueueEmpty()
 		assertEquals(true, whs.isUnassignedOrderQueueEmpty());		
 		
-		//test getAssignedOrderList()
+		//Test getAssignedOrderList()
 		ArrayList<String> al = new ArrayList<>();
 		al.add("ss1");
 		Order tstOrder = new Order(al, 5);
 		whs.getAssignedOrderList().add(tstOrder);
 		
-		//test moveOrderFromAssignedToDispactedList()
+		//Test moveOrderFromAssignedToDispactedList()
 		whs.moveOrderFromAssignedToDispactedList(tstOrder);
 		assertEquals(tstOrder, whs.getDispatchedOrder(3));
 		
-		//test getDispatchedOrderList()
+		//Test getDispatchedOrderList()
 		assertEquals(4, whs.getDispatchedOrderList().size());
 		
-		//test checkRobotAvailability()
+		//Test checkRobotAvailability()
 		assertEquals("r0", whs.checkRobotAvailability(tstOrder));
 		
 		
-		//test getPositionFromUID()
+		//Test getPositionFromUID()
 		assertEquals(0, whs.getPositionFromUID("ps0").getX());
 		assertEquals(2, whs.getPositionFromUID("ps0").getY());
 		
-		//test getPositionFromCoordinates()
+		//Test getPositionFromCoordinates()
 		assertEquals(4, whs.getPositionFromCoordinates(4,5).getX());
 		assertEquals(5, whs.getPositionFromCoordinates(4,5).getY());
 		
-		//test moveObjectToCell()	
+		//Test moveObjectToCell()	
 		whs.moveObjectToCell(0,2,1,3,"ps0");
 		assertEquals(3, whs.getPositionFromUID("ps0").getY());
 		assertEquals(1, whs.getPositionFromUID("ps0").getX());
 		
 		
-		//test tickAllObjects()
+		//Test tickAllObjects()
 		whs.tickAllObjects();
 		assertEquals(88, whs.getTick());		
 		

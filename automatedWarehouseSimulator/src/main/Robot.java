@@ -301,7 +301,7 @@ public class Robot extends WarehouseObject implements Tick {
 	 * @param destination - the desired destination
 	 * @return boolean - true if it does need to charge, false if not.
 	 */
-	private boolean doesRobotNeedToCharge(Warehouse wh, Position destination) {
+	public boolean doesRobotNeedToCharge(Warehouse wh, Position destination) {
 		
 		int futureCostPerTick = 0; 
 
