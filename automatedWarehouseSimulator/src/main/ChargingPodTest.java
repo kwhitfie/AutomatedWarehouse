@@ -6,15 +6,23 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the ChargingPod class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
+
 public class ChargingPodTest {
 
 	@Test
 	public void constructorTest() {
 				
-		//new charging pod 
+		//Create new charging pod 
 		ChargingPod cPd1 = new ChargingPod("cPd1", 5, "rb1");
 		
-		//test constructor
+		//Constructor Tests 
 		assertEquals("cPd1", cPd1.getUID());
 		assertEquals(5, cPd1.getPOWER_UNITS_PER_TICK());
 		assertEquals("rb1", cPd1.getAssignedRobotUID());
@@ -22,7 +30,7 @@ public class ChargingPodTest {
 		//test toString()
 		assertEquals("Charging Pod. UID: cPd1. Power units per tick: 5. Assigned robot UID: rb1", cPd1.toString());
 		
-		//set up warehouse
+		//Create new warehouse
 		ArrayList<String> robots = new ArrayList<String>();
 		robots.add("c0 r0 4 1");
 		ArrayList<String> shelves= new ArrayList<String>();
@@ -34,13 +42,10 @@ public class ChargingPodTest {
 		
 		Warehouse whs = new Warehouse(5,5,50,1,robots,shelves,stations,orders);
 		
-		//test charge robot    
+		//Test chargeRobot()    
 		whs.getRobot("r0").setBatteryChargePercentage(5);
 		whs.getChargingPod("c0").chargeRobot("r0", whs);
-		assertEquals(6, whs.getRobot("r0").getBatteryStatus());
-		
-		
-		
+		assertEquals(6, whs.getRobot("r0").getBatteryStatus());		
 	}
 
 }

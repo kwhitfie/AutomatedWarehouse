@@ -7,21 +7,27 @@ import java.util.Queue;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the Robot class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class RobotTest {
 
 	@Test
 	public void test() {
 		
-		//create new positions
+		//Create new positions
 		Position pst1 = new Position(5,7);
 		Position pst2 = new Position(12,4);
 		Position pst3 = new Position(7,9);
-		Position pst4 = new Position(3,2);
 		
-		//create new robot 
+		//Create new robot 
 		Robot rb1 = new Robot("rb1", 50, pst1, "cPd1");
 		
-		//test constructor
+		//Constructor Test
 		assertEquals("cPd1", rb1.getChargingPodUID());
 		assertEquals(false, rb1.hasItem());
 		assertEquals(false, rb1.isBusy());
@@ -36,21 +42,21 @@ public class RobotTest {
 		assertNull(rb1.getTargetShelfPosition());
 		
 	
-		//test getManhattanDistance()
+		//Test getManhattanDistance()
 		assertEquals(10, rb1.getManhattanDistance(pst1,pst2));
 		assertEquals(4, rb1.getManhattanDistance(pst1,pst3));
 		assertEquals(10, rb1.getManhattanDistance(pst3,pst2));
 		
-		//test setBatteryChargePercentage()
+		//Test setBatteryChargePercentage()
 		rb1.setBatteryChargePercentage(20);
 		assertEquals(20, rb1.getBatteryStatus());
 		
 		
-		//test toString()
+		//Test toString()
 		assertEquals("Robot(rb1)", rb1.toString());
 		
 		
-		//Require Warehouse
+		//Create Warehouse
 		ArrayList<String> robots = new ArrayList<String>();
 		robots.add("c0 r0 4 1");
 		ArrayList<String> shelves= new ArrayList<String>();
@@ -62,16 +68,16 @@ public class RobotTest {
 		
 		Warehouse whs = new Warehouse(5,5,50,1,robots,shelves,stations,orders);
 		
-		//test move()
+		//Test move()
 		whs.getRobot("r0").move(whs.getPositionFromCoordinates(3,2), whs);
 		assertEquals(3, whs.getPositionFromUID("r0").getX());
 		assertEquals(2, whs.getPositionFromUID("r0").getY());
 		
-		//test doesSquareHaveRobot()	
+		//Test doesSquareHaveRobot()	
 		assertEquals(true, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(3,2), whs));
 		assertEquals(false, whs.getRobot("r0").doesSquareHaveRobot(whs.getPositionFromCoordinates(1,2), whs));
 		
-		//test checkIfPossibleToAcceptJob() and acceptOrder()
+		//Test checkIfPossibleToAcceptJob() and acceptOrder()
 		ArrayList<String> al = new ArrayList<>();
 		al.add("ss1");
 		Order tstOrder = new Order(al,5);
@@ -81,22 +87,17 @@ public class RobotTest {
 		assertEquals("ss1", whs.getRobot("r0").getShelves().peek());
 		assertEquals(false, whs.getRobot("r0").checkIfPossibleToAcceptJob(whs, tstOrder));
 		
-		//test batteryCostPerTick()
+		//Test batteryCostPerTick()
 		assertEquals(1, whs.getRobot("r0").batteryCostPerTick());
 		
 		whs.moveObjectToCell(3,2,2,3,"r0");
 		whs.getRobot("r0").tick(whs);
 		assertEquals(2, whs.getRobot("r0").batteryCostPerTick());
 		
-		
-		
-		
-		
-		
-		//test getDestinationPosition()
-		//test doesRobotNeedToCharge()
-		//test tick()
-		
+		//Test doesRobotNeedToCharge()
+		assertEquals(false, whs.getRobot("r0").doesRobotNeedToCharge(whs, whs.getPositionFromCoordinates(3,2)));
+		whs.getRobot("r0").setBatteryChargePercentage(1);
+		assertEquals(true, whs.getRobot("r0").doesRobotNeedToCharge(whs, whs.getPositionFromCoordinates(5,5)));
 		
 	}
 

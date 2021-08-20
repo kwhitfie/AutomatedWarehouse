@@ -4,28 +4,35 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the Position class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class PositionTest {
 
 	@Test
 	public void test() {
 		
-		//create new Position
+		//Create new Position
 		Position pst1 = new Position(5,7);
 		
-		//test constructor
+		//Constructor Test
 		assertEquals(5, pst1.getX());
 		assertEquals(7, pst1.getY());
 		
-		//test toString()
+		//Test toString()
 		assertEquals("(5,7)", pst1.toString());
 		
-		//test set x
+		//Test set x
 		pst1.setX(15);
 		
-		//test set y
+		//Test set y
 		pst1.setY(12);
 		
-		//test all again
+		//Test all again
 		assertEquals(15, pst1.getX());
 		assertEquals(12, pst1.getY());
 		assertEquals("(15,12)", pst1.toString());

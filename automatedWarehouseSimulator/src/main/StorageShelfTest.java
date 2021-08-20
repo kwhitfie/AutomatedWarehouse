@@ -4,18 +4,25 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * This class tests the methods of the StorageShelf class
+ * 
+ * @author Alfie Smith, Kayley Whitfield, Dan Philpot
+ *
+ */
+
 public class StorageShelfTest {
 
 	@Test
 	public void test() {
 		
-		//create new StorageShelf
+		//Create new StorageShelf
 		StorageShelf stSh1 = new StorageShelf("stSh1");
 		
-		//test constructor
+		//Constructor Test
 		assertEquals("stSh1", stSh1.getUID());
 		
-		//test toString()
+		//Test toString()
 		assertEquals("Storage Shelf(stSh1)", stSh1.toString());
 	}
 
